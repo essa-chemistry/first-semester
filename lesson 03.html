@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الطرائق العلمية — درس ومراجعة</title>
+<style>
+  :root{
+    --bg:#F4F9FA;
+    --surface:#FFFFFF;
+    --ink:#1E2A32;
+    --muted:#5B6E77;
+    --primary:#0E7C86;
+    --primary-dark:#0A5D66;
+    --primary-tint:#E3F2F1;
+    --amber:#B9720E;
+    --amber-tint:#FBF0DD;
+    --border:#DCE7E7;
+    --success:#1F8A4C;
+    --success-tint:#E7F5EC;
+    --danger:#C0392B;
+    --danger-tint:#FBEAE8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Segoe UI','Tahoma','Arial',sans-serif;
+    line-height:1.9;
+    padding:0 16px 60px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+
+  .top{padding:34px 0 18px;}
+  .crumb{color:var(--muted);font-size:14px;margin-bottom:10px;}
+  .crumb b{color:var(--primary-dark);}
+  h1{font-size:28px;margin:0 0 8px;color:var(--primary-dark);}
+  .lede{color:var(--muted);font-size:16px;max-width:640px;}
+
+  section{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-right:5px solid var(--primary);
+    border-radius:10px;
+    padding:26px 28px;
+    margin:20px 0;
+  }
+  section h2{font-size:20px;margin:0 0 6px;color:var(--primary-dark);}
+  section .sub{color:var(--muted);font-size:14px;margin-bottom:18px;}
+  p{margin:10px 0;}
+
+  .def{
+    background:var(--primary-tint);
+    border:1px solid #C7E4E2;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+  }
+  .def b{color:var(--primary-dark);}
+
+  .warn{
+    background:var(--amber-tint);
+    border:1px solid #EAD4A6;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+  }
+  .warn b{color:var(--amber);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+  @media (max-width:600px){.grid2{grid-template-columns:1fr;}}
+  .card{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 16px;
+    background:#FBFEFE;
+  }
+  .card h3{margin:0 0 6px;font-size:15px;color:var(--primary-dark);}
+  .card p{margin:0;font-size:14px;color:var(--ink);}
+
+  /* method cycle */
+  .cycle{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:18px 0;}
+  .stage{
+    text-align:center;border:1px solid var(--border);border-radius:8px;
+    padding:12px 14px;background:#FBFEFE;min-width:110px;font-size:13.5px;font-weight:600;color:var(--primary-dark);
+  }
+  .stage .tag{font-size:11px;color:var(--muted);font-weight:400;display:block;margin-top:3px;}
+  .cyArrow{color:var(--muted);font-size:18px;}
+  .loopNote{text-align:center;color:var(--muted);font-size:13px;margin-top:6px;}
+
+  /* qual vs quant */
+  .vs{display:flex;gap:14px;margin:16px 0;align-items:stretch;flex-wrap:wrap;}
+  .vsCard{flex:1;min-width:220px;border-radius:8px;padding:16px 18px;}
+  .vsCard.a{background:var(--primary-tint);border:1px solid #C7E4E2;}
+  .vsCard.b{background:var(--amber-tint);border:1px solid #EAD4A6;}
+  .vsCard h3{margin:0 0 8px;font-size:16px;}
+  .vsCard.a h3{color:var(--primary-dark);}
+  .vsCard.b h3{color:var(--amber);}
+  .vsCard ul{margin:0;padding-right:18px;font-size:14px;}
+  .vsCard li{margin-bottom:6px;}
+  .vsMid{display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;font-size:15px;}
+
+  ul.recap{margin:10px 0;padding-right:20px;}
+  ul.recap li{margin-bottom:8px;}
+
+  .story{
+    border-right:3px solid var(--amber);
+    background:#FFFDF8;padding:10px 16px;margin:12px 0;font-size:14.5px;
+  }
+
+  .qcard{
+    border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:16px;background:#FBFEFE;
+  }
+  .qcard .qtitle{font-weight:600;margin-bottom:12px;}
+  .opt{
+    display:block;width:100%;text-align:right;
+    background:#fff;border:1px solid var(--border);border-radius:6px;
+    padding:10px 14px;margin-bottom:8px;cursor:pointer;font-size:14.5px;color:var(--ink);
+    transition:border-color .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--primary);}
+  .opt.correct{background:var(--success-tint);border-color:var(--success);color:#154D2E;font-weight:600;}
+  .opt.wrong{background:var(--danger-tint);border-color:var(--danger);color:#7A231A;font-weight:600;}
+  .opt.disabled{cursor:default;}
+  .explain{
+    display:none;margin-top:10px;font-size:13.5px;color:var(--muted);
+    border-top:1px dashed var(--border);padding-top:10px;
+  }
+  .explain.show{display:block;}
+
+  .scorebar{
+    position:sticky;bottom:0;background:var(--surface);
+    border:1px solid var(--border);border-radius:10px;
+    padding:14px 20px;margin-top:10px;
+    display:flex;align-items:center;justify-content:space-between;
+    box-shadow:0 -4px 14px rgba(0,0,0,.05);
+  }
+  #scoreText{font-weight:700;color:var(--primary-dark);}
+  #resetBtn{
+    background:var(--primary);color:#fff;border:none;border-radius:6px;
+    padding:8px 18px;cursor:pointer;font-size:14px;
+  }
+  #resetBtn:hover{background:var(--primary-dark);}
+
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="crumb">الفصل 1: مقدمة في علم الكيمياء &nbsp;›&nbsp; <b>الدرس 1-3: الطرائق العلمية</b></div>
+    <h1>الطرائق العلمية — درس ومراجعة</h1>
+    <p class="lede">يتبع العلماء الطريقة العلمية لطرح أسئلة، واقتراح إجابات لها واختبارها، وتقويم نتائج الاختبارات. هذا الدرس يبني فهمك لكل خطوة من هذه الرحلة، من الملاحظة إلى النظرية والقانون العلمي — عبر قصة اكتشاف تدمير الأوزون الحقيقية.</p>
+  </div>
+
+  <!-- 1: الطريقة العلمية -->
+  <section>
+    <h2>1) ما الطريقة العلمية؟ ولماذا لا ترتيب ثابت لها؟</h2>
+    <div class="sub">دورة متكررة، لا خطوات صارمة يجب السير عليها دومًا</div>
+
+    <div class="def"><b>الطريقة العلمية:</b> طريقة منظمة تُستعمل في الدراسات العلمية (كيميائية أو حيوية أو فيزيائية) لحل المشكلات، وللتحقق من عمل العلماء الآخرين.</div>
+
+    <div class="cycle">
+      <div class="stage">ملاحظات<span class="tag">معرفة حالية، بيانات</span></div>
+      <div class="cyArrow">←</div>
+      <div class="stage">فرضية<span class="tag">توقّع قابل للاختبار</span></div>
+      <div class="cyArrow">←</div>
+      <div class="stage">تجارب<span class="tag">اختبار الفرضية</span></div>
+      <div class="cyArrow">←</div>
+      <div class="stage">استنتاج<span class="tag">حكم مبني على البيانات</span></div>
+      <div class="cyArrow">←</div>
+      <div class="stage">نظرية / قانون علمي<span class="tag">دعم مؤكَّد بتجارب عدة</span></div>
+    </div>
+    <p class="loopNote">قد يعيد العلماء الكرّة بين أي خطوتين — مثلًا: تعديل الفرضية بعد تجربة لا تدعمها، ثم تجارب جديدة — فالخطوات دورة متكررة لا تسلسل ثابت.</p>
+
+    <div class="warn"><b>لماذا لا يلتزم العلماء بترتيب ثابت؟</b> لأن كل عالم يعمل برؤية فردية وإبداع ذاتي، وقد تحتاج النتائج إلى الرجوع لخطوة سابقة (كتعديل الفرضية) بدل التقدم دومًا للأمام. لهذا يجب على العلماء وصف طرائقهم بدقة عند نشر نتائج أبحاثهم — فإن لم يستطع علماء آخرون تكرار النتائج بنفس الخطوات، يكون هناك شك في صدقها.</div>
+  </section>
+
+  <!-- 2: الملاحظة والبيانات -->
+  <section>
+    <h2>2) الملاحظة: نوعية أم كمية؟</h2>
+    <div class="sub">كل دراسة علمية تبدأ بملاحظة بسيطة — لكن نوع البيانات يحدد قوتها</div>
+
+    <div class="def"><b>الملاحظة:</b> عملية جمع معلومات. تُستعمل عادة للوصول إلى استنتاجات.</div>
+
+    <div class="vs">
+      <div class="vsCard a">
+        <h3>بيانات نوعية</h3>
+        <ul>
+          <li>تصف باستعمال الحواس الخمس</li>
+          <li>مثل: اللون، الرائحة، الشكل، الملمس، الطعم</li>
+        </ul>
+      </div>
+      <div class="vsMid">≠</div>
+      <div class="vsCard b">
+        <h3>بيانات كمية</h3>
+        <ul>
+          <li>معلومات رقمية دقيقة</li>
+          <li>مثل: درجة الحرارة، الضغط، الحجم، كمية الناتج</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3: الفرضية والتجربة -->
+  <section>
+    <h2>3) الفرضية والتجربة</h2>
+    <div class="sub">من التوقّع المؤقت إلى الاختبار المضبوط</div>
+
+    <div class="def"><b>الفرضية:</b> تفسير مؤقت لظاهرة ما أو حدث تمت ملاحظته، وهو قابل للاختبار.</div>
+    <div class="def"><b>التجربة:</b> مجموعة من المشاهدات المضبوطة التي تختبر الفرضية.</div>
+
+    <div class="story">
+      <b>مثال حقيقي:</b> اكتشف الكيميائيان مولينا ورولاند وجود مركبات CFCs قبل أن تُبيّن البيانات الكمية تناقص مستوى الأوزون. تولّد لديهما فضول عن مدة بقاء CFCs في الجو، فوضعا فرضيتين قابلتين للاختبار: (1) هذه المركبات تتحلل بفعل الأشعة فوق البنفسجية، و(2) الكلور الناتج عن ذلك يحطّم جزيئات غاز الأوزون.
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>المتغير المستقل</h3>
+        <p>الكمية التي تخطط لتغييرها عمدًا في التجربة (مثل درجة حرارة الماء).</p>
+      </div>
+      <div class="card">
+        <h3>المتغير التابع</h3>
+        <p>يتغيّر تبعًا لتغيّر المتغير المستقل، وهو ما تقيسه كنتيجة (مثل سرعة ذوبان الملح).</p>
+      </div>
+      <div class="card">
+        <h3>العامل الثابت</h3>
+        <p>لا يُسمح بتغييره أثناء التجربة (مثل كمية الملح وكمية الماء والتحريك).</p>
+      </div>
+      <div class="card">
+        <h3>الضابط</h3>
+        <p>أساس ثابت للمقارنة تُقاس عليه نتائج التجربة (مثل الماء عند درجة حرارة الغرفة).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4: الاستنتاج وضبط المتغيرات -->
+  <section>
+    <h2>4) الاستنتاج، وصعوبة ضبط المتغيرات</h2>
+    <div class="sub">لماذا لا يمكن للعلماء "إثبات" فرضية بشكل نهائي</div>
+
+    <div class="def"><b>الاستنتاج:</b> حكم قائم على المعلومات التي يتم الحصول عليها من التجربة.</div>
+
+    <p>نحن لا نستطيع إثبات فرضية ما. فعندما تؤيد البيانات الفرضية، يعني ذلك فقط أنها <b>قد تكون</b> صحيحة. وإذا ظهرت بعد ذلك بيانات لا تدعمها، يجب رفض الفرضية أو تعديلها. في حالة الأوزون، توجد متغيرات عدة (غازات أخرى، رياح، تغيّر الأشعة فوق البنفسجية)، مما يجعل تحديد السبب الحقيقي لتناقص الأوزون صعبًا — ولهذا يحاكي العلماء الظروف مختبريًّا حيث يمكن ضبط المتغيرات بسهولة أكبر.</p>
+  </section>
+
+  <!-- 5: النظرية والقانون -->
+  <section>
+    <h2>5) النظرية والقانون العلمي — فرق يُسأل عنه كثيرًا</h2>
+    <div class="sub">أحدهما يفسّر "لماذا"، والآخر يصف "ماذا يحدث"</div>
+
+    <div class="vs">
+      <div class="vsCard a">
+        <h3>النظرية</h3>
+        <ul>
+          <li>تفسير لظاهرة طبيعية بناءً على مشاهدات واستقصاءات مع مرور الزمن</li>
+          <li>تصف مبدأ رئيسًا دعمته تجارب عدة، وتبقى عرضة للتعديل</li>
+          <li>تُعدّ ناجحة إذا استُعملت للقيام بتوقعات صحيحة</li>
+          <li>مثال: النظرية الذرية، نظرية النسبية</li>
+        </ul>
+      </div>
+      <div class="vsMid">مقابل</div>
+      <div class="vsCard b">
+        <h3>القانون العلمي</h3>
+        <ul>
+          <li>يصف علاقة موجودة في الطبيعة، تدعمها عدة تجارب</li>
+          <li>يصف العلاقة دون أن يفسّر بالضرورة سبب حدوثها</li>
+          <li>على العلماء أن يطوّروا فرضيات لتفسير وجود هذه العلاقة</li>
+          <li>مثال: قانون نيوتن للجاذبية العام</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6: القصة الكاملة -->
+  <section>
+    <h2>6) القصة الكاملة: كيف طُبّقت الطريقة العلمية على أزمة الأوزون؟</h2>
+    <div class="sub">ربط كل ما سبق في مثال واحد</div>
+    <div class="story">
+      <b>الفرضية:</b> CFCs تتحلل بالأشعة فوق البنفسجية، والكلور الناتج يدمّر الأوزون.<br>
+      <b>النموذج والتوقّع:</b> تنبّأ نموذج مولينا ورولاند بتكوّن الكلور وتناقص غاز الأوزون تبعًا لذلك.<br>
+      <b>الدعم:</b> وجدت مجموعة بحثية أخرى دليلًا على تفاعل الأوزون والكلور في الستراتوسفير، لكنها لم تعرف مصدر الكلور — وهو ما فسّره نموذج مولينا ورولاند بدقة.<br>
+      <b>الاستنتاج:</b> غاز الأوزون في الستراتوسفير يتحطم بفعل مركبات CFCs، وكان الدعم كافيًا لنشر الاكتشاف — ففازا بجائزة نوبل عام 1995م.
+    </div>
+    <p>هذا مثال على نموذج علمي جيد: أمكن اختباره واستعماله للقيام بتوقعات صحيحة، وهذا ما يجعله ناجحًا وموثوقًا.</p>
+  </section>
+
+  <!-- 7: ملخص -->
+  <section>
+    <h2>7) ملخص الدرس في نقاط</h2>
+    <ul class="recap">
+      <li>الطريقة العلمية طريقة منظمة لحل المشكلات، وخطواتها لا تُنفَّذ بترتيب ثابت.</li>
+      <li>البيانات النوعية تصف بالحواس، والبيانات الكمية أرقام دقيقة.</li>
+      <li>الفرضية تفسير مؤقت قابل للاختبار؛ التجربة مجموعة مشاهدات مضبوطة لاختبارها.</li>
+      <li>المتغير المستقل يُغيَّر عمدًا، والمتغير التابع يتغيّر تبعًا له؛ العامل الثابت لا يتغيّر، والضابط أساس للمقارنة.</li>
+      <li>الاستنتاج حكم قائم على البيانات؛ لا يمكن "إثبات" فرضية، فقط دعمها أو رفضها.</li>
+      <li>النظرية تفسّر ظاهرة طبيعية وتبقى قابلة للتعديل؛ القانون العلمي يصف علاقة ثابتة في الطبيعة تدعمها تجارب عدة.</li>
+    </ul>
+  </section>
+
+  <!-- 8: quiz -->
+  <section id="quizSection">
+    <h2>8) اختبر نفسك — 10 أسئلة</h2>
+    <div class="sub">اختر إجابة واحدة لكل سؤال، وستظهر لك النتيجة والتفسير فورًا</div>
+    <div id="quizHost"></div>
+
+    <div class="scorebar">
+      <span id="scoreText">النتيجة: 0 / 10</span>
+      <button id="resetBtn">إعادة المحاولة</button>
+    </div>
+  </section>
+
+  <footer>مراجعة الدرس 1-3 «الطرائق العلمية» — الفصل 1: مقدمة في علم الكيمياء</footer>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "ما تعريف «الطريقة العلمية»؟",
+    options: [
+      "قائمة ثابتة من خطوات يجب تنفيذها بالترتيب نفسه في كل بحث",
+      "طريقة منظمة تُستعمل في الدراسات العلمية لحل المشكلات والتحقق من نتائج العلماء الآخرين",
+      "نظرية علمية مثبتة بشكل نهائي لا تقبل التعديل",
+      "أسلوب يقتصر استعماله على علم الكيمياء فقط"
+    ],
+    correct: 1,
+    explain: "الطريقة العلمية طريقة منظمة تُستعمل في الدراسات العلمية (كيميائية أو حيوية أو فيزيائية)، لحل المشكلات وللتحقق من عمل العلماء الآخرين."
+  },
+  {
+    q: "لماذا لا يلتزم العلماء بتنفيذ خطوات الطريقة العلمية بترتيب ثابت في كل بحث؟",
+    options: [
+      "لأن الخطوات غير مهمة أصلًا ويمكن تجاهلها",
+      "لأن كل عالم يعمل برؤية فردية، وقد يحتاج الرجوع إلى خطوة سابقة (كتعديل الفرضية) بحسب النتائج",
+      "لأن الطريقة العلمية تُستعمل فقط في الفيزياء دون غيرها",
+      "لأن الترتيب يعتمد فقط على نوع المادة الكيميائية المستخدمة"
+    ],
+    correct: 1,
+    explain: "خطوات الطريقة العلمية دورة متكررة لا تسلسل ثابت؛ فقد تتكرر الخطوات حسب النتائج، ولهذا يجب على العلماء وصف طرائقهم بدقة عند نشر أبحاثهم."
+  },
+  {
+    q: "أيّ مما يلي يُعدّ «بيانات نوعية»؟",
+    options: [
+      "درجة الحرارة 25 درجة سلسيوس",
+      "لون المحلول أحمر ورائحته حادة",
+      "الحجم يساوي 250 مل",
+      "الكتلة تساوي 12 جرامًا"
+    ],
+    correct: 1,
+    explain: "البيانات النوعية تصف باستعمال الحواس الخمس (لون، رائحة، شكل، ملمس، طعم)، أما البيانات الكمية فهي أرقام مثل درجة الحرارة والحجم والكتلة."
+  },
+  {
+    q: "ما «الفرضية»، وما أهم صفة يجب أن تتوفر فيها؟",
+    options: [
+      "قانون علمي مؤكد لا يقبل التغيير",
+      "تفسير مؤقت لظاهرة تمت ملاحظتها، ويجب أن تكون قابلة للاختبار",
+      "استنتاج نهائي بعد إجراء عدة تجارب",
+      "وصف نوعي فقط لما يُلاحظ بالحواس"
+    ],
+    correct: 1,
+    explain: "الفرضية عبارة عن تفسير مؤقت لظاهرة ما أو حدث تمت ملاحظته، وهي قابلة للاختبار — كما في فرضية مولينا ورولاند عن تحلل CFCs بالأشعة فوق البنفسجية."
+  },
+  {
+    q: "في تجربة لدراسة أثر درجة الحرارة في سرعة ذوبان ملح الطعام، ما المتغير المستقل وما المتغير التابع؟",
+    options: [
+      "المستقل: سرعة الذوبان — التابع: درجة الحرارة",
+      "المستقل: درجة الحرارة (التي نغيّرها عمدًا) — التابع: سرعة الذوبان (تتغيّر تبعًا لذلك)",
+      "كلاهما درجة الحرارة",
+      "كلاهما سرعة الذوبان"
+    ],
+    correct: 1,
+    explain: "المتغير المستقل هو الذي نخطط لتغييره عمدًا (درجة الحرارة)، والمتغير التابع يتغيّر تبعًا لتغيّر المتغير المستقل (سرعة الذوبان)."
+  },
+  {
+    q: "ما وظيفة «الضابط» في التجربة؟",
+    options: [
+      "هو المتغير الذي نغيّره عمدًا لدراسة أثره",
+      "هو أساس ثابت للمقارنة تُقاس عليه نتائج التجربة (مثل الماء عند درجة حرارة الغرفة)",
+      "هو نفسه المتغير التابع في التجربة",
+      "عامل عشوائي لا تأثير له على النتائج"
+    ],
+    correct: 1,
+    explain: "الضابط أساس للمقارنة في التجربة، مثل استعمال الماء عند درجة حرارة الغرفة كضابط عند دراسة ذوبان الملح في ماء ساخن."
+  },
+  {
+    q: "لماذا لا يمكن للعلماء «إثبات» فرضية ما بشكل نهائي؟",
+    options: [
+      "لأن الفرضيات لا تحتاج إلى بيانات أصلًا",
+      "لأن البيانات الداعمة تشير فقط إلى أن الفرضية قد تكون صحيحة، وقد تظهر بيانات لاحقة ترفضها أو تعدّلها",
+      "لأن كل التجارب تعطي نتائج متطابقة دائمًا",
+      "لأن الاستنتاج لا علاقة له بالبيانات التجريبية"
+    ],
+    correct: 1,
+    explain: "الاستنتاج حكم قائم على المعلومات المتاحة؛ فإذا أيّدت البيانات الفرضية فهذا يعني أنها قد تكون صحيحة فقط، وإذا جاءت بيانات لا تدعمها لاحقًا، تُرفض الفرضية أو تُعدَّل."
+  },
+  {
+    q: "ما الفرق الجوهري بين «النظرية» و«القانون العلمي»؟",
+    options: [
+      "لا فرق بينهما، وهما مصطلح واحد بمعنيين مختلفين",
+      "النظرية تفسّر لماذا تحدث ظاهرة معينة، أما القانون العلمي فيصف علاقة ثابتة في الطبيعة دون أن يفسّر سببها بالضرورة",
+      "القانون العلمي أقل دقة من النظرية دائمًا",
+      "النظرية تُستعمل فقط في الفيزياء، والقانون فقط في الكيمياء"
+    ],
+    correct: 1,
+    explain: "النظرية تفسير لظاهرة طبيعية بناءً على مشاهدات مع مرور الزمن، بينما القانون العلمي (كقانون نيوتن للجاذبية) يصف علاقة موجودة في الطبيعة تدعمها تجارب، وعلى العلماء تطوير فرضيات لتفسير سبب وجودها."
+  },
+  {
+    q: "في نموذج مولينا ورولاند، ماذا توقّعا يحدث لغاز الأوزون عند ازدياد كمية CFCs في الجو؟",
+    options: [
+      "يزداد غاز الأوزون في الستراتوسفير",
+      "يتحطم غاز الأوزون بفعل الكلور الناتج عن تفكك CFCs بالأشعة فوق البنفسجية",
+      "لا تأثير لمركبات CFCs على غاز الأوزون إطلاقًا",
+      "يتحول غاز الأوزون بالكامل إلى مركبات CFCs"
+    ],
+    correct: 1,
+    explain: "تنبأ نموذج مولينا ورولاند بأن الأشعة فوق البنفسجية تجعل الكلور ينفصل عن CFCs، وأن هذا الكلور يدمّر غاز الأوزون بالاتحاد معه، مكوّنًا الأكسجين وأول أكسيد الكلور، وتتكرر العملية."
+  },
+  {
+    q: "ما الذي جعل نموذج مولينا ورولاند نموذجًا علميًا ناجحًا، وأهّلهما لجائزة نوبل؟",
+    options: [
+      "أنه لم يُختبر إطلاقًا من أي عالم آخر",
+      "أنه أمكن اختباره واستعماله للقيام بتوقعات صحيحة دعمتها بيانات كافية",
+      "أنه اعتمد فقط على الملاحظة النوعية دون أي بيانات كمية",
+      "أنه لم يتعرض لأي مراجعة أو تدقيق من علماء آخرين"
+    ],
+    correct: 1,
+    explain: "النماذج العلمية الجيدة يمكن فحصها واستعمالها للقيام بتوقعات؛ وقد توقع نموذج مولينا ورولاند تكوّن الكلور وتناقص الأوزون، وأيّدت بيانات لاحقة هذا التوقع، فكان الدعم كافيًا لنشر اكتشافهما والفوز بجائزة نوبل عام 1995م."
+  }
+];
+
+const host = document.getElementById('quizHost');
+let answered = new Array(QUESTIONS.length).fill(false);
+let score = 0;
+
+function render(){
+  host.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'qcard';
+
+    const title = document.createElement('div');
+    title.className = 'qtitle';
+    title.textContent = (qi+1) + '. ' + item.q;
+    card.appendChild(title);
+
+    item.options.forEach((optText, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.addEventListener('click', () => handleAnswer(qi, oi, card));
+      card.appendChild(btn);
+    });
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + qi;
+    explain.textContent = item.explain;
+    card.appendChild(explain);
+
+    host.appendChild(card);
+  });
+  updateScore();
+}
+
+function handleAnswer(qi, oi, card){
+  if(answered[qi]) return;
+  answered[qi] = true;
+  const correctIndex = QUESTIONS[qi].correct;
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach((btn, idx) => {
+    btn.classList.add('disabled');
+    btn.disabled = true;
+    if(idx === correctIndex){
+      btn.classList.add('correct');
+    } else if(idx === oi){
+      btn.classList.add('wrong');
+    }
+  });
+  if(oi === correctIndex) score++;
+  document.getElementById('explain-' + qi).classList.add('show');
+  updateScore();
+}
+
+function updateScore(){
+  document.getElementById('scoreText').textContent = 'النتيجة: ' + score + ' / ' + QUESTIONS.length;
+}
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  answered = new Array(QUESTIONS.length).fill(false);
+  score = 0;
+  render();
+  document.getElementById('quizSection').scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+render();
+</script>
+</body>
+</html>
