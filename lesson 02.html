@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الكيمياء والمادة — درس ومراجعة</title>
+<style>
+  :root{
+    --bg:#F4F9FA;
+    --surface:#FFFFFF;
+    --ink:#1E2A32;
+    --muted:#5B6E77;
+    --primary:#0E7C86;
+    --primary-dark:#0A5D66;
+    --primary-tint:#E3F2F1;
+    --amber:#B9720E;
+    --amber-tint:#FBF0DD;
+    --border:#DCE7E7;
+    --success:#1F8A4C;
+    --success-tint:#E7F5EC;
+    --danger:#C0392B;
+    --danger-tint:#FBEAE8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Segoe UI','Tahoma','Arial',sans-serif;
+    line-height:1.9;
+    padding:0 16px 60px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+
+  .top{padding:34px 0 18px;}
+  .crumb{color:var(--muted);font-size:14px;margin-bottom:10px;}
+  .crumb b{color:var(--primary-dark);}
+  h1{font-size:28px;margin:0 0 8px;color:var(--primary-dark);}
+  .lede{color:var(--muted);font-size:16px;max-width:640px;}
+
+  section{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-right:5px solid var(--primary);
+    border-radius:10px;
+    padding:26px 28px;
+    margin:20px 0;
+  }
+  section h2{font-size:20px;margin:0 0 6px;color:var(--primary-dark);}
+  section .sub{color:var(--muted);font-size:14px;margin-bottom:18px;}
+  p{margin:10px 0;}
+
+  .def{
+    background:var(--primary-tint);
+    border:1px solid #C7E4E2;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+  }
+  .def b{color:var(--primary-dark);}
+
+  .warn{
+    background:var(--amber-tint);
+    border:1px solid #EAD4A6;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:14px 0;
+  }
+  .warn b{color:var(--amber);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+  @media (max-width:600px){.grid2{grid-template-columns:1fr;}}
+  .card{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 16px;
+    background:#FBFEFE;
+  }
+  .card h3{margin:0 0 6px;font-size:15px;color:var(--primary-dark);}
+  .card p{margin:0;font-size:14px;color:var(--ink);}
+
+  /* mass vs weight compare */
+  .vs{display:flex;gap:14px;margin:16px 0;align-items:stretch;flex-wrap:wrap;}
+  .vsCard{
+    flex:1;min-width:220px;
+    border-radius:8px;padding:16px 18px;
+  }
+  .vsCard.mass{background:var(--primary-tint);border:1px solid #C7E4E2;}
+  .vsCard.weight{background:var(--amber-tint);border:1px solid #EAD4A6;}
+  .vsCard h3{margin:0 0 8px;font-size:16px;}
+  .vsCard.mass h3{color:var(--primary-dark);}
+  .vsCard.weight h3{color:var(--amber);}
+  .vsCard ul{margin:0;padding-right:18px;font-size:14px;}
+  .vsCard li{margin-bottom:6px;}
+  .vsMid{display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;font-size:15px;}
+
+  /* matter yes/no chips */
+  .chipRow{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+  .chip{
+    padding:7px 14px;border-radius:20px;font-size:14px;font-weight:600;
+    border:1px solid transparent;
+  }
+  .chip.yes{background:var(--success-tint);color:#154D2E;border-color:#BEE3CC;}
+  .chip.no{background:var(--danger-tint);color:#7A231A;border-color:#F0C4BE;}
+
+  /* scale diagram: macroscopic -> atomic */
+  .scale{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0;}
+  .scaleBox{
+    text-align:center;border:1px solid var(--border);border-radius:8px;
+    padding:14px 18px;background:#FBFEFE;min-width:150px;
+  }
+  .scaleBox .big{font-size:22px;}
+  .scaleBox .cap{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .scaleArrow{color:var(--muted);font-size:20px;}
+
+  table.branches{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;}
+  table.branches th{
+    background:var(--primary);color:#fff;text-align:right;padding:9px 12px;font-size:13.5px;
+  }
+  table.branches td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  table.branches tr:nth-child(even) td{background:#F7FBFB;}
+
+  ul.recap{margin:10px 0;padding-right:20px;}
+  ul.recap li{margin-bottom:8px;}
+
+  .qcard{
+    border:1px solid var(--border);border-radius:8px;padding:18px 20px;margin-bottom:16px;background:#FBFEFE;
+  }
+  .qcard .qtitle{font-weight:600;margin-bottom:12px;}
+  .opt{
+    display:block;width:100%;text-align:right;
+    background:#fff;border:1px solid var(--border);border-radius:6px;
+    padding:10px 14px;margin-bottom:8px;cursor:pointer;font-size:14.5px;color:var(--ink);
+    transition:border-color .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--primary);}
+  .opt.correct{background:var(--success-tint);border-color:var(--success);color:#154D2E;font-weight:600;}
+  .opt.wrong{background:var(--danger-tint);border-color:var(--danger);color:#7A231A;font-weight:600;}
+  .opt.disabled{cursor:default;}
+  .explain{
+    display:none;margin-top:10px;font-size:13.5px;color:var(--muted);
+    border-top:1px dashed var(--border);padding-top:10px;
+  }
+  .explain.show{display:block;}
+
+  .scorebar{
+    position:sticky;bottom:0;background:var(--surface);
+    border:1px solid var(--border);border-radius:10px;
+    padding:14px 20px;margin-top:10px;
+    display:flex;align-items:center;justify-content:space-between;
+    box-shadow:0 -4px 14px rgba(0,0,0,.05);
+  }
+  #scoreText{font-weight:700;color:var(--primary-dark);}
+  #resetBtn{
+    background:var(--primary);color:#fff;border:none;border-radius:6px;
+    padding:8px 18px;cursor:pointer;font-size:14px;
+  }
+  #resetBtn:hover{background:var(--primary-dark);}
+
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="crumb">الفصل 1: مقدمة في علم الكيمياء &nbsp;›&nbsp; <b>الدرس 1-2: الكيمياء والمادة</b></div>
+    <h1>الكيمياء والمادة — درس ومراجعة</h1>
+    <p class="lede">تتناول مجالات علم الكيمياء دراسة الأنواع المختلفة من المادة. هذا الدرس يوضّح ما هي المادة، الفرق بين الكتلة والوزن، لماذا يهتم الكيميائيون بما لا يُرى بالعين المجردة، وكيف تتوزع الكيمياء إلى فروع.</p>
+  </div>
+
+  <!-- 1: ما المادة -->
+  <section>
+    <h2>1) ما المادة؟ وما الذي ليس مادة؟</h2>
+    <div class="sub">المادة هي المكوّن الأساسي للكون — لكن ليس كل ما حولك مادة</div>
+
+    <div class="def"><b>المادة:</b> كل ما يشغل حيزًا وله كتلة. توجد مادة بشكل طبيعي (كالأوزون) أو اصطناعي (كمركبات CFCs).</div>
+
+    <p>الهواء مثال مهم: لا تراه ولا تشعر به دائمًا، لكنه مادة — فعندما تنفخ بالونًا يتمدد ليسمح للهواء بالدخول، ويصبح أثقل من قبل. هذا يثبت أن للهواء كتلة ويشغل حيزًا.</p>
+
+    <div class="chipRow">
+      <span class="chip yes">✓ مادة: الكتاب</span>
+      <span class="chip yes">✓ مادة: الهواء</span>
+      <span class="chip yes">✓ مادة: الأوزون وCFCs</span>
+      <span class="chip no">✗ ليست مادة: الأفكار والآراء</span>
+      <span class="chip no">✗ ليست مادة: الحرارة والضوء</span>
+      <span class="chip no">✗ ليست مادة: موجات الراديو والمجالات المغناطيسية</span>
+    </div>
+  </section>
+
+  <!-- 2: الكتلة والوزن -->
+  <section>
+    <h2>2) الكتلة والوزن — فرق جوهري يخلط فيه كثيرون</h2>
+    <div class="sub">هذه أكثر نقطة في الدرس تُسأل بصياغات مختلفة في الاختبارات</div>
+
+    <div class="vs">
+      <div class="vsCard mass">
+        <h3>الكتلة</h3>
+        <ul>
+          <li>مقياس كمية المادة في الجسم</li>
+          <li><b>ثابتة</b> في أي مكان بالكون</li>
+          <li>لا تعتمد على قوة الجاذبية</li>
+        </ul>
+      </div>
+      <div class="vsMid">≠</div>
+      <div class="vsCard weight">
+        <h3>الوزن</h3>
+        <ul>
+          <li>مقياس لكمية المادة <b>ولقوة جذب الأرض</b> لها معًا</li>
+          <li><b>يختلف</b> من مكان إلى آخر</li>
+          <li>= الكتلة × تسارع الجاذبية المحلي</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="warn">
+      <b>لماذا يفضّل العلماء الكتلة على الوزن في قياساتهم؟</b> لأن قوة الجذب ليست ثابتة في كل الأماكن — تقل كلما بعدنا عن سطح الأرض، وتختلف تمامًا على أجرام أخرى (وزنك على القمر يساوي سدس وزنك على الأرض، لأن جاذبية القمر تساوي سدس جاذبية الأرض). أما الكتلة فتبقى ثابتة في أي مكان، فهي المقياس العملي والدقيق لمقارنة الأجسام.
+    </div>
+  </section>
+
+  <!-- 3: التركيب تحت المجهري والنموذج -->
+  <section>
+    <h2>3) لماذا يهتم الكيميائيون بما لا يُرى بالعين المجردة؟</h2>
+    <div class="sub">من المستوى الذي نراه، إلى المستوى الذري الذي يفسّره</div>
+
+    <div class="scale">
+      <div class="scaleBox"><div class="big">🔍</div><div class="cap">ما نلاحظه بالعين المجردة<br>(خواص المادة الظاهرة)</div></div>
+      <div class="scaleArrow">⟸ يفسَّر بـ ⟸</div>
+      <div class="scaleBox"><div class="big">⚛</div><div class="cap">المستوى تحت المجهري<br>(تركيب الذرات وتغيراتها)</div></div>
+    </div>
+
+    <div class="def"><b>الذرة:</b> جسيم تحت مجهري صغير جدًا يدخل في تركيب كل مادة، ولا يمكن رؤيته حتى بالمجاهر الضوئية — فتريليون ذرة يمكن أن تشغل حيزًا يساوي نقطة صغيرة فقط.</div>
+
+    <p>كل ما نلاحظه عن سلوك المادة وتغيراتها يعتمد في الأصل على تركيب هذه الذرات — تمامًا كقضبان الحديد المخفية داخل جدران مبنى، والتي لا تُرى من الخارج لكنها تحدد ثباته وشكله.</p>
+
+    <div class="def"><b>النموذج:</b> تفسير مرئي، أو لفظي، أو رياضي للبيانات التجريبية، يستعمله العلماء لتمثيل أشياء يصعب مشاهدتها مباشرة — مثل نموذج حاسوبي لطائرة قبل بنائها، أو نماذج الكيميائيين لتمثيل المادة على المستوى الذري.</div>
+  </section>
+
+  <!-- 4: فروع الكيمياء -->
+  <section>
+    <h2>4) الكيمياء: علم أساسي (مركزي) لكل العلوم</h2>
+    <div class="sub">ولأن أنواع المادة كثيرة، تنقسم الكيمياء إلى فروع متخصصة</div>
+
+    <p>فهم الكيمياء أساسي لعلوم أخرى كثيرة: الأحياء، والفيزياء، وعلوم الأرض والبيئة. ولهذا التنوع الهائل في أنواع المادة، تُقسَّم الكيمياء تقليديًا إلى فروع — مع تداخل كبير بينها (فالكيمياء العضوية وكيمياء المبلمرات تشتركان مثلًا في دراسة البلاستيك).</p>
+
+    <table class="branches">
+      <tr><th>الفرع</th><th>مجال الدراسة</th><th>أمثلة</th></tr>
+      <tr><td><b>الكيمياء العضوية</b></td><td>المواد التي تحتوي كربون</td><td>الأدوية، والبلاستيكات</td></tr>
+      <tr><td><b>الكيمياء غير العضوية</b></td><td>معظم المواد التي لا تحتوي على كربون عمومًا</td><td>المعادن، والفلزات واللافلزات</td></tr>
+      <tr><td><b>الكيمياء الفيزيائية</b></td><td>سلوك المادة وتغيراتها وتغيرات الطاقة المصاحبة لها</td><td>سرعة التفاعلات وآليتها</td></tr>
+      <tr><td><b>الكيمياء التحليلية</b></td><td>أنواع المواد ومكوناتها</td><td>الأغذية، وضبط جودة المنتجات</td></tr>
+      <tr><td><b>الكيمياء الحيوية</b></td><td>المادة والعمليات الحيوية في المخلوقات الحية</td><td>التمثيل الغذائي، والتخمر</td></tr>
+      <tr><td><b>الكيمياء البيئية</b></td><td>المادة والبيئة</td><td>التلوث، والدورات الكيميائية الحيوية</td></tr>
+      <tr><td><b>الكيمياء الاصطناعية</b></td><td>العمليات الكيميائية في الصناعة</td><td>الأصباغ، ومواد الطلاء</td></tr>
+      <tr><td><b>كيمياء المبلمرات</b></td><td>المبلمرات والمواد البلاستيكية</td><td>الأنسجة، ومواد الطلاء، والبلاستيكات</td></tr>
+      <tr><td><b>الكيمياء الذرية</b></td><td>نظريات تركيب المادة</td><td>الروابط، وأشكال المدارات، والتركيب الإلكتروني</td></tr>
+      <tr><td><b>الكيمياء الحرارية</b></td><td>الحرارة الناتجة عن العمليات الكيميائية</td><td>حرارة التفاعل</td></tr>
+    </table>
+  </section>
+
+  <!-- 5: ملخص -->
+  <section>
+    <h2>5) ملخص الدرس في نقاط</h2>
+    <ul class="recap">
+      <li>المادة: كل ما يشغل حيزًا وله كتلة (مثل الكتاب والهواء)؛ الأفكار والحرارة والضوء وموجات الراديو ليست مادة.</li>
+      <li>الكتلة: مقياس كمية المادة، ثابتة في كل مكان. الوزن: يقيس المادة وقوة الجذب معًا، ويختلف من مكان لآخر.</li>
+      <li>يفضّل العلماء الكتلة على الوزن في القياس لأنها لا تتأثر باختلاف الجاذبية.</li>
+      <li>تتركب المادة من ذرات — جسيمات تحت مجهرية لا تُرى حتى بالمجاهر الضوئية، وهي ما يفسّر سلوك المادة.</li>
+      <li>النموذج: تفسير مرئي أو لفظي أو رياضي يستعمله العلماء لتمثيل ما يصعب مشاهدته.</li>
+      <li>الكيمياء علم مركزي لكل العلوم، وتنقسم إلى فروع متعددة (عضوية، غير عضوية، فيزيائية، حيوية، بيئية، وغيرها) قد تتداخل فيما بينها.</li>
+    </ul>
+  </section>
+
+  <!-- 6: quiz -->
+  <section id="quizSection">
+    <h2>6) اختبر نفسك — 10 أسئلة</h2>
+    <div class="sub">اختر إجابة واحدة لكل سؤال، وستظهر لك النتيجة والتفسير فورًا</div>
+    <div id="quizHost"></div>
+
+    <div class="scorebar">
+      <span id="scoreText">النتيجة: 0 / 10</span>
+      <button id="resetBtn">إعادة المحاولة</button>
+    </div>
+  </section>
+
+  <footer>مراجعة الدرس 1-2 «الكيمياء والمادة» — الفصل 1: مقدمة في علم الكيمياء</footer>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "ما الفرق الجوهري بين الكتلة والوزن؟",
+    options: [
+      "لا فرق بينهما، وهما نفس الشيء",
+      "الكتلة مقياس كمية المادة وثابتة، أما الوزن يقيس أيضًا قوة جذب الأرض ويختلف من مكان لآخر",
+      "الوزن ثابت دائمًا والكتلة هي المتغيرة",
+      "الكتلة تقاس بالنيوتن والوزن بالكيلوجرام"
+    ],
+    correct: 1,
+    explain: "الكتلة مقياس لكمية المادة وتبقى ثابتة في أي مكان، بينما الوزن مقياس لكمية المادة ولقوة جذب الأرض معًا، وهو يختلف باختلاف قوة الجاذبية من مكان لآخر."
+  },
+  {
+    q: "لماذا يفضّل العلماء استعمال الكتلة بدلًا من الوزن في قياساتهم؟",
+    options: [
+      "لأن الكتلة أسهل في القياس بميزان يدوي بسيط",
+      "لأن كتلة الجسم ثابتة في أي مكان، بخلاف الوزن الذي يتغيّر بتغيّر قوة الجاذبية",
+      "لأن الوزن لا يمكن قياسه في المختبر أصلًا",
+      "لأن الكتلة أكبر رقميًا من الوزن دائمًا"
+    ],
+    correct: 1,
+    explain: "لما كانت الكتلة مستقلة عن قوة الجاذبية، فإن العلماء يستعملون مقياس الكتلة لأنه يعطي قيمة ثابتة بغض النظر عن الموقع."
+  },
+  {
+    q: "أيّ مما يلي يُعدّ مادة؟",
+    options: ["الضوء", "الهواء", "الأفكار والآراء", "موجات الراديو"],
+    correct: 1,
+    explain: "الهواء مادة لأنه يشغل حيزًا وله كتلة (كما يظهر عند نفخ بالون فيتمدد ويصبح أثقل)، أما الضوء والأفكار وموجات الراديو والمجالات المغناطيسية فليست مادة."
+  },
+  {
+    q: "وزن الجسم يساوي:",
+    options: [
+      "كتلته فقط بلا أي عامل آخر",
+      "حاصل ضرب كتلته في تسارع الجاذبية الأرضية المحلي",
+      "حجمه مقسومًا على كتلته",
+      "كتلته مضروبة في المسافة من مركز الأرض"
+    ],
+    correct: 1,
+    explain: "وزن الجسم هو حاصل ضرب كتلته في تسارع الجاذبية الأرضية المحلي، ولهذا يختلف الوزن إذا اختلف مقدار الجاذبية."
+  },
+  {
+    q: "ما الذرة، وأين تقع من ناحية إمكانية رؤيتها؟",
+    options: [
+      "جسيم يمكن رؤيته بسهولة بالمجهر الضوئي",
+      "جسيم تحت مجهري صغير جدًا لا يمكن رؤيته حتى بالمجاهر الضوئية",
+      "أكبر وحدة بناء تُرى بالعين المجردة",
+      "نوع من الجزيئات المرئية مباشرة"
+    ],
+    correct: 1,
+    explain: "الذرات جسيمات تحت مجهرية صغيرة جدًا، فتريليون ذرة يمكن أن تشغل حيزًا يساوي نقطة صغيرة فقط، ولذلك لا يمكن رؤيتها حتى بالمجاهر الضوئية."
+  },
+  {
+    q: "ما «النموذج» كما يستعمله العلماء؟",
+    options: [
+      "جهاز لقياس الكتلة في المختبر",
+      "تفسير مرئي أو لفظي أو رياضي للبيانات التجريبية يمثّل أشياء يصعب مشاهدتها",
+      "نوع من أنواع المادة الاصطناعية كـCFCs",
+      "وحدة قياس الوزن على سطح القمر"
+    ],
+    correct: 1,
+    explain: "النموذج تفسير مرئي أو لفظي أو رياضي للبيانات التجريبية، يستعمله العلماء لتمثيل أشياء يصعب مشاهدتها، كنموذج طائرة أو نموذج ذري للمادة."
+  },
+  {
+    q: "لماذا يهتم الكيميائيون بالوصف تحت المجهري (الذري) للمادة؟",
+    options: [
+      "لأن كل ما يُلاحظ عن المادة بالعين المجردة يعتمد على تركيب الذرات وتغيراتها",
+      "لأن الذرات يمكن رؤيتها بسهولة بالعين المجردة",
+      "لأنه لا علاقة بين تركيب الذرة وخواص المادة الظاهرة",
+      "لأن المستوى تحت المجهري غير مهم في تفسير التغيرات"
+    ],
+    correct: 0,
+    explain: "كل ما نلاحظه عن المادة بالعين المجردة (خواصها وتغيراتها) ينتج في الأصل من تركيب الذرات على المستوى تحت المجهري، فهم هذا المستوى يفسّر ما نراه."
+  },
+  {
+    q: "يوصف علم الكيمياء بأنه «علم أساسي/مركزي» لأن:",
+    options: [
+      "لا علاقة له بالعلوم الأخرى إطلاقًا",
+      "فهمه ضروري لعلوم أخرى كالأحياء والفيزياء وعلوم الأرض والبيئة",
+      "هو الفرع الوحيد الذي يدرس المادة في العالم",
+      "يقتصر على دراسة المركبات الاصطناعية فقط"
+    ],
+    correct: 1,
+    explain: "إن فهم الكيمياء يُعدّ أساسيًّا لكل العلوم: الأحياء، والفيزياء، والأرض، والبيئة وغيرها؛ ولذلك تُوصف بأنها العلم المركزي."
+  },
+  {
+    q: "أيّ فرع من فروع الكيمياء يختص بدراسة المواد التي تحتوي على الكربون، مثل الأدوية والبلاستيكات؟",
+    options: ["الكيمياء غير العضوية", "الكيمياء العضوية", "الكيمياء الحرارية", "الكيمياء الذرية"],
+    correct: 1,
+    explain: "الكيمياء العضوية تُعنى بدراسة المواد التي تحتوي كربون، ومن أمثلتها الأدوية والبلاستيكات."
+  },
+  {
+    q: "إذا انتقل رائد فضاء إلى سطح القمر (حيث جاذبية القمر تساوي سدس جاذبية الأرض)، فماذا يحدث لكتلته ووزنه؟",
+    options: [
+      "يبقى كلاهما ثابتًا بلا أي تغيّر",
+      "تبقى كتلته ثابتة، بينما يقلّ وزنه إلى سدس وزنه على الأرض",
+      "تقلّ كتلته إلى السدس ويبقى وزنه ثابتًا",
+      "يزداد كلاهما على سطح القمر"
+    ],
+    correct: 1,
+    explain: "الكتلة خاصية للجسم نفسه ولا تتغيّر بتغيّر الموقع، أما الوزن يعتمد على قوة الجذب المحلية، فيقلّ على القمر إلى سدس قيمته على الأرض لأن جاذبية القمر تساوي سدس جاذبية الأرض."
+  }
+];
+
+const host = document.getElementById('quizHost');
+let answered = new Array(QUESTIONS.length).fill(false);
+let score = 0;
+
+function render(){
+  host.innerHTML = '';
+  QUESTIONS.forEach((item, qi) => {
+    const card = document.createElement('div');
+    card.className = 'qcard';
+
+    const title = document.createElement('div');
+    title.className = 'qtitle';
+    title.textContent = (qi+1) + '. ' + item.q;
+    card.appendChild(title);
+
+    item.options.forEach((optText, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = optText;
+      btn.addEventListener('click', () => handleAnswer(qi, oi, card));
+      card.appendChild(btn);
+    });
+
+    const explain = document.createElement('div');
+    explain.className = 'explain';
+    explain.id = 'explain-' + qi;
+    explain.textContent = item.explain;
+    card.appendChild(explain);
+
+    host.appendChild(card);
+  });
+  updateScore();
+}
+
+function handleAnswer(qi, oi, card){
+  if(answered[qi]) return;
+  answered[qi] = true;
+  const correctIndex = QUESTIONS[qi].correct;
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach((btn, idx) => {
+    btn.classList.add('disabled');
+    btn.disabled = true;
+    if(idx === correctIndex){
+      btn.classList.add('correct');
+    } else if(idx === oi){
+      btn.classList.add('wrong');
+    }
+  });
+  if(oi === correctIndex) score++;
+  document.getElementById('explain-' + qi).classList.add('show');
+  updateScore();
+}
+
+function updateScore(){
+  document.getElementById('scoreText').textContent = 'النتيجة: ' + score + ' / ' + QUESTIONS.length;
+}
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  answered = new Array(QUESTIONS.length).fill(false);
+  score = 0;
+  render();
+  document.getElementById('quizSection').scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+render();
+</script>
+</body>
+</html>
