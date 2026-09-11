@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>كيمياء 1 — بوابة الدروس والمراجعة</title>
+  <style>
+    :root {
+      --primary: #0E7C86;
+      --primary-dark: #0A5D66;
+      --bg: #F4F9FA;
+      --surface: #FFFFFF;
+      --border: #DCE7E7;
+      --ink: #1E2A32;
+      --muted: #5B6E77;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    body { background-color: var(--bg); color: var(--ink); line-height: 1.8; padding: 30px 16px; }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-right: 6px solid var(--primary);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    header h1 { color: var(--primary-dark); font-size: 24px; margin-bottom: 8px; }
+    header p { color: var(--muted); font-size: 15px; }
+    .lesson-list { display: flex; flex-direction: column; gap: 14px; }
+    .lesson-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s ease;
+    }
+    .lesson-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(14, 124, 134, 0.1);
+    }
+    .lesson-info h2 { font-size: 17px; color: var(--primary-dark); margin-bottom: 4px; }
+    .lesson-info span { font-size: 13.5px; color: var(--muted); }
+    .btn-go {
+      background: var(--primary);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    footer { text-align: center; margin-top: 35px; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>منصة مادة الكيمياء (1)</h1>
+      <p>الفصل الدراسي الأول — المرحلة الثانوية</p>
+    </header>
+
+    <div class="lesson-list">
+      <a href="lesson%2001.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>الدرس 1-1: قصة مادتين</h2>
+          <span>المفاهيم الأساسية، طبقة الأوزون، ومركبات CFCs + اختبار</span>
+        </div>
+        <div class="btn-go">ابدأ المذاكرة ←</div>
+      </a>
+
+      <a href="lesson%2002.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>الدرس 1-2: الكيمياء والمادة</h2>
+          <span>الكتلة والوزن، النماذج تحت المجهرية، وفروع الكيمياء + اختبار</span>
+        </div>
+        <div class="btn-go">ابدأ المذاكرة ←</div>
+      </a>
+
+      <a href="lesson%2003.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>الدرس 1-3: الطرائق العلمية</h2>
+          <span>خطوات البحث العلمي، الفرضيات، والمتغيرات + اختبار</span>
+        </div>
+        <div class="btn-go">ابدأ المذاكرة ←</div>
+      </a>
+    </div>
+
+    <footer>بوابة مراجعة واختبارات تفاعلية</footer>
+  </div>
+</body>
+</html>
