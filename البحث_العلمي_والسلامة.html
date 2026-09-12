@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>البحث العلمي والسلامة في المختبر | ورقة مراجعة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0c1f35;
+  --blue:#1a5276;
+  --sky:#2196f3;
+  --cyan:#00acc1;
+  --green:#1a7a4a;
+  --green-bg:#e8f8f0;
+  --red:#c0392b;
+  --red-bg:#fdf0ef;
+  --gold:#d4820a;
+  --gold-bg:#fef9ec;
+  --purple:#6d3ea0;
+  --purple-bg:#f4eeff;
+  --teal:#00796b;
+  --teal-bg:#e0f2f1;
+  --orange:#d35400;
+  --orange-bg:#fef0e6;
+  --bg:#eef5fd;
+  --card:#ffffff;
+  --text:#0d1b2a;
+  --muted:#546e7a;
+  --border:#bdd5ef;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);direction:rtl;line-height:1.85;}
+
+/* ══ HERO ══ */
+.hero{
+  background:linear-gradient(150deg,#050f1e 0%,#0c1f35 55%,#142e4d 100%);
+  color:#fff;padding:52px 28px 44px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 25% 65%,rgba(0,172,193,.1) 0%,transparent 50%),
+             radial-gradient(ellipse at 80% 25%,rgba(212,130,10,.09) 0%,transparent 45%),
+             radial-gradient(ellipse at 60% 90%,rgba(109,62,160,.07) 0%,transparent 40%);
+  pointer-events:none;
+}
+.hero-chip{
+  display:inline-block;
+  background:rgba(0,172,193,.15);border:1px solid rgba(0,172,193,.35);
+  color:#80deea;border-radius:100px;
+  padding:.38rem 1.2rem;font-size:.85rem;font-weight:700;
+  margin-bottom:1.1rem;position:relative;z-index:1;
+}
+.hero h1{
+  font-family:'Cairo',sans-serif;font-weight:900;
+  font-size:clamp(1.9rem,5vw,3rem);color:#fff;line-height:1.15;
+  margin-bottom:.55rem;position:relative;z-index:1;
+}
+.hero h1 em{color:#fbbf24;font-style:normal;}
+.hero-sub{color:rgba(255,255,255,.7);font-size:1rem;max-width:560px;margin:0 auto 1.6rem;position:relative;z-index:1;}
+.hero-pills{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap;position:relative;z-index:1;}
+.pill{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:.45rem 1rem;font-size:.88rem;font-weight:700;color:rgba(255,255,255,.88);}
+
+/* ══ TABS ══ */
+.tabs{display:flex;background:var(--card);border-bottom:2px solid var(--border);padding:0 1.2rem;gap:2px;position:sticky;top:0;z-index:99;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow-x:auto;}
+.tab{padding:.95rem 1.3rem;font-size:.93rem;font-weight:700;color:var(--muted);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;font-family:'Tajawal',sans-serif;transition:all .2s;}
+.tab:hover{color:var(--blue);}
+.tab.on{color:var(--navy);border-bottom-color:var(--gold);}
+
+/* ══ SECTIONS ══ */
+.sec{display:none;padding:2.2rem 1.3rem 5rem;}
+.sec.on{display:block;}
+.inner{max-width:880px;margin:0 auto;}
+
+/* ══ SEC HEADER ══ */
+.sec-h{margin-bottom:1.8rem;}
+.sec-h .tag{font-size:.76rem;font-weight:800;color:var(--sky);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.3rem;}
+.sec-h h2{font-family:'Cairo',sans-serif;font-weight:900;font-size:clamp(1.5rem,3.5vw,2.1rem);color:var(--navy);border-right:5px solid var(--cyan);padding-right:.8rem;}
+
+/* ══ CONCEPT CARD ══ */
+.cc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem 1.7rem;margin-bottom:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.04);position:relative;overflow:hidden;}
+.cc::before{content:'';position:absolute;right:0;top:0;bottom:0;width:4px;background:var(--cyan);border-radius:0 4px 4px 0;}
+.cc.gold::before{background:var(--gold);}
+.cc.green::before{background:var(--green);}
+.cc.red::before{background:var(--red);}
+.cc.purple::before{background:var(--purple);}
+.cc.teal::before{background:var(--teal);}
+.cc.orange::before{background:var(--orange);}
+
+.cc .cl{font-size:.74rem;font-weight:800;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.38rem;}
+.cc h3{font-family:'Cairo',sans-serif;font-size:1.18rem;font-weight:900;color:var(--navy);margin-bottom:.65rem;}
+.cc p,.cc li{font-size:.98rem;line-height:1.85;}
+.cc ul,.cc ol{padding-right:1.1rem;display:flex;flex-direction:column;gap:.42rem;}
+.cc strong{color:var(--blue);}
+
+/* ══ COMPARISON CARDS ══ */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1rem 0;}
+@media(max-width:580px){.compare-grid{grid-template-columns:1fr;}}
+.cmp-card{border-radius:14px;padding:1.3rem 1.5rem;border:1.5px solid;}
+.cmp-card.theory{background:var(--blue-bg, #eff6ff);border-color:#93c5fd;}
+.cmp-card.theory{background:#eff6ff;}
+.cmp-card.applied{background:var(--green-bg);border-color:#6ee7b7;}
+.cmp-card h4{font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:900;margin-bottom:.6rem;}
+.cmp-card.theory h4{color:#1d4ed8;}
+.cmp-card.applied h4{color:var(--green);}
+.cmp-card p{font-size:.93rem;line-height:1.75;}
+.cmp-card ul{padding-right:1rem;display:flex;flex-direction:column;gap:.35rem;font-size:.9rem;line-height:1.7;margin-top:.6rem;}
+
+/* ══ KEY BOX ══ */
+.kb{background:var(--gold-bg);border:1.5px solid #fcd34d;border-radius:13px;padding:1.1rem 1.4rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;font-size:.97rem;}
+.kb .ki{font-size:1.35rem;flex-shrink:0;margin-top:.1rem;}
+.kb .kt{line-height:1.75;color:#78350f;}
+.kb strong{font-weight:800;color:#92400e;}
+
+/* ══ ALERT ══ */
+.alert{border-radius:12px;padding:.9rem 1.2rem;margin:.8rem 0;display:flex;gap:.75rem;align-items:flex-start;font-size:.95rem;}
+.alert.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;}
+.alert.warn{background:var(--orange-bg);border:1px solid #fdba74;color:#9a3412;}
+.alert.good{background:var(--green-bg);border:1px solid #86efac;color:#14532d;}
+.alert.red{background:var(--red-bg);border:1px solid #fca5a5;color:#991b1b;}
+.alert .ai{font-size:1.25rem;flex-shrink:0;margin-top:.05rem;}
+
+/* ══ SAFETY GRID ══ */
+.safety-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1rem 0;}
+.safety-card{border-radius:14px;padding:1.1rem 1.3rem;border:1.5px solid;}
+.safety-card.protect{background:#eff6ff;border-color:#93c5fd;}
+.safety-card.hazard{background:var(--red-bg);border-color:#fca5a5;}
+.safety-card.chemical{background:var(--orange-bg);border-color:#fdba74;}
+.safety-card.fire{background:#fff7ed;border-color:#fde68a;}
+.safety-card.end{background:var(--green-bg);border-color:#86efac;}
+.safety-card h4{font-size:.95rem;font-weight:800;margin-bottom:.5rem;}
+.safety-card.protect h4{color:#1d4ed8;}
+.safety-card.hazard h4{color:var(--red);}
+.safety-card.chemical h4{color:var(--orange);}
+.safety-card.fire h4{color:#d97706;}
+.safety-card.end h4{color:var(--green);}
+.safety-card ul{padding-right:1rem;display:flex;flex-direction:column;gap:.3rem;font-size:.88rem;line-height:1.65;}
+
+/* ══ STEPS ══ */
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{display:flex;gap:.9rem;align-items:flex-start;}
+.step-line{display:flex;flex-direction:column;align-items:center;}
+.step-dot{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-weight:900;font-size:.88rem;}
+.step-bar{width:2px;flex:1;min-height:20px;margin:3px 0;}
+.step-content{padding-bottom:1.4rem;flex:1;}
+.step-content h4{font-size:.98rem;font-weight:800;margin-bottom:.35rem;}
+.step-content p{font-size:.92rem;line-height:1.7;}
+
+/* ══ TABLE ══ */
+.dtable{width:100%;border-collapse:collapse;font-size:.93rem;margin:1rem 0;}
+.dtable th{background:var(--navy);color:#fff;padding:.7rem 1rem;font-weight:800;text-align:center;}
+.dtable th:first-child{border-radius:10px 0 0 0;}
+.dtable th:last-child{border-radius:0 10px 0 0;}
+.dtable td{padding:.65rem 1rem;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;}
+.dtable tr:nth-child(even) td{background:#f7faff;}
+.dtable tr:hover td{background:#eff6ff;}
+.dtable .hl{color:var(--blue);font-weight:800;}
+.dtable td:first-child{text-align:right;font-weight:600;}
+
+/* ══ DIVIDER ══ */
+.div{height:1px;background:var(--border);margin:1.6rem 0;}
+
+/* ══ QUIZ ══ */
+.quiz-intro{background:linear-gradient(135deg,#eff6ff,#e0f2fe);border:1px solid #bfdbfe;border-radius:16px;padding:1.6rem;text-align:center;margin-bottom:1.8rem;}
+.quiz-intro h3{font-family:'Cairo',sans-serif;font-size:1.45rem;font-weight:900;color:var(--navy);margin-bottom:.35rem;}
+.quiz-intro p{color:var(--muted);font-size:.95rem;}
+
+.pb-wrap{background:var(--border);border-radius:10px;height:8px;margin:1.4rem 0;overflow:hidden;}
+.pb{height:100%;background:linear-gradient(90deg,var(--sky),var(--gold));border-radius:10px;transition:width .4s;}
+.plabs{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-top:.38rem;}
+
+.qcard{background:var(--card);border:1.5px solid var(--border);border-radius:15px;padding:1.6rem 1.6rem 1.3rem;margin-bottom:1.1rem;box-shadow:0 2px 7px rgba(0,0,0,.05);transition:border-color .25s;}
+.qcard.ok{border-color:rgba(26,122,74,.38);}
+.qcard.bad{border-color:rgba(192,57,43,.3);}
+
+.qh{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1rem;}
+.qn{width:36px;height:36px;flex-shrink:0;background:#eff6ff;border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-weight:900;font-size:.88rem;color:var(--blue);}
+.qt{font-size:.99rem;font-weight:700;color:var(--text);line-height:1.7;flex:1;padding-top:.28rem;}
+
+.opts{display:flex;flex-direction:column;gap:.52rem;}
+.obtn{display:flex;align-items:center;gap:.85rem;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:11px;background:#fafcff;cursor:pointer;text-align:right;font-family:'Tajawal',sans-serif;font-size:.95rem;font-weight:500;color:var(--text);transition:all .18s;width:100%;direction:rtl;}
+.obtn:hover:not(:disabled){border-color:var(--sky);background:#eff6ff;color:var(--navy);}
+.obtn:hover:not(:disabled) .ol{background:var(--sky);color:#fff;border-color:var(--sky);}
+.ol{width:30px;height:30px;border-radius:8px;flex-shrink:0;background:#fff;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;color:var(--muted);font-family:'Cairo',sans-serif;transition:all .18s;}
+.obtn.correct{background:var(--green-bg);border-color:rgba(26,122,74,.4);color:#14532d;}
+.obtn.correct .ol{background:var(--green);color:#fff;border-color:var(--green);}
+.obtn.wrong{background:var(--red-bg);border-color:rgba(192,57,43,.32);color:#7f1d1d;}
+.obtn.wrong .ol{background:var(--red);color:#fff;border-color:var(--red);}
+.obtn.reveal{background:rgba(26,122,74,.03);border-color:rgba(26,122,74,.14);}
+.obtn:disabled{pointer-events:none;}
+
+.fb{display:none;margin-top:.75rem;padding:.8rem 1rem;border-radius:11px;font-size:.93rem;font-weight:500;line-height:1.7;}
+.fb.show{display:flex;gap:.65rem;align-items:flex-start;}
+.fb.ok{background:var(--green-bg);border:1px solid rgba(26,122,74,.25);color:#14532d;}
+.fb.bad{background:var(--red-bg);border:1px solid rgba(192,57,43,.2);color:#7f1d1d;}
+.fb strong{font-weight:800;}
+
+/* FLOAT BAR */
+#fsbar{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--border);border-radius:100px;padding:.5rem 1.5rem;display:flex;align-items:center;gap:1.1rem;box-shadow:0 8px 30px rgba(0,0,0,.11);z-index:500;font-size:.82rem;white-space:nowrap;}
+.fsi{display:flex;align-items:center;gap:.35rem;}
+.fsdot{width:8px;height:8px;border-radius:50%;}
+.fsdot.g{background:var(--green);}
+.fsdot.r{background:var(--red);}
+.fsdot.b{background:var(--sky);}
+.fv{font-weight:800;font-family:'Cairo',sans-serif;color:var(--navy);}
+.fd{width:1px;height:15px;background:var(--border);}
+
+/* RESULT */
+#res-box{display:none;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.4rem 1.8rem;margin-top:1.4rem;text-align:center;}
+#res-box.show{display:block;}
+.rring{width:128px;height:128px;border-radius:50%;border:8px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.3rem;}
+.rring.ex{border-color:var(--green);background:var(--green-bg);}
+.rring.gd{border-color:var(--gold);background:var(--gold-bg);}
+.rring.nw{border-color:var(--red);background:var(--red-bg);}
+.rn{font-family:'Cairo',sans-serif;font-size:2.3rem;font-weight:900;}
+.rring.ex .rn{color:var(--green);}
+.rring.gd .rn{color:var(--gold);}
+.rring.nw .rn{color:var(--red);}
+.rl{font-size:.72rem;color:var(--muted);}
+.rmsg{font-family:'Cairo',sans-serif;font-size:1.38rem;font-weight:900;margin-bottom:.38rem;}
+.rsub{color:var(--muted);font-size:.95rem;margin-bottom:1.4rem;}
+.rbtn{background:var(--navy);color:#fff;border:none;border-radius:11px;padding:.8rem 2.2rem;font-family:'Tajawal',sans-serif;font-size:.97rem;font-weight:800;cursor:pointer;transition:all .2s;}
+.rbtn:hover{background:var(--blue);transform:translateY(-2px);}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-chip">🔬 كيمياء | القسم 1-4 | الفصل الأول</div>
+  <h1>البحث العلمي و<em>السلامة في المختبر</em></h1>
+  <p class="hero-sub">أنواع البحث العلمي • التقنية • السلامة المختبرية — ورقة مراجعة متكاملة للطالب</p>
+  <div class="hero-pills">
+    <div class="pill">🧪 البحث النظري vs التطبيقي</div>
+    <div class="pill">⚙️ التقنية</div>
+    <div class="pill">🦺 قواعد السلامة</div>
+    <div class="pill">✏️ 10 أسئلة تفاعلية</div>
+  </div>
+</div>
+
+<nav class="tabs">
+  <button class="tab on" onclick="goTab('t1',this)">🔭 أنواع البحث</button>
+  <button class="tab" onclick="goTab('t2',this)">⚙️ التقنية والاكتشافات</button>
+  <button class="tab" onclick="goTab('t3',this)">🦺 السلامة في المختبر</button>
+  <button class="tab" onclick="goTab('t4',this)">✏️ الاختبار التفاعلي</button>
+</nav>
+
+<!-- ══════════ TAB 1: أنواع البحث ══════════ -->
+<div id="t1" class="sec on">
+<div class="inner">
+
+  <div class="sec-h">
+    <div class="tag">Scientific Research — Types of Investigations</div>
+    <h2>أنواع البحوث العلمية</h2>
+  </div>
+
+  <div class="alert info">
+    <span class="ai">📌</span>
+    <div>الفكرة الرئيسة: كثير من المعلومات التي حصل عليها العلماء من خلال البحث النظري تُستعمل لاحقاً لحل مشكلة أو تلبية حاجة محددة.</div>
+  </div>
+
+  <!-- البحث النظري vs التطبيقي -->
+  <div class="compare-grid" style="margin-top:1.2rem">
+    <div class="cmp-card theory">
+      <h4>🔭 البحث النظري (الأساسي)</h4>
+      <p>بحث يُجرى <strong>للحصول على المعرفة من أجل المعرفة نفسها</strong> — دون هدف تطبيقي محدد مسبقاً.</p>
+      <ul>
+        <li>الدافع: حب الاستطلاع والفضول العلمي</li>
+        <li>لا يوجد تطبيق عملي مُخطط مسبقاً</li>
+        <li>النتائج قد تتحول لاحقاً لبحث تطبيقي</li>
+        <li><strong>مثال:</strong> دراسة مولينا وروولاند على مركبات CFC وتفاعلها مع طبقة الأوزون</li>
+      </ul>
+    </div>
+    <div class="cmp-card applied">
+      <h4>⚙️ البحث التطبيقي</h4>
+      <p>بحث <strong>يُجرى لحل مشكلة محددة</strong> أو تلبية حاجة معينة — الهدف التطبيقي واضح من البداية.</p>
+      <ul>
+        <li>الدافع: حل مشكلة قائمة أو تلبية حاجة</li>
+        <li>يعتمد في الغالب على نتائج البحث النظري</li>
+        <li>له تطبيق عملي مباشر</li>
+        <li><strong>مثال:</strong> البحث عن بدائل لمركبات CFC بعد اكتشاف ثقب الأوزون</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kb">
+    <span class="ki">🧠</span>
+    <div class="kt"><strong>العلاقة بين النوعين:</strong> البحث النظري والتطبيقي ليسا منفصلين — كثيراً ما يتحول البحث النظري إلى تطبيقي عند ظهور مشكلة. مثال الأشعة السينية: اكتُشفت أثناء بحث نظري على أنابيب التفريغ الكهربائي، ثم وُظّفت في التشخيص الطبي.</div>
+  </div>
+
+  <!-- قصة CFC والأوزون -->
+  <div class="cc teal">
+    <div class="cl">تطبيق حقيقي — قصة كاملة لفهم أعمق</div>
+    <h3>🌍 قصة مركبات CFC وطبقة الأوزون</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-line">
+          <div class="step-dot" style="background:#e0f2f1;color:#00796b">1</div>
+          <div class="step-bar" style="background:#e0f2f1"></div>
+        </div>
+        <div class="step-content">
+          <h4>البحث النظري (من أجل المعرفة)</h4>
+          <p>مولينا وروولاند — دافعهما حب الاستطلاع فقط — أجريا بحثاً نظرياً على مركبات CFC وأثبتا أنها يمكن أن تُسرّع تفكك الأوزون تحت ظروف مختبرية معينة.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="step-dot" style="background:#e0f2f1;color:#00796b">2</div>
+          <div class="step-bar" style="background:#e0f2f1"></div>
+        </div>
+        <div class="step-content">
+          <h4>ظهور المشكلة (1985م)</h4>
+          <p>اكتُشف وجود ثقب في طبقة الأوزون، فقاس العلماء كميات CFC في الستراتوسفير ووجدوا ارتباطاً قوياً — تحوّل البحث النظري فجأة إلى قضية تطبيقية عاجلة.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-line">
+          <div class="step-dot" style="background:#e0f2f1;color:#00796b">3</div>
+          <div class="step-bar" style="background:#e0f2f1"></div>
+        </div>
+        <div class="step-content">
+          <h4>البحث التطبيقي (لحل المشكلة)</h4>
+          <p>أُجريت أبحاث تطبيقية للحصول على بدائل لـCFC التي أصبحت ممنوعة — ومازال العلماء يراقبون التغيرات السنوية في كمية الأوزون.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- البيانات الكمية والنوعية -->
+  <div class="div"></div>
+  <div class="cc gold">
+    <div class="cl">أدوات البحث العلمي</div>
+    <h3>📊 البيانات: كمية ونوعية</h3>
+    <div class="compare-grid">
+      <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:1.1rem">
+        <h4 style="color:#1d4ed8;font-family:'Cairo',sans-serif;font-weight:900;margin-bottom:.5rem">📏 البيانات الكمية</h4>
+        <p style="font-size:.92rem;line-height:1.7">بيانات <strong>رقمية قابلة للقياس</strong> — تُعبّر عنها بأرقام ووحدات.</p>
+        <p style="font-size:.88rem;color:#1d4ed8;margin-top:.4rem">مثال: درجة الغليان = 100°C، كثافة الماء = 1 g/mL</p>
+      </div>
+      <div style="background:var(--purple-bg);border:1.5px solid #c4b5fd;border-radius:12px;padding:1.1rem">
+        <h4 style="color:var(--purple);font-family:'Cairo',sans-serif;font-weight:900;margin-bottom:.5rem">👁️ البيانات النوعية</h4>
+        <p style="font-size:.92rem;line-height:1.7">بيانات <strong>وصفية غير رقمية</strong> — تصف الشكل أو اللون أو الرائحة.</p>
+        <p style="font-size:.88rem;color:var(--purple);margin-top:.4rem">مثال: لون السائل أصفر، رائحة حادة، الشكل بلوري</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════ TAB 2: التقنية والاكتشافات ══════════ -->
+<div id="t2" class="sec">
+<div class="inner">
+
+  <div class="sec-h">
+    <div class="tag">Technology & Unplanned Discoveries</div>
+    <h2>التقنية والاكتشافات غير المقصودة</h2>
+  </div>
+
+  <div class="cc purple">
+    <div class="cl">تعريف أساسي</div>
+    <h3>⚙️ ما التقنية؟</h3>
+    <p>التقنية هي <strong>شيء من صنع الإنسان</strong> وقد لا يوجد في الطبيعة. تنتج عادةً عن تطبيق نتائج البحث العلمي لحل مشكلة أو تحسين حياة الإنسان.</p>
+    <div class="alert info" style="margin-top:.8rem">
+      <span class="ai">💡</span>
+      <div><strong>الفرق الجوهري:</strong> العلم يصف ويفسّر الطبيعة — التقنية تُنشئ أشياء جديدة لا توجد في الطبيعة تلقائياً.</div>
+    </div>
+  </div>
+
+  <!-- الاكتشافات غير المقصودة -->
+  <div class="cc gold">
+    <div class="cl">اكتشافات غير متوقعة غيّرت العالم</div>
+    <h3>🎯 الاكتشافات غير المقصودة</h3>
+    <p style="margin-bottom:1rem">كثيراً ما يُجري العلماء تجاربهم ليتوصلوا إلى نتائج مختلفة تماماً عما كانوا يتوقعون — وهذه النتائج قد تغير العالم:</p>
+
+    <div class="compare-grid">
+      <div style="background:var(--green-bg);border:1.5px solid #86efac;border-radius:12px;padding:1.2rem">
+        <h4 style="color:var(--green);font-family:'Cairo',sans-serif;font-weight:900;margin-bottom:.6rem">🍄 اكتشاف البنسلين — ألكسندر فلمنج</h4>
+        <ul style="font-size:.9rem;padding-right:1rem;display:flex;flex-direction:column;gap:.35rem;color:var(--text)">
+          <li>وجد فلمنج طبقاً محتوياً على بكتيريا ستافيلوكوكس — ملوّثاً بعفن أخضر</li>
+          <li>لاحظ وجود منطقة خالية حوله ماتت فيها البكتيريا</li>
+          <li>استنتج أن مادة كيميائية من الفطر (البنسلين) قتلت البكتيريا</li>
+          <li><strong>النتيجة:</strong> أول مضاد حيوي — أنقذ ملايين الأرواح</li>
+        </ul>
+      </div>
+      <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:12px;padding:1.2rem">
+        <h4 style="color:#1d4ed8;font-family:'Cairo',sans-serif;font-weight:900;margin-bottom:.6rem">🧵 اكتشاف النايلون — جوليان هيل (1931م)</h4>
+        <ul style="font-size:.9rem;padding-right:1rem;display:flex;flex-direction:column;gap:.35rem;color:var(--text)">
+          <li>غمس قضيباً زجاجياً ساخناً في مخلوط من المحاليل</li>
+          <li>بشكل غير متوقع سحب ألياف طويلة قوية</li>
+          <li>طوّر هيل وزملاؤه هذه الألياف حتى تم تطوير النايلون 1934م</li>
+          <li><strong>النتيجة:</strong> مادة تستعمل في الأنسجة والبلاستيك وأشرطة التثبيت</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="kb">
+    <span class="ki">🔑</span>
+    <div class="kt"><strong>الدرس المستفاد:</strong> الملاحظة الدقيقة والاهتمام بالنتائج غير المتوقعة أساس الاكتشافات العظيمة. فلمنج لم يتجاهل "الطبق الملوث" — بل تساءل عن السبب. هذا هو العقل العلمي الحقيقي.</div>
+  </div>
+
+  <!-- مقارنة: نظري - تطبيقي - تقنية -->
+  <div class="cc">
+    <h3>📋 جدول مقارنة: بحث نظري — تطبيقي — تقنية</h3>
+    <table class="dtable">
+      <thead>
+        <tr><th>المعيار</th><th>البحث النظري</th><th>البحث التطبيقي</th><th>التقنية</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>الهدف</td><td>المعرفة لذاتها</td><td class="hl">حل مشكلة محددة</td><td>صنع شيء جديد</td></tr>
+        <tr><td>الدافع</td><td>الفضول العلمي</td><td class="hl">حاجة أو مشكلة</td><td>تطبيق عملي</td></tr>
+        <tr><td>التخطيط</td><td>لا هدف تطبيقي مسبق</td><td class="hl">هدف واضح</td><td>منتج محدد</td></tr>
+        <tr><td>مثال</td><td>دراسة CFC/أوزون</td><td class="hl">إيجاد بديل CFC</td><td>النايلون، البنسلين</td></tr>
+        <tr><td>العلاقة</td><td colspan="3" style="color:var(--teal);font-weight:700">الثلاثة مترابطة — النظري يغذّي التطبيقي وينتج التقنية</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════ TAB 3: السلامة ══════════ -->
+<div id="t3" class="sec">
+<div class="inner">
+
+  <div class="sec-h">
+    <div class="tag">Laboratory Safety</div>
+    <h2>قواعد السلامة في مختبر الكيمياء</h2>
+  </div>
+
+  <div class="alert red">
+    <span class="ai">⚠️</span>
+    <div><strong>أهمية قصوى:</strong> في المختبر قد يعمل عدة أشخاص في مكان صغير — لذا أنت مسؤول عن سلامتك وسلامة من يعملون معك. السلامة ليست اختيارية.</div>
+  </div>
+
+  <div class="alert warn" style="margin-bottom:1.2rem">
+    <span class="ai">📋</span>
+    <div><strong>القاعدة الأساسية:</strong> ادرس التجربة كاملاً قبل دخول المختبر، وإذا كان لديك أسئلة فاطلب مساعدة المعلم قبل البدء — ليس أثناء التجربة.</div>
+  </div>
+
+  <!-- Safety cards -->
+  <div class="safety-grid">
+
+    <div class="safety-card protect">
+      <h4>🥽 الحماية الشخصية</h4>
+      <ul>
+        <li>الب <strong>النظارة الواقية</strong> ومعطف المختبر دائماً</li>
+        <li>الب <strong>القفازات</strong> عند استعمال مواد كيميائية مهيّجة</li>
+        <li>الب <strong>أحذية مغلقة</strong> على أصابع القدم</li>
+        <li>تجنب الملابس الفضفاضة والأشياء المتدلية</li>
+        <li>لا تلبس <strong>عدسات لاصقة</strong> في المختبر</li>
+        <li>اربطي الشعر إلى الخلف (للطالبات)</li>
+      </ul>
+    </div>
+
+    <div class="safety-card hazard">
+      <h4>☠️ ما يُمنع منعاً باتاً</h4>
+      <ul>
+        <li><strong>لا تتذوق</strong> أي مادة كيميائية أبداً</li>
+        <li><strong>لا تأكل ولا تشرب</strong> في المختبر أبداً</li>
+        <li><strong>لا تجري تجارب</strong> دون إذن المعلم</li>
+        <li><strong>لا تعمل بمفردك</strong> في المختبر</li>
+        <li><strong>لا تُعد</strong> المواد الكيميائية غير المستعملة للعبوة الأصلية</li>
+        <li>لا تسحب مادة كيميائية بفمك — استعمل الماصّة</li>
+      </ul>
+    </div>
+
+    <div class="safety-card chemical">
+      <h4>🧪 التعامل مع المواد الكيميائية</h4>
+      <ul>
+        <li>اقرأ بطاقة العبوة <strong>ثلاث مرات</strong> (قبل، أثناء، وبعد)</li>
+        <li>لا تدخل القطارة في عبوات المواد — اسكب قليلاً في كأس</li>
+        <li>خذ كميات قليلة (الزيادة أسهل من التخلص من الفائض)</li>
+        <li>المواد السامة والقابلة للاشتعال تحت إشراف المعلم فقط</li>
+        <li>استعمل <strong>خزانة طرد الغازات</strong> عند الحاجة</li>
+        <li>أضف الحمض <strong>دائماً</strong> إلى الماء — وليس العكس</li>
+      </ul>
+    </div>
+
+    <div class="safety-card fire">
+      <h4>🔥 السلامة من الحرائق والحرارة</h4>
+      <ul>
+        <li>احفظ المواد القابلة للاشتعال <strong>بعيداً عن اللهب</strong></li>
+        <li>لا تسخّن المخابير المدرّجة أو السحاحات بلهب بنزن</li>
+        <li>عند تسخين أنبوب اختبار: <strong>لا توجّه فوهته نحو أحد</strong></li>
+        <li>الزجاج الساخن لا يختلف في مظهره عن البارد — توخّ الحذر</li>
+        <li>اعرف مكان طفاية الحريق وبطانية الحريق والإسعافات الأولية</li>
+      </ul>
+    </div>
+
+    <div class="safety-card end" style="grid-column: span 2">
+      <h4>✅ بعد الانتهاء من التجربة</h4>
+      <ul style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem">
+        <li>نظّف الأدوات واحفظها في أماكنها</li>
+        <li>نظّف مكان العمل جيداً</li>
+        <li>تأكد من <strong>إطفاء الغاز</strong> وإغلاق مصدر الماء</li>
+        <li>تخلّص من الزجاج المكسور والمواد غير المستعملة كما يطلب المعلم</li>
+        <li>اغسل يديك بالماء والصابون قبل مغادرة المختبر</li>
+        <li>أخبر المعلم عن أي حادث أو جرح أو عطل</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- قاعدة الأحماض -->
+  <div class="cc red">
+    <div class="cl">قاعدة مهمة جداً — تحتاج حفظاً</div>
+    <h3>⚗️ قاعدة الذهب عند تحضير محاليل الأحماض</h3>
+    <p style="font-size:1.05rem"><strong style="color:var(--red)">أضف الحمض دائماً إلى الماء — وليس الماء إلى الحمض!</strong></p>
+    <div class="alert red" style="margin-top:.8rem">
+      <span class="ai">🔥</span>
+      <div><strong>لماذا؟</strong> عند إضافة الحمض إلى الماء: الحرارة تتوزع في كمية كبيرة من الماء. أما العكس (ماء على حمض): يحدث تفاعل عنيف قد يُسبب قذف الحمض الساخن ويُسبب حروقاً شديدة.</div>
+    </div>
+  </div>
+
+  <!-- إسعافات أولية -->
+  <div class="cc green">
+    <div class="cl">إسعافات أولية فورية</div>
+    <h3>🩺 ماذا تفعل إذا لامست مادة كيميائية جلدك أو عينيك؟</h3>
+    <ul>
+      <li><strong>الخطوة الفورية:</strong> اغسل المنطقة المتضررة بكميات كبيرة من الماء فوراً</li>
+      <li><strong>الخطوة الثانية:</strong> أخبر معلمك فوراً عن طبيعة المادة الكيميائية</li>
+      <li><strong>لا تتأخر:</strong> الغسل الفوري بالماء يقلل الضرر بشكل كبير</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════ TAB 4: الاختبار ══════════ -->
+<div id="t4" class="sec">
+<div class="inner">
+
+  <div class="quiz-intro">
+    <h3>🎯 اختبار البحث العلمي والسلامة في المختبر</h3>
+    <p>10 أسئلة تمثل أساس الاختبارات الشهرية والنهائية — المعطيات داخل كل سؤال</p>
+  </div>
+
+  <div class="pb-wrap"><div class="pb" id="pb" style="width:0%"></div></div>
+  <div class="plabs"><span id="ql">السؤال 0 من 10</span><span id="sl">النقاط: 0</span></div>
+
+  <div id="qzone"></div>
+  <div id="res-box">
+    <div class="rring" id="rr"><span class="rn" id="rnum">0</span><span class="rl">من 10</span></div>
+    <div class="rmsg" id="rm"></div>
+    <div class="rsub" id="rs"></div>
+    <button class="rbtn" onclick="restart()">🔄 إعادة الاختبار</button>
+  </div>
+
+</div>
+</div>
+
+<div id="fsbar">
+  <div class="fsi"><div class="fsdot g"></div><span class="fv" id="fc">0</span><span style="color:var(--muted);font-size:.8rem">صحيح</span></div>
+  <div class="fd"></div>
+  <div class="fsi"><div class="fsdot r"></div><span class="fv" id="fw">0</span><span style="color:var(--muted);font-size:.8rem">خطأ</span></div>
+  <div class="fd"></div>
+  <div class="fsi"><div class="fsdot b"></div><span class="fv" id="ft">0/10</span><span style="color:var(--muted);font-size:.8rem">مجاب</span></div>
+</div>
+
+<script>
+function goTab(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const QS=[
+  {
+    q:'ما تعريف البحث النظري (الأساسي)؟',
+    opts:[
+      'بحث يُجرى لحل مشكلة محددة ومعروفة مسبقاً',
+      'بحث يُجرى للحصول على المعرفة من أجل المعرفة نفسها — دون هدف تطبيقي مسبق',
+      'بحث يهدف إلى تطوير تقنية جديدة للسوق',
+      'بحث يُجرى فقط في مجالات الطب والبيئة'
+    ],
+    ans:1,
+    exp:'البحث النظري (الأساسي) هو الذي يُجرى للحصول على المعرفة من أجل المعرفة نفسها — الدافع هو الفضول العلمي فقط، وليس هناك هدف تطبيقي مخطط مسبقاً. مثاله: دراسة مولينا وروولاند على مركبات CFC.'
+  },
+  {
+    q:'مولينا وروولاند أجريا بحثاً على مركبات CFC وتفاعلها مع الأوزون. لم يكن هناك أي دليل بيئي في ذلك الوقت. ما نوع البحث الذي أجراه؟',
+    opts:[
+      'بحث تطبيقي لحل مشكلة ثقب الأوزون',
+      'بحث نظري دافعه حب الاستطلاع فقط',
+      'بحث تقني لتطوير بديل لـCFC',
+      'بحث ميداني عن حالة الأوزون'
+    ],
+    ans:1,
+    exp:'مولينا وروولاند كانا مدفوعَين بحب الاستطلاع فقط — لا توجد مشكلة محددة يحاولان حلها. إذن هو بحث نظري. تحوّل لاحقاً إلى بحث تطبيقي عندما اكتُشف ثقب الأوزون عام 1985م.'
+  },
+  {
+    q:'ما الفرق الجوهري بين البحث التطبيقي والتقنية؟',
+    opts:[
+      'لا فرق بينهما، كلاهما نفس الشيء',
+      'البحث التطبيقي يُجرى لحل مشكلة، أما التقنية فهي شيء من صنع الإنسان قد لا يوجد في الطبيعة',
+      'التقنية دائماً تسبق البحث التطبيقي',
+      'البحث التطبيقي أهم من التقنية في الكيمياء'
+    ],
+    ans:1,
+    exp:'البحث التطبيقي هو النشاط العلمي الذي يحل مشكلة محددة. أما التقنية فهي المنتج الناتج — شيء من صنع الإنسان قد لا يوجد في الطبيعة تلقائياً. النايلون والبنسلين مثالان على التقنية.'
+  },
+  {
+    q:'ألكسندر فلمنج وجد طبقاً محتوياً على بكتيريا ملوثاً بعفن أخضر، ولاحظ منطقة خالية من البكتيريا حوله. ما الاستنتاج الذي توصّل إليه؟',
+    opts:[
+      'أن الطبق معطوب ولا يمكن استعماله',
+      'أن مادة كيميائية من الفطر قتلت البكتيريا — وهذا ما أدى لاكتشاف البنسلين',
+      'أن البكتيريا تموت تلقائياً دون سبب',
+      'أن الفطر الأخضر نوع نادر لا علاقة له بالبكتيريا'
+    ],
+    ans:1,
+    exp:'فلمنج لاحظ وجود منطقة خالية حوله ماتت فيها البكتيريا، واستنتج أن مادة كيميائية من الفطر (البنسلين) هي السبب. هذا الاكتشاف غير المقصود أدى إلى أول مضاد حيوي في التاريخ.'
+  },
+  {
+    q:'في مختبر الكيمياء: أيٌّ من الإجراءات التالية صحيح عند تحضير محلول حمضي؟',
+    opts:[
+      'أضف الماء إلى الحمض ببطء مع التحريك',
+      'أضف الحمض إلى الماء ببطء — وليس العكس',
+      'اخلط الحمض والماء بتساوٍ في وقت واحد',
+      'سخّن الماء أولاً ثم أضف الحمض'
+    ],
+    ans:1,
+    exp:'القاعدة الذهبية: "أضف الحمض دائماً إلى الماء". السبب: إضافة الماء على الحمض قد تُسبب تفاعلاً عنيفاً ينبعث عنه حرارة شديدة وقذف للحمض الساخن — خطر جسيم. أما العكس فتتوزع الحرارة في كمية كبيرة من الماء.'
+  },
+  {
+    q:'طالب في المختبر لامست يده مادة كيميائية غير معروفة. ما الإجراء الصحيح الفوري؟',
+    opts:[
+      'يغطي يده ويكمل التجربة حتى ينتهي منها',
+      'يغسل يده بكمية كبيرة من الماء فوراً ويُخبر المعلم عن طبيعة المادة',
+      'ينتظر قليلاً ليرى إذا كان هناك تأثير',
+      'يُزيل المادة بقماش جاف فقط'
+    ],
+    ans:1,
+    exp:'الخطوة الفورية: الغسل بكميات كبيرة من الماء فوراً — ثم إخبار المعلم بطبيعة المادة. التأخر في الغسل يزيد من تأثير المادة الكيميائية على الجلد بشكل كبير.'
+  },
+  {
+    q:'عند تسخين مادة في أنبوب اختبار في المختبر، ما الإجراء الصحيح؟',
+    opts:[
+      'وجّه فوهة الأنبوب نحوك لتراقب التفاعل عن قرب',
+      'ضع الأنبوب على طاولة مستوية بدون مسك',
+      'لا توجّه فوهة الأنبوب نحو جسمك أو نحو شخص آخر، ولا تنظر في الفوهة',
+      'أحكم إغلاق فوهة الأنبوب أثناء التسخين'
+    ],
+    ans:2,
+    exp:'يجب ألا توجّه فوهة أنبوب الاختبار أثناء التسخين نحو جسمك أو نحو أي شخص آخر. كذلك لا تنظر في الفوهة مطلقاً — المادة قد تُقذف فجأة بسبب الغليان أو التفاعل.'
+  },
+  {
+    q:'ما الفرق بين البيانات الكمية والبيانات النوعية في البحث العلمي؟',
+    opts:[
+      'البيانات الكمية أفضل من النوعية دائماً',
+      'البيانات الكمية رقمية قابلة للقياس (مثل درجة الغليان 100°C)، والنوعية وصفية (مثل اللون أصفر)',
+      'البيانات النوعية رقمية والكمية وصفية — العكس هو الصحيح',
+      'كلا النوعين تعني نفس الشيء'
+    ],
+    ans:1,
+    exp:'البيانات الكمية: رقمية قابلة للقياس تُعبّر عنها بأرقام ووحدات (مثل: 100°C، 1g/mL). البيانات النوعية: وصفية غير رقمية تصف الشكل أو اللون أو الرائحة (مثل: السائل أصفر اللون، له رائحة حادة).'
+  },
+  {
+    q:'أيٌّ من الإجراءات التالية مسموح به في مختبر الكيمياء؟',
+    opts:[
+      'إعادة المواد الكيميائية غير المستعملة إلى العبوة الأصلية',
+      'لبس النظارة الواقية ومعطف المختبر والقفازات عند الحاجة',
+      'تناول الطعام والشراب في المختبر إذا كان العمل في منطقة آمنة',
+      'إجراء تجارب إضافية من الخيال دون إذن المعلم'
+    ],
+    ans:1,
+    exp:'الإجراء الصحيح والمسموح به هو: لبس النظارة الواقية ومعطف المختبر ولبس القفازات عند استعمال مواد مهيّجة. أما الباقي: لا تُعد المواد للعبوة الأصلية، لا طعام ولا شراب، لا تجارب دون إذن المعلم.'
+  },
+  {
+    q:'ما الصحيح بخصوص العلاقة بين البحث النظري والتطبيقي بناءً على قصة مركبات CFC؟',
+    opts:[
+      'هما دائماً منفصلان ومستقلان تماماً',
+      'البحث التطبيقي يسبق النظري دائماً',
+      'البحث النظري قد يتحول لاحقاً إلى بحث تطبيقي عند ظهور مشكلة تستوجب الحل',
+      'البحث النظري لا قيمة له إذا لم يكن له تطبيق فوري'
+    ],
+    ans:2,
+    exp:'قصة CFC توضح أن البحث النظري الذي أجراه مولينا وروولاند (من أجل المعرفة فقط) تحوّل لاحقاً إلى بحث تطبيقي عاجل عند اكتشاف ثقب الأوزون 1985م. البحثان مترابطان ومتكاملان.'
+  }
+];
+
+let correct=0,wrong=0,answered=0;
+const L=['أ','ب','ج','د'];
+
+function buildQuiz(){
+  const z=document.getElementById('qzone');
+  z.innerHTML='';
+  QS.forEach((q,qi)=>{
+    const o=q.opts.map((op,oi)=>`
+      <button class="obtn" id="o${qi}${oi}" onclick="pick(${qi},${oi})">
+        <span class="ol">${L[oi]}</span><span>${op}</span>
+      </button>`).join('');
+    z.innerHTML+=`
+      <div class="qcard" id="qc${qi}">
+        <div class="qh">
+          <div class="qn">${qi+1}</div>
+          <div class="qt">${q.q}</div>
+        </div>
+        <div class="opts">${o}</div>
+        <div class="fb" id="fb${qi}">
+          <span id="fbi${qi}"></span>
+          <div><strong id="fbt${qi}"></strong> <span id="fbe${qi}"></span></div>
+        </div>
+      </div>`;
+  });
+}
+
+function pick(qi,ch){
+  const q=QS[qi];
+  const btns=document.querySelectorAll(`#qc${qi} .obtn`);
+  if(btns[0].disabled)return;
+  btns.forEach((b,oi)=>{
+    b.disabled=true;
+    if(oi===q.ans)b.classList.add('correct');
+    else if(oi===ch)b.classList.add('wrong');
+    else b.classList.add('reveal');
+  });
+  const ok=ch===q.ans;
+  document.getElementById('qc'+qi).classList.add(ok?'ok':'bad');
+  const fb=document.getElementById('fb'+qi);
+  fb.className='fb show '+(ok?'ok':'bad');
+  document.getElementById('fbi'+qi).textContent=ok?'✅ ':'❌ ';
+  document.getElementById('fbt'+qi).textContent=ok?'إجابة صحيحة!':'إجابة خاطئة.';
+  document.getElementById('fbe'+qi).textContent=q.exp;
+  if(ok)correct++;else wrong++;
+  answered++;
+  upd();
+  if(answered===10)setTimeout(result,600);
+}
+
+function upd(){
+  document.getElementById('pb').style.width=(answered/10*100)+'%';
+  document.getElementById('ql').textContent='السؤال '+answered+' من 10';
+  document.getElementById('sl').textContent='النقاط: '+correct;
+  document.getElementById('fc').textContent=correct;
+  document.getElementById('fw').textContent=wrong;
+  document.getElementById('ft').textContent=answered+'/10';
+}
+
+function result(){
+  document.getElementById('qzone').style.display='none';
+  const rb=document.getElementById('res-box');
+  rb.classList.add('show');
+  document.getElementById('rnum').textContent=correct;
+  const rr=document.getElementById('rr');
+  let cls,msg,sub;
+  if(correct>=9){cls='ex';msg='🏆 ممتاز! أتقنت الدرس بالكامل!';sub='فهم عميق — أنت مستعد للاختبار.';}
+  else if(correct>=7){cls='ex';msg='⭐ جيد جدًا! قريب من الاتقان';sub='راجع الأسئلة التي أخطأت فيها.';}
+  else if(correct>=5){cls='gd';msg='👍 جيد — راجع مرة أخرى';sub:'ارجع لأقسام الدرس ثم حاول مجدداً.';}
+  else{cls='nw';msg='📚 تحتاج مراجعة شاملة للدرس';sub='ابدأ من أنواع البحث ثم السلامة وأعد المحاولة.';}
+  rr.className='rring '+cls;
+  document.getElementById('rm').textContent=msg;
+  document.getElementById('rs').textContent=sub;
+}
+
+function restart(){
+  correct=0;wrong=0;answered=0;
+  upd();
+  document.getElementById('res-box').classList.remove('show');
+  document.getElementById('qzone').style.display='block';
+  buildQuiz();
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
