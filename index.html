@@ -25,6 +25,8 @@
       --emerald-tint: #ecfdf5;
       --rose: #e11d48;
       --rose-tint: #ffe4e6;
+      --indigo: #4338ca;
+      --indigo-tint: #e0e7ff;
       --text-main: #1e293b;
       --text-muted: #64748b;
       --border: #e2e8f0;
@@ -88,14 +90,14 @@
     header p {
       font-size: clamp(0.95rem, 2.5vw, 1.1rem);
       color: #e2e8f0;
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
       line-height: 1.7;
     }
 
     /* ══ MAIN CONTENT ══ */
     main {
-      max-width: 1100px;
+      max-width: 1140px;
       margin: -25px auto 50px;
       padding: 0 16px;
       width: 100%;
@@ -141,10 +143,23 @@
       line-height: 1.6;
     }
 
+    .section-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--navy);
+      margin: 28px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-right: 5px solid var(--teal);
+      padding-right: 12px;
+    }
+
     /* ══ LESSONS GRID ══ */
     .lessons-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
@@ -175,19 +190,31 @@
       height: 5px;
     }
 
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
     .lesson-num {
       display: inline-block;
       font-size: 0.85rem;
       font-weight: 800;
       padding: 3px 12px;
       border-radius: 6px;
-      margin-bottom: 12px;
       width: fit-content;
+    }
+
+    .lesson-chapter {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 700;
     }
 
     .lesson-title {
       font-family: 'Cairo', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: var(--navy);
       margin-bottom: 10px;
@@ -195,7 +222,7 @@
     }
 
     .lesson-desc {
-      font-size: 0.96rem;
+      font-size: 0.94rem;
       color: var(--text-muted);
       margin-bottom: 16px;
       flex-grow: 1;
@@ -210,9 +237,9 @@
     }
 
     .topics-list li {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-main);
-      margin-bottom: 7px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -232,7 +259,7 @@
       color: #ffffff;
       text-decoration: none;
       font-weight: 800;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       padding: 11px 18px;
       border-radius: 10px;
       transition: opacity 0.2s ease, transform 0.15s ease;
@@ -244,40 +271,47 @@
     }
 
     /* ══ THEME ACCENTS FOR LESSON CARDS ══ */
-    /* Lesson 1: Ozone (Teal) */
-    .c1 .card-stripe { background: var(--teal); }
-    .c1 .lesson-num { background: var(--teal-tint); color: var(--teal); }
-    .c1 .topics-list li::before { color: var(--teal); }
-    .c1 .btn-open { background: var(--teal); }
-    .c1:hover { border-color: var(--teal); }
+    .c-teal .card-stripe { background: var(--teal); }
+    .c-teal .lesson-num { background: var(--teal-tint); color: var(--teal); }
+    .c-teal .topics-list li::before { color: var(--teal); }
+    .c-teal .btn-open { background: var(--teal); }
+    .c-teal:hover { border-color: var(--teal); }
 
-    /* Lesson 2: States of Matter (Amber) */
-    .c2 .card-stripe { background: var(--amber); }
-    .c2 .lesson-num { background: var(--amber-tint); color: var(--amber); }
-    .c2 .topics-list li::before { color: var(--amber); }
-    .c2 .btn-open { background: var(--amber); }
-    .c2:hover { border-color: var(--amber); }
+    .c-primary .card-stripe { background: var(--primary); }
+    .c-primary .lesson-num { background: var(--primary-tint); color: var(--primary-dark); }
+    .c-primary .topics-list li::before { color: var(--primary); }
+    .c-primary .btn-open { background: var(--primary); }
+    .c-primary:hover { border-color: var(--primary); }
 
-    /* Lesson 3: Physical & Chemical Properties (Primary Blue) */
-    .c3 .card-stripe { background: var(--primary); }
-    .c3 .lesson-num { background: var(--primary-tint); color: var(--primary-dark); }
-    .c3 .topics-list li::before { color: var(--primary); }
-    .c3 .btn-open { background: var(--primary); }
-    .c3:hover { border-color: var(--primary); }
+    .c-indigo .card-stripe { background: var(--indigo); }
+    .c-indigo .lesson-num { background: var(--indigo-tint); color: var(--indigo); }
+    .c-indigo .topics-list li::before { color: var(--indigo); }
+    .c-indigo .btn-open { background: var(--indigo); }
+    .c-indigo:hover { border-color: var(--indigo); }
 
-    /* Lesson 4: Changes of Matter (Emerald) */
-    .c4 .card-stripe { background: var(--emerald); }
-    .c4 .lesson-num { background: var(--emerald-tint); color: var(--emerald); }
-    .c4 .topics-list li::before { color: var(--emerald); }
-    .c4 .btn-open { background: var(--emerald); }
-    .c4:hover { border-color: var(--emerald); }
+    .c-amber .card-stripe { background: var(--amber); }
+    .c-amber .lesson-num { background: var(--amber-tint); color: var(--amber); }
+    .c-amber .topics-list li::before { color: var(--amber); }
+    .c-amber .btn-open { background: var(--amber); }
+    .c-amber:hover { border-color: var(--amber); }
 
-    /* Lesson 5: Mixtures & Separation (Purple) */
-    .c5 .card-stripe { background: var(--purple); }
-    .c5 .lesson-num { background: var(--purple-tint); color: var(--purple); }
-    .c5 .topics-list li::before { color: var(--purple); }
-    .c5 .btn-open { background: var(--purple); }
-    .c5:hover { border-color: var(--purple); }
+    .c-emerald .card-stripe { background: var(--emerald); }
+    .c-emerald .lesson-num { background: var(--emerald-tint); color: var(--emerald); }
+    .c-emerald .topics-list li::before { color: var(--emerald); }
+    .c-emerald .btn-open { background: var(--emerald); }
+    .c-emerald:hover { border-color: var(--emerald); }
+
+    .c-purple .card-stripe { background: var(--purple); }
+    .c-purple .lesson-num { background: var(--purple-tint); color: var(--purple); }
+    .c-purple .topics-list li::before { color: var(--purple); }
+    .c-purple .btn-open { background: var(--purple); }
+    .c-purple:hover { border-color: var(--purple); }
+
+    .c-rose .card-stripe { background: var(--rose); }
+    .c-rose .lesson-num { background: var(--rose-tint); color: var(--rose); }
+    .c-rose .topics-list li::before { color: var(--rose); }
+    .c-rose .btn-open { background: var(--rose); }
+    .c-rose:hover { border-color: var(--rose); }
 
     /* ══ FOOTER ══ */
     footer {
@@ -293,32 +327,37 @@
 <body>
 
   <header>
-    <div class="badge">🔬 كيمياء 1 | الصف الأول الثانوي (نظام المسارات)</div>
+    <div class="badge">🔬 كيمياء 1 | الصف الأول الثانوي</div>
     <h1>بوابة دروس <span>كيمياء 1 التفاعلية</span></h1>
-    <p>مراجعة شاملة ومبسطة لمقرر كيمياء 1: مفاهيم أساسية، تطبيقات حياتية، وقوانين علمية واختبارات تفاعلية ذاتية لكل موضوع.</p>
+    <p>بوابة المراجعة الشاملة لمقرر كيمياء 1: المفاهيم الأساسية، الأمثلة التطبيقية، الشروحات المبسطة، وبنك الأسئلة الذاتي لكل درس.</p>
   </header>
 
   <main>
     <div class="intro-banner">
-      <div class="intro-icon">📚</div>
+      <div class="intro-icon">🧪</div>
       <div class="intro-text">
         <h3>مرحباً بكم يا أبطال كيمياء 1</h3>
-        <p>اختر الدرس المطلوب للمذاكرة والتدريب الذاتي من خلال بطاقات الشرح المنظمة والاختبارات التفاعلية المباشرة المرفقة بكل درس.</p>
+        <p>اختر الدرس المطلوب لبدء المذاكرة ومراجعة الأفكار الأساسية، ثم حل الاختبار التفاعلي (10 أسئلة) للتأكد من فهمك.</p>
       </div>
     </div>
 
+    <!-- الفصل 1 -->
+    <div class="section-title">الفصل 1: مقدمة في علم الكيمياء</div>
     <div class="lessons-grid">
 
       <!-- الدرس 1: قصة مادتين -->
-      <div class="lesson-card c1">
+      <div class="lesson-card c-teal">
         <div class="card-stripe"></div>
-        <span class="lesson-num">الدرس 01</span>
+        <div class="lesson-meta">
+          <span class="lesson-num">الدرس 01</span>
+          <span class="lesson-chapter">الدرس 1-1</span>
+        </div>
         <h2 class="lesson-title">قصة مادتين</h2>
-        <p class="lesson-desc">مفهوم الكيمياء والمادة النقية، وطبقة الأوزون في الستراتوسفير، ومركبات الكلوروفلوروكربون (CFCs) وأثرها البيئي.</p>
+        <p class="lesson-desc">تعريف الكيمياء والمادة النقية، وطبقة الأوزون في الستراتوسفير، ومركبات الكلوروفلوروكربون (CFCs) وثقب الأوزون.</p>
         <ul class="topics-list">
-          <li>المادة والمادة الكيميائية النقية</li>
-          <li>طبقة الأوزون وأشعة UVB الضارة</li>
-          <li>تكون الأوزون ومقياس دوبسون (300 DU)</li>
+          <li>المادة والمادة الكيميائية النقية (O₃)</li>
+          <li>طبقة الأوزون وحماية الأرض من أشعة UVB</li>
+          <li>معدل الأوزون الطبيعي بوحدة دوبسون (300 DU)</li>
           <li>مركبات CFCs وثقب الأوزون (10 أسئلة)</li>
         </ul>
         <a href="lesson%2001.html" class="btn-open">
@@ -327,17 +366,20 @@
         </a>
       </div>
 
-      <!-- الدرس 2: خواص المادة وحالاتها الفيزيائية -->
-      <div class="lesson-card c2">
+      <!-- الدرس 2: الكيمياء والمادة -->
+      <div class="lesson-card c-primary">
         <div class="card-stripe"></div>
-        <span class="lesson-num">الدرس 02</span>
-        <h2 class="lesson-title">خواص المادة وحالاتها الفيزيائية</h2>
-        <p class="lesson-desc">حالات المادة الأربع (صلبة، سائلة، غازية، بلازما)، والفرق العلمي بين الغاز والبخار، وممالح القصب برؤية 2030.</p>
+        <div class="lesson-meta">
+          <span class="lesson-num">الدرس 02</span>
+          <span class="lesson-chapter">الدرس 1-2</span>
+        </div>
+        <h2 class="lesson-title">الكيمياء والمادة</h2>
+        <p class="lesson-desc">الفرق الجوهري بين الكتلة والوزن، وتفسير سلوك المادة بالتركيب الذري تحت المجهري، وفروع علم الكيمياء.</p>
         <ul class="topics-list">
-          <li>مقارنة خصائص الحالات الأربع للمادة</li>
-          <li>الفرق الدقيق بين الغاز والبخار</li>
-          <li>ممالح مدينة القصب ورؤية المملكة 2030</li>
-          <li>إنجاز نوبل 2025 للبروفيسور عمر ياغي (10 أسئلة)</li>
+          <li>ثبات الكتلة وتغير الوزن باختلاف الجاذبية</li>
+          <li>تفسير الظواهر بالمستوى الذري تحت المجهري</li>
+          <li>النموذج العلمي ودوره في الكيمياء</li>
+          <li>فروع الكيمياء العشرة (10 أسئلة)</li>
         </ul>
         <a href="lesson%2002.html" class="btn-open">
           <span>دخول الدرس الثاني</span>
@@ -345,17 +387,20 @@
         </a>
       </div>
 
-      <!-- الدرس 3: الخواص الفيزيائية والكيميائية للمادة -->
-      <div class="lesson-card c3">
+      <!-- الدرس 3: الطرائق العلمية -->
+      <div class="lesson-card c-indigo">
         <div class="card-stripe"></div>
-        <span class="lesson-num">الدرس 03</span>
-        <h2 class="lesson-title">الخواص الفيزيائية والكيميائية</h2>
-        <p class="lesson-desc">التمييز بين الخواص المميزة وغير المميزة، والخواص الكيميائية للنحاس والحديد، وتغير خواص الماء والجليد بتغير الظروف.</p>
+        <div class="lesson-meta">
+          <span class="lesson-num">الدرس 03</span>
+          <span class="lesson-chapter">الدرس 1-3</span>
+        </div>
+        <h2 class="lesson-title">الطرائق العلمية</h2>
+        <p class="lesson-desc">خطوات الطريقة العلمية كدورة متكررة، والبيانات النوعية والكمية، والمتغيرات في التجربة، والفرق بين النظرية والقانون.</p>
         <ul class="topics-list">
-          <li>الخواص غير المميزة (الكتلة والحجم)</li>
-          <li>الخواص المميزة (الكثافة والانصهار والغليان)</li>
-          <li>الخواص الكيميائية للنحاس وتكون الصدأ</li>
-          <li>تغير كثافة الماء وطفو الجبال الجليدية (10 أسئلة)</li>
+          <li>البيانات النوعية (الحواس) والكمية (الأرقام)</li>
+          <li>الفرضية والمتغيرات (المستقل، التابع، الضابط)</li>
+          <li>الاستنتاج وعدم إمكانية إثبات الفرضية قطيعاً</li>
+          <li>الفرق بين النظرية والقانون العلمي (10 أسئلة)</li>
         </ul>
         <a href="lesson%2003.html" class="btn-open">
           <span>دخول الدرس الثالث</span>
@@ -363,17 +408,20 @@
         </a>
       </div>
 
-      <!-- الدرس 4: تغيرات المادة وقانون حفظ الكتلة -->
-      <div class="lesson-card c4">
+      <!-- الدرس 4: البحث العلمي -->
+      <div class="lesson-card c-amber">
         <div class="card-stripe"></div>
-        <span class="lesson-num">الدرس 04</span>
-        <h2 class="lesson-title">تغيرات المادة وقانون حفظ الكتلة</h2>
-        <p class="lesson-desc">التغيرات الفيزيائية وتغيرات الحالة، ودلائل حدوث التفاعل الكيميائي، مع التطبيق الحسابي لقانون حفظ الكتلة للافوازييه.</p>
+        <div class="lesson-meta">
+          <span class="lesson-num">الدرس 04</span>
+          <span class="lesson-chapter">الدرس 1-4</span>
+        </div>
+        <h2 class="lesson-title">البحث العلمي</h2>
+        <p class="lesson-desc">المقارنة بين البحث النظري والتطبيقي، والاكتشافات غير المقصودة (البنسلين والنايلون)، وقواعد السلامة في المختبر، وميثاق مونتريال.</p>
         <ul class="topics-list">
-          <li>التغير الفيزيائي وتغيرات الحالة (انصهار وغليان)</li>
-          <li>التغير الكيميائي (المتفاعلات والنواتج ودلائل التفاعل)</li>
-          <li>قانون حفظ الكتلة للافوازييه</li>
-          <li>مسائل حسابية تدريبية محلولة (10 أسئلة)</li>
+          <li>البحث النظري مقابل البحث التطبيقي</li>
+          <li>اكتشافات غير مقصودة قادت لتطور علمي</li>
+          <li>قواعد السلامة والتعامل الآمن مع المواد</li>
+          <li>ميثاق مونتريال وثقب الأوزون (10 أسئلة)</li>
         </ul>
         <a href="lesson%2004.html" class="btn-open">
           <span>دخول الدرس الرابع</span>
@@ -381,20 +429,92 @@
         </a>
       </div>
 
-      <!-- الدرس 5: المخاليط وطرائق فصلها -->
-      <div class="lesson-card c5">
+    </div>
+
+    <!-- الفصل 2 -->
+    <div class="section-title">الفصل 2: المادة — الخواص والتغيرات</div>
+    <div class="lessons-grid">
+
+      <!-- الدرس 5: خواص المادة وحالاتها الفيزيائية -->
+      <div class="lesson-card c-rose">
         <div class="card-stripe"></div>
-        <span class="lesson-num">الدرس 05</span>
-        <h2 class="lesson-title">المخاليط وطرائق فصلها</h2>
-        <p class="lesson-desc">التمييز بين المخلوط المتجانس وغير المتجانس، والسبائك والمحاليل الستة (أسطوانة الغواص)، وطرائق الفصل الفيزيائية.</p>
+        <div class="lesson-meta">
+          <span class="lesson-num">الدرس 05</span>
+          <span class="lesson-chapter">الدرس 2-1 (أ)</span>
+        </div>
+        <h2 class="lesson-title">خواص المادة وحالاتها</h2>
+        <p class="lesson-desc">حالات المادة الأربع (صلبة، سائلة، غازية، بلازما)، والفرق العلمي بين الغاز والبخار، وممالح القصب برؤية 2030.</p>
         <ul class="topics-list">
-          <li>المخاليط المتجانسة (المحاليل) وغير المتجانسة</li>
-          <li>المحاليل الستة والسبائك (الفولاذ وسبائك ناسا)</li>
-          <li>طرائق الفصل (الترشيح، التقطير، الكروماتوجرافيا)</li>
-          <li>التبلور عالي النقاوة والتسامي (10 أسئلة)</li>
+          <li>المادة النقية وخصائص حالات المادة الأربع</li>
+          <li>الفرق العلمي الدقيق بين الغاز والبخار</li>
+          <li>ممالح مدينة القصب ورؤية المملكة 2030</li>
+          <li>إنجاز نوبل 2025 للبروفيسور عمر ياغي (10 أسئلة)</li>
         </ul>
         <a href="lesson%2005.html" class="btn-open">
           <span>دخول الدرس الخامس</span>
+          <span>←</span>
+        </a>
+      </div>
+
+      <!-- الدرس 6: الخواص الفيزيائية والكيميائية للمادة -->
+      <div class="lesson-card c-primary">
+        <div class="card-stripe"></div>
+        <div class="lesson-meta">
+          <span class="lesson-num">الدرس 06</span>
+          <span class="lesson-chapter">الدرس 2-1 (ب)</span>
+        </div>
+        <h2 class="lesson-title">الخواص الفيزيائية والكيميائية</h2>
+        <p class="lesson-desc">التمييز بين الخواص المميزة وغير المميزة، والخواص الكيميائية للنحاس وتكون الصدأ، وتغير خواص الماء بتغير الظروف.</p>
+        <ul class="topics-list">
+          <li>الخواص غير المميزة (الكتلة والحجم والطول)</li>
+          <li>الخواص المميزة (الكثافة، درجات الغليان والانصهار)</li>
+          <li>الخواص الكيميائية للنحاس وسلوك الحديد</li>
+          <li>كثافة الماء وتفسير طفو الجليد (10 أسئلة)</li>
+        </ul>
+        <a href="lesson%2006.html" class="btn-open">
+          <span>دخول الدرس السادس</span>
+          <span>←</span>
+        </a>
+      </div>
+
+      <!-- الدرس 7: تغيرات المادة وقانون حفظ الكتلة -->
+      <div class="lesson-card c-emerald">
+        <div class="card-stripe"></div>
+        <div class="lesson-meta">
+          <span class="lesson-num">الدرس 07</span>
+          <span class="lesson-chapter">الدرس 2-2</span>
+        </div>
+        <h2 class="lesson-title">تغيرات المادة وقانون حفظ الكتلة</h2>
+        <p class="lesson-desc">التغير الفيزيائي وتغير الحالة، والتفاعل الكيميائي ومؤشراته، مع التطبيق الحسابي لقانون حفظ الكتلة للافوازييه.</p>
+        <ul class="topics-list">
+          <li>التغير الفيزيائي وتغير الحالة (انصهار وغليان وتكثف)</li>
+          <li>التغير الكيميائي (المتفاعلات والنواتج ودلائل التفاعل)</li>
+          <li>قانون حفظ الكتلة: كتلة المتفاعلات = كتلة النواتج</li>
+          <li>مسائل حسابية تدريبية محلولة (10 أسئلة)</li>
+        </ul>
+        <a href="lesson%2007.html" class="btn-open">
+          <span>دخول الدرس السابع</span>
+          <span>←</span>
+        </a>
+      </div>
+
+      <!-- الدرس 8: المخاليط وطرائق فصلها -->
+      <div class="lesson-card c-purple">
+        <div class="card-stripe"></div>
+        <div class="lesson-meta">
+          <span class="lesson-num">الدرس 08</span>
+          <span class="lesson-chapter">الدرس 2-3</span>
+        </div>
+        <h2 class="lesson-title">المخاليط وطرائق فصلها</h2>
+        <p class="lesson-desc">التمييز بين المخلوط المتجانس وغير المتجانس، وأنواع المحاليل والسبائك، واستعراض طرائق الفصل الفيزيائية الست.</p>
+        <ul class="topics-list">
+          <li>المخاليط المتجانسة (المحاليل) وغير المتجانسة</li>
+          <li>أنواع المحاليل الستة والسبائك (الفولاذ وسبائك ناسا)</li>
+          <li>طرائق الفصل (الترشيح، التقطير، الكروماتوجرافيا)</li>
+          <li>التبلور عالي النقاوة والتسامي (10 أسئلة)</li>
+        </ul>
+        <a href="lesson%2008.html" class="btn-open">
+          <span>دخول الدرس الثامن</span>
           <span>←</span>
         </a>
       </div>
