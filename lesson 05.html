@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس: خواص المادة وحالاتها</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --card-border: #e2e8f0;
+    --navy: #0f172a;
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --primary-soft: #e0f2fe;
+    --teal: #0d9488;
+    --teal-soft: #ccfbf1;
+    --amber: #d97706;
+    --amber-soft: #fef3c7;
+    --emerald: #059669;
+    --emerald-soft: #ecfdf5;
+    --purple: #7c3aed;
+    --purple-soft: #f3e8ff;
+    --rose: #e11d48;
+    --rose-soft: #ffe4e6;
+    --text: #1e293b;
+    --muted: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.85;
+    padding-bottom: 85px;
+    font-size: 1.05rem;
+  }
+
+  .cite { display: none !important; }
+
+  /* ═══ HERO HEADER ═══ */
+  .hero {
+    background: linear-gradient(135deg, #0f4c81 0%, #0284c7 60%, #0d9488 100%);
+    color: #ffffff;
+    padding: clamp(35px, 6vw, 55px) 20px 35px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.12);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #e0f2fe;
+  }
+  .hero h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 900;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .hero h1 span { color: #bae6fd; }
+  .hero p {
+    font-size: clamp(0.95rem, 3vw, 1.08rem);
+    color: #f1f5f9;
+    max-width: 680px;
+    margin: 0 auto 16px;
+    line-height: 1.7;
+  }
+  .hero-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  /* ═══ TABS NAVIGATION ═══ */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: #ffffff;
+    border-bottom: 2px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    overflow-x: auto;
+  }
+  .tbtn {
+    background: transparent;
+    border: 1.5px solid transparent;
+    color: var(--muted);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .tbtn:hover {
+    color: var(--primary);
+    background: var(--primary-soft);
+  }
+  .tbtn.active {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    border-color: #7dd3fc;
+  }
+
+  /* ═══ WRAPPER & CARDS ═══ */
+  .container { max-width: 920px; margin: 24px auto; padding: 0 16px; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: clamp(18px, 4vw, 26px);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; width: 5px; height: 100%;
+    background: var(--primary);
+  }
+  .card.teal::after { background: var(--teal); }
+  .card.amber::after { background: var(--amber); }
+  .card.purple::after { background: var(--purple); }
+
+  .card h2 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+    margin: 18px 0 8px;
+    font-family: 'Cairo', sans-serif;
+  }
+  .card p {
+    color: #334155;
+    font-size: 1.02rem;
+    margin-bottom: 12px;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  .card ul li {
+    position: relative;
+    padding-right: 22px;
+    margin-bottom: 10px;
+    color: #1e293b;
+    font-size: 1rem;
+  }
+  .card ul li::before {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    color: var(--primary);
+    font-size: 0.85rem;
+  }
+
+  /* Educational Highlight Boxes */
+  .concept-box {
+    background: var(--primary-soft);
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 14px 0;
+    font-size: 1.02rem;
+  }
+  .concept-box b { color: var(--primary-dark); }
+
+  .vision-box {
+    background: var(--emerald-soft);
+    border-right: 5px solid var(--emerald);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-size: 1.02rem;
+    color: #064e3b;
+  }
+  .vision-box b { color: #047857; font-size: 1.1rem; }
+
+  .nobel-box {
+    background: var(--purple-soft);
+    border-right: 5px solid var(--purple);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-size: 1.02rem;
+    color: #4c1d95;
+  }
+  .nobel-box b { color: var(--purple); font-size: 1.1rem; }
+
+  /* States Grid */
+  .states-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+    margin: 18px 0;
+  }
+  .state-card {
+    background: #ffffff;
+    border: 1.5px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+  }
+  .state-card h4 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .state-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .s-solid { background: #fef3c7; color: #b45309; }
+  .s-liquid { background: #e0f2fe; color: #0369a1; }
+  .s-gas { background: #dcfce7; color: #15803d; }
+  .s-plasma { background: #f3e8ff; color: #7c3aed; }
+
+  /* Tables */
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: 16px 0;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.96rem;
+    min-width: 520px;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: #ffffff;
+    padding: 12px 14px;
+    font-weight: 800;
+    text-align: center;
+  }
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--card-border);
+    text-align: center;
+    color: #1e293b;
+  }
+  .data-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* ═══ QUIZ SYSTEM ═══ */
+  .quiz-header {
+    background: linear-gradient(135deg, #f0f9ff, #ccfbf1);
+    border: 1px solid #bae6fd;
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .quiz-header h3 {
+    font-family: 'Cairo', sans-serif;
+    color: var(--navy);
+    font-size: 1.35rem;
+  }
+  .progress-wrap {
+    background: #e2e8f0;
+    height: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 14px 0 8px;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--teal));
+    transition: width 0.3s ease;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .q-card {
+    background: var(--surface);
+    border: 1.5px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .q-card.ok { border-color: var(--emerald); }
+  .q-card.bad { border-color: var(--rose); }
+
+  .q-head { display: flex; gap: 12px; margin-bottom: 14px; }
+  .q-badge {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    border: 1px solid #bae6fd;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .q-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.55;
+  }
+
+  .opts-stack { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.98rem;
+    text-align: right;
+    transition: all 0.15s ease;
+  }
+  .opt-btn:hover:not(:disabled) {
+    background: #e0f2fe;
+    border-color: var(--primary);
+  }
+  .opt-letter {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--muted);
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .opt-btn.correct {
+    background: var(--emerald-soft);
+    border-color: var(--emerald);
+    color: var(--emerald);
+    font-weight: 800;
+  }
+  .opt-btn.correct .opt-letter {
+    background: var(--emerald);
+    color: #ffffff;
+    border-color: var(--emerald);
+  }
+  .opt-btn.wrong {
+    background: var(--rose-soft);
+    border-color: var(--rose);
+    color: var(--rose);
+    font-weight: 800;
+  }
+  .opt-btn.wrong .opt-letter {
+    background: var(--rose);
+    color: #ffffff;
+    border-color: var(--rose);
+  }
+  .opt-btn:disabled { cursor: default; }
+
+  .q-explain {
+    display: none;
+    margin-top: 12px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: #334155;
+    border-right: 4px solid var(--primary);
+    line-height: 1.7;
+  }
+  .q-explain.show { display: block; }
+  .q-explain b { color: var(--primary-dark); }
+
+  /* Floating Score Capsule */
+  .score-capsule {
+    position: fixed;
+    bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: #ffffff;
+    border: 1.5px solid var(--card-border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-radius: 50px;
+    padding: 8px 22px;
+    display: flex;
+    gap: 16px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    z-index: 1000;
+  }
+
+  /* Result Banner */
+  .result-banner {
+    display: none;
+    background: #ffffff;
+    border: 2px solid #bae6fd;
+    border-radius: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+  .result-banner.show { display: block; }
+  .res-score {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+  }
+  .res-btn {
+    background: var(--primary);
+    border: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 10px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: background 0.2s;
+  }
+  .res-btn:hover { background: var(--primary-dark); }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-badge">🔬 كيمياء 2-1 — الفصل 2: المادة - الخواص والتغيرات</div>
+  <h1>خواص <span>المادة وحالاتها الفيزيائية</span></h1>
+  <p>شرح تفصيلي لحالات المادة الأربع، والمادة الكيميائية النقية، والفرق العلمي بين الغاز والبخار، مع إضاءات وطنية ملهمة[cite: 18].</p>
+  <div class="hero-tags">
+    <div class="tag">🧊 الحالات: صلب، سائل، غاز، بلازما</div>
+    <div class="tag">🧂 المواد الكيميائية النقية</div>
+    <div class="tag">💨 الفرق بين الغاز والبخار</div>
+    <div class="tag">🇸🇦 ممالح القصب ورؤية 2030</div>
+    <div class="tag">✏️ 10 أسئلة تقييمية</div>
+  </div>
+</header>
+
+<!-- ══ NAV TABS ══ -->
+<nav class="nav-tabs">
+  <button class="tbtn active" onclick="switchTab('t1', this)">🧂 المواد الكيميائية النقية</button>
+  <button class="tbtn" onclick="switchTab('t2', this)">🧊 حالات المادة الأربع</button>
+  <button class="tbtn" onclick="switchTab('t3', this)">💨 الغاز مقابل البخار ونوبل 2025</button>
+  <button class="tbtn" onclick="switchTab('t4', this)">✏️ اختبر فهمك (10 أسئلة)</button>
+</nav>
+
+<div class="container">
+
+  <!-- ════════ TAB 1: المواد الكيميائية النقية ════════ -->
+  <main id="t1" class="tab-pane active">
+    
+    <div class="card">
+      <h2>ما هي المادة؟ وما المادة الكيميائية النقية؟</h2>
+      <p><b>المادة:</b> هي كل ما له كتلة ويشغل حيزاً في الفراغ <span class="cite">[cite: 18]</span>.</p>
+      
+      <div class="concept-box">
+        <b>المادة الكيميائية النقية (Substance):</b> مادة ذات تركيب محدد وثابت لا يتغير من عينة إلى أخرى <span class="cite">[cite: 18]</span>.
+      </div>
+
+      <h3>أمثلة مقارنة مهمة:</h3>
+      <ul>
+        <li><b>ملح الطعام النقي (كلوريد الصوديوم NaCl):</b> مادة كيميائية نقية؛ لأنه يتكون دائماً من كلوريد الصوديوم بنسبة 100%، سواء استُخرج من ماء البحر أو من أعماق المناجم <span class="cite">[cite: 18]</span>.</li>
+        <li><b>الماء النقي (المقطر):</b> مادة نقية يتكون دائماً من هيدروجين وأكسجين بنسب كتلية ثابتة <span class="cite">[cite: 18]</span>.</li>
+        <li><b>ماء الصنبور وماء البحر:</b> ليسا مادتين نقيتين؛ لاحتوائهما على كميات متفاوتة ومختلفة من الأملاح والمعادن والمواد الذائبة بحسب مكان العينة <span class="cite">[cite: 18]</span>.</li>
+      </ul>
+    </div>
+
+    <div class="card teal">
+      <h2>الربط مع رؤية المملكة 2030 وممالح مدينة القصب</h2>
+      <div class="vision-box">
+        <b>🇸🇦 اقتصاد مزدهر (الهدف 3.3.7):</b> رفع نسبة المحتوى المحلي في القطاعات غير النفطية <span class="cite">[cite: 18]</span>.<br><br>
+        اكتُشف الملح بكميات تجارية ضخمة في <b>مدينة القصب</b> في المملكة العربية السعودية، حيث يُستخرج بحفر برك واسعة تُضخ إليها المياه الجوفية المالحة بمحركات كهربائية، وتُترك لتتبخر تحت أشعة الشمس، فيترسب الملح الأبيض النقي على شكل طبقات سميكة تدعم الصناعات الوطنية والمحتوى المحلي غير النفطي <span class="cite">[cite: 18]</span>.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ════════ TAB 2: حالات المادة ════════ -->
+  <section id="t2" class="tab-pane">
+    
+    <div class="card">
+      <h2>حالات المادة (States of Matter)</h2>
+      <p>توجد المواد في الطبيعة على الأرض في ثلاث حالات مألوفة، وميز العلماء حالة رابعة شائعة كونياً <span class="cite">[cite: 18]</span>:</p>
+
+      <div class="states-grid">
+        <div class="state-card">
+          <span class="state-badge s-solid">الحالة الصلبة</span>
+          <h4>المادة الصلبة</h4>
+          <p style="font-size:0.92rem; color:var(--muted);">شكل محدد وحجم محدد، جسيماتها متراصة بإحكام وغير قابلة للانضغاط <span class="cite">[cite: 18]</span>.</p>
+        </div>
+
+        <div class="state-card">
+          <span class="state-badge s-liquid">الحالة السائلة</span>
+          <h4>السائل</h4>
+          <p style="font-size:0.92rem; color:var(--muted);">حجم ثابت وشكل متغير (تأخذ شكل الوعاء)، قابلة للجريان والانزلاق <span class="cite">[cite: 18]</span>.</p>
+        </div>
+
+        <div class="state-card">
+          <span class="state-badge s-gas">الحالة الغازية</span>
+          <h4>الغاز</h4>
+          <p style="font-size:0.92rem; color:var(--muted);">شكل متغير وحجم متغير، جسيماتها متباعدة جداً وتنضغط بسهولة فائقة <span class="cite">[cite: 18]</span>.</p>
+        </div>
+
+        <div class="state-card">
+          <span class="state-badge s-plasma">الحالة الرابعة</span>
+          <h4>البلازما</h4>
+          <p style="font-size:0.92rem; color:var(--muted);">غاز متأين إلكتروناته حرة، تشكل معظم مادة النجوم في الكون <span class="cite">[cite: 18]</span>.</p>
+        </div>
+      </div>
+
+      <h3>مقارنة شاملة لخصائص الحالات الثلاث:</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>وجه المقارنة</th>
+              <th>المادة الصلبة (Solid)</th>
+              <th>السائل (Liquid)</th>
+              <th>الغاز (Gas)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>الشكل</b></td>
+              <td>محدد وثابت (لا تأخذ شكل الوعاء) <span class="cite">[cite: 18]</span></td>
+              <td>متغير (يأخذ شكل الوعاء الذي يحويه) <span class="cite">[cite: 18]</span></td>
+              <td>متغير (يأخذ شكل الوعاء الذي يملؤه) <span class="cite">[cite: 18]</span></td>
+            </tr>
+            <tr>
+              <td><b>الحجم</b></td>
+              <td>محدد وثابت <span class="cite">[cite: 18]</span></td>
+              <td>ثابت لا يتغير <span class="cite">[cite: 18]</span></td>
+              <td>متغير (يملأ حجم الوعاء كاملاً) <span class="cite">[cite: 18]</span></td>
+            </tr>
+            <tr>
+              <td><b>ترتيب الجسيمات</b></td>
+              <td>متراصة بإحكام في مواضع ثابتة <span class="cite">[cite: 18]</span></td>
+              <td>أقل تراصاً، قادرة على الجريان والحركة <span class="cite">[cite: 18]</span></td>
+              <td>متباعدة جداً وعشوائية الحركة <span class="cite">[cite: 18]</span></td>
+            </tr>
+            <tr>
+              <td><b>قابلية الانضغاط</b></td>
+              <td>غير قابلة للانضغاط <span class="cite">[cite: 18]</span></td>
+              <td>غير قابلة للانضغاط تقريباً <span class="cite">[cite: 18]</span></td>
+              <td><b>تنضغط بسهولة بالغة</b> <span class="cite">[cite: 18]</span></td>
+            </tr>
+            <tr>
+              <td><b>أثر التسخين</b></td>
+              <td>تتمدد قليلاً <span class="cite">[cite: 18]</span></td>
+              <td>تتمدد بالتسخين <span class="cite">[cite: 18]</span></td>
+              <td>تتمدد بالحرارة <span class="cite">[cite: 18]</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="concept-box" style="background:#f1f5f9; border-color:#cbd5e1;">
+        <b>💡 تصحيح مفهوم علمي:</b> المادة الصلبة لا تُحدد بمدى قساوتها! فالأسمنت قاسٍ جداً والشمع أو الصلصال ليّن، ومع ذلك كلاهما يُعد علمياً مادة صلبة؛ لأن لكل منهما شكلاً وحجماً محددين <span class="cite">[cite: 18]</span>.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════ TAB 3: الغاز والبخار ونوبل 2025 ════════ -->
+  <section id="t3" class="tab-pane">
+    
+    <div class="card amber">
+      <h2>ما الفرق العلمي الدقيق بين «الغاز» و«البخار»؟</h2>
+      <p>كثيراً ما يحدث خلط بين الكلمتين في الحياة اليومية، لكنهما في الكيمياء تعبران عن حالتين مختلفتين تماماً <span class="cite">[cite: 18]</span>:</p>
+
+      <div class="concept-box" style="background:var(--amber-soft); border-color:#fde68a;">
+        <ul>
+          <li><b>الغاز (Gas):</b> يشير إلى مادة توجد في <b>الحالة الغازية بطبيعتها في درجات الحرارة العادية</b> (مثل غاز الميثان، الأكسجين، النيتروجين) <span class="cite">[cite: 18]</span>.</li>
+          <li><b>البخار (Vapor):</b> يشير إلى الحالة الغازية لمادة توجد أصلاً في <b>الحالة الصلبة أو السائلة في درجات الحرارة العادية</b> (مثل بخار الماء؛ فالماء في الأصل سائل، وبخار اليود؛ فاليود في الأصل صلب) <span class="cite">[cite: 18]</span>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card purple">
+      <h2>فخر وطني: نوبل في الكيمياء 2025 (د. عمر ياغي)</h2>
+      <div class="nobel-box">
+        <b>🏆 إنجاز عالمي سعودي:</b><br>
+        فاز العالم السعودي <b>البروفيسور عمر ياغي</b> بجائزة نوبل في الكيمياء لعام <b>2025م</b>، تقديراً لاكتشافه وابتكاره «الهياكل المعدنية-العضوية (MOFs)»، والتي أحدثت نقلة علمية هائلة وتاريخية في مجال <b>تخزين وفصل الغازات</b> مثل الهيدروجين وغاز ثاني أكسيد الكربون، واستخلاص الماء من الهواء الجاف <span class="cite">[cite: 18]</span>.
+      </div>
+
+      <div class="concept-box" style="background:#f5f3ff; border-color:#ddd6fe;">
+        <b>🏅 جائزة الملك فيصل العالمية (إريك كورتل 1417هـ):</b> نال البروفيسور إريك كورتل الجائزة لاكتشافه حالة جديدة للمادة تُعرف باسم «حالة التكاثف» التي تحدث للجسيمات عند درجات حرارة فائقة الانخفاض تقترب من الصفر المطلق <span class="cite">[cite: 18]</span>.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════ TAB 4: الاختبار التفاعلي ════════ -->
+  <section id="t4" class="tab-pane">
+    <div class="quiz-header">
+      <h3>🎯 10 أسئلة تقييمية على خواص المادة وحالاتها</h3>
+      <p style="color: var(--muted); font-size: 0.95rem; margin-top: 4px;">اختبار شامل يقيس المفاهيم الدقيقة والفروق بين حالات المادة والغاز والبخار[cite: 18]</p>
+      
+      <div class="progress-wrap">
+        <div class="progress-bar" id="pBar"></div>
+      </div>
+      <div class="progress-labels">
+        <span id="pCount">التقدم: 0 / 10</span>
+        <span id="pScore">الدرجة: 0</span>
+      </div>
+    </div>
+
+    <div id="quizBox"></div>
+
+    <div class="result-banner" id="resBanner">
+      <div class="res-score" id="resVal">0 / 10</div>
+      <h3 id="resTitle" style="color: var(--navy); margin-bottom: 6px;"></h3>
+      <p id="resDesc" style="color: var(--muted); font-size: 0.98rem;"></p>
+      <button class="res-btn" onclick="restartQuiz()">🔄 إعادة المحاولة</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Floating Score Capsule -->
+<div class="score-capsule">
+  <span style="color: var(--emerald);">✔ صحيح: <b id="lblOk">0</b></span>
+  <span style="color: #cbd5e1;">|</span>
+  <span style="color: var(--rose);">✖ خطأ: <b id="lblBad">0</b></span>
+</div>
+
+<script>
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+const QUESTIONS = [
+  {
+    q: "تُعرف المادة ذات التركيب الكيميائي المحدد والثابت الذي لا يتغير من عينة لأخرى باسم:",
+    opts: [
+      "المادة الكيميائية النقية",
+      "المخلوط المتجانس",
+      "المادة المتأينة",
+      "المحلول القياسي"
+    ],
+    ans: 0,
+    exp: "المادة الكيميائية النقية لها تركيب محدد وثابت كملح الطعام النقي أو الماء المقطر."
+  },
+  {
+    q: "لماذا يُعد ماء الصنبور أو ماء البحر مادة غير نقية في علم الكيمياء؟",
+    opts: [
+      "لأنه يتكون من الهيدروجين والأكسجين فقط",
+      "لأنه يتواجد دائماً في الحالة السائلة",
+      "لاحتوائه على كميات متفاوتة من الأملاح والمعادن والمواد الذائبة",
+      "لأنه لا يغلي عند درجات الحرارة العادية"
+    ],
+    ans: 2,
+    exp: "ماء البحر والشرب يحتويان على نسب متغيرة من الأملاح والمعادن الذائبة باختلاف المصدر، بخلاف الماء النقي المقطر."
+  },
+  {
+    q: "أي حالات المادة توصف بأنها «غاز متأين تكون فيه الإلكترونات حرة وغير مرتبطة بالذرة»؟",
+    opts: [
+      "الحالة السائلة",
+      "الحالة الصلبة",
+      "حالة التكاثف",
+      "حالة البلازما"
+    ],
+    ans: 3,
+    exp: "البلازما هي غاز متأين إلكتروناته حرة، وتعتبر الحالة الأكثر شيوعاً في مادة الكون (كالنجوم)."
+  },
+  {
+    q: "تتميز المادة الصلبة بأنها:",
+    opts: [
+      "لها شكل محدد وحجم محدد وغير قابلة للانضغاط",
+      "تأخذ شكل وحجم الوعاء وتنضغط بسهولة",
+      "لها حجم متغير وشكل ثابت",
+      "تنساب وتجري بحرية تامة في الأوعية"
+    ],
+    ans: 0,
+    exp: "المادة الصلبة لها شكل وحجم محددان وجسيماتها مرصوصة بإحكام مما يجعلها غير قابلة للانضغاط."
+  },
+  {
+    q: "علل: يستطيع السائل الجريان والانسكاب ليأخذ شكل الوعاء الذي يوضع فيه؟",
+    opts: [
+      "لأن جسيماته متباعدة جداً وتنعدم قوى التجاذب بينها",
+      "لأن جسيماته أقل تراصاً وليست ثابتة في أماكنها وقادرة على الحركة وتجاوز بعضها",
+      "لأن حجمه يتغير بتغير شكل الوعاء",
+      "لأن شحنته الكهربائية سالبة"
+    ],
+    ans: 1,
+    exp: "جسيمات السائل حرة الحركة وقادرة على الانزلاق وتجاوز بعضها، مما يمنحه خاصية الجريان وشكل الوعاء."
+  },
+  {
+    q: "ما الفرق العلمي الدقيق بين كلمتي «الغاز» و«البخار»؟",
+    opts: [
+      "الغاز يتكون من ذرات مفردة والبخار من جزيئات",
+      "البخار قابل للانضغاط والغاز غير قابل للانضغاط",
+      "الغاز مادة غازية في الحرارة العادية، بينما البخار حالة غازية لمادة صلبة أو سائلة أصلاً بالحرارة العادية",
+      "لا يوجد أي فرق علمي بينهما إطلاقاً"
+    ],
+    ans: 2,
+    exp: "الغاز غازي بطبيعته في درجات الحرارة العادية كالأكسجين، أما البخار فهو حالة غازية لمادة سائلة كبخار الماء."
+  },
+  {
+    q: "لماذا تنضغط الغازات بسهولة بالغة عند التأثير عليها بضغط خارجي؟",
+    opts: [
+      "لأن جسيماتها متراصة بإحكام",
+      "لأن كتلة جسيماتها متغيرة باستمرار",
+      "لأنها تتحول فوراً إلى حالة البلازما",
+      "لأن جسيماتها متباعدة جداً بعضها عن بعض مقارنة بالصلب والسائل"
+    ],
+    ans: 3,
+    exp: "تباعد جسيمات الغاز ووجود فراغات شاسعة بينها يسمح بتقريبها من بعضها وضغطها بسهولة في حجم أصغر."
+  },
+  {
+    q: "أي العبارات الآتية صحيحة علمياً فيما يخص قساوة المادة الصلبة؟",
+    opts: [
+      "المادة الصلبة لابد أن تكون قاسية جداً كالحديد والأسمنت",
+      "المادة الصلبة لا تُحدد بمدى قساوتها؛ فالأسمنت قاسٍ والشمع ليّن وكلاهما مادة صلبة",
+      "الشمع والصلصال سوائل بطيئة الجريان وليسا مواد صلبة",
+      "المواد الصلبة اللينة تنضغط بسهولة كالغازات"
+    ],
+    ans: 1,
+    exp: "الصلابة حالة فيزيائية تعني ثبات الشكل والحجم وليست مقياساً للقساوة؛ فالشمع لين ولكنه صلب."
+  },
+  {
+    q: "فاز العالم السعودي البروفيسور عمر ياغي بجائزة نوبل في الكيمياء لعام 2025 تقديراً لـ:",
+    opts: [
+      "اكتشافه الهياكل المعدنية-العضوية (MOFs) لتخزين وفصل الغازات",
+      "ابتكار طريقة استخراج الملح من مياه البحر",
+      "تفسير حركة البلازما في شاشات التلفاز",
+      "عزل النيتروجين السائل في المختبرات"
+    ],
+    ans: 0,
+    exp: "نال د. عمر ياغي نوبل 2025 لاكتشافه الهياكل المعدنية-العضوية MOFs التي أحدثت ثورة في تخزين الغازات كالهيدروجين."
+  },
+  {
+    q: "كيف يرتبط استخراج الملح من ممالح مدينة «القصب» برؤية المملكة 2030؟",
+    opts: [
+      "بتحويل الملح إلى طاقة شمسية",
+      "بتقليل استهلاك غاز النيتروجين",
+      "بإنتاج غاز البلازما من المناجم",
+      "بالمساهمة في رفع نسبة المحتوى المحلي في القطاعات غير النفطية"
+    ],
+    ans: 3,
+    exp: "استخراج الملح في مدينة القصب يدعم مستهدف رؤية 2030 برفع نسبة المحتوى المحلي في الصناعات غير النفطية."
+  }
+];
+
+let answersDone = 0;
+let correctCount = 0;
+let wrongCount = 0;
+const LETTERS = ['أ', 'ب', 'ج', 'د'];
+
+function renderQuiz() {
+  const container = document.getElementById('quizBox');
+  container.innerHTML = '';
+
+  QUESTIONS.forEach((qObj, qIdx) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = `qCard-${qIdx}`;
+
+    const optsHtml = qObj.opts.map((optText, optIdx) => `
+      <button class="opt-btn" onclick="submitAnswer(${qIdx}, ${optIdx})">
+        <span class="opt-letter">${LETTERS[optIdx]}</span>
+        <span>${optText}</span>
+      </button>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="q-head">
+        <div class="q-badge">${qIdx + 1}</div>
+        <div class="q-title">${qObj.q}</div>
+      </div>
+      <div class="opts-stack" id="optGroup-${qIdx}">${optsHtml}</div>
+      <div class="q-explain" id="exp-${qIdx}">
+        <b>💡 الشرح والتوضيح:</b> ${qObj.exp}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function submitAnswer(qIdx, selectedIdx) {
+  const card = document.getElementById(`qCard-${qIdx}`);
+  const group = document.getElementById(`optGroup-${qIdx}`);
+  const buttons = group.querySelectorAll('.opt-btn');
+
+  if (buttons[0].disabled) return;
+
+  const correctIndex = QUESTIONS[qIdx].ans;
+  const isCorrect = (selectedIdx === correctIndex);
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === correctIndex) btn.classList.add('correct');
+    else if (idx === selectedIdx) btn.classList.add('wrong');
+  });
+
+  if (isCorrect) {
+    correctCount++;
+    card.classList.add('ok');
+  } else {
+    wrongCount++;
+    card.classList.add('bad');
+  }
+
+  document.getElementById(`exp-${qIdx}`).classList.add('show');
+  answersDone++;
+  refreshStats();
+
+  if (answersDone === QUESTIONS.length) {
+    showResults();
+  }
+}
+
+function refreshStats() {
+  const pct = (answersDone / QUESTIONS.length) * 100;
+  document.getElementById('pBar').style.width = pct + '%';
+  document.getElementById('pCount').textContent = `التقدم: ${answersDone} / 10`;
+  document.getElementById('pScore').textContent = `الدرجة: ${correctCount}`;
+  document.getElementById('lblOk').textContent = correctCount;
+  document.getElementById('lblBad').textContent = wrongCount;
+}
+
+function showResults() {
+  const banner = document.getElementById('resBanner');
+  const scoreVal = document.getElementById('resVal');
+  const title = document.getElementById('resTitle');
+  const desc = document.getElementById('resDesc');
+
+  scoreVal.textContent = `${correctCount} / 10`;
+
+  if (correctCount >= 9) {
+    title.textContent = "🏆 إتقان تام ومبهر لخواص المادة وحالاتها!";
+    desc.textContent = "استيعاب كامل للفروق بين حالات المادة والغاز والبخار ومفاهيم المادة النقية.";
+  } else if (correctCount >= 7) {
+    title.textContent = "⭐ مستوى متميز جداً!";
+    desc.textContent = "أداء رائع، راجع فقط النقاط البسيطة التي تعثرت فيها لتحقيق العلامة الكاملة.";
+  } else {
+    title.textContent = "📚 تحتاج إلى مراجعة سريعة لترتيب الجسيمات والغاز والبخار.";
+    desc.textContent = "أعد قراءة الشرح بالبطاقات السابقة ثم أعد المحاولة لتحقيق نتيجة أفضل.";
+  }
+
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function restartQuiz() {
+  answersDone = 0;
+  correctCount = 0;
+  wrongCount = 0;
+  refreshStats();
+  document.getElementById('resBanner').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderQuiz();
+</script>
+</body>
+</html>

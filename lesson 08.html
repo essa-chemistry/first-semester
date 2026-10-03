@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس: المخاليط وطرائق فصلها</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --card-border: #e2e8f0;
+    --navy: #0f172a;
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --primary-soft: #e0f2fe;
+    --teal: #0d9488;
+    --teal-soft: #ccfbf1;
+    --amber: #d97706;
+    --amber-soft: #fef3c7;
+    --emerald: #059669;
+    --emerald-soft: #ecfdf5;
+    --purple: #7c3aed;
+    --purple-soft: #f3e8ff;
+    --rose: #e11d48;
+    --rose-soft: #ffe4e6;
+    --text: #1e293b;
+    --muted: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.85;
+    padding-bottom: 85px;
+    font-size: 1.05rem;
+  }
+
+  .cite { display: none !important; }
+
+  /* ═══ HERO HEADER ═══ */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #0d9488 60%, #0284c7 100%);
+    color: #ffffff;
+    padding: clamp(35px, 6vw, 55px) 20px 35px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(13, 148, 136, 0.12);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #99f6e4;
+  }
+  .hero h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 900;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .hero h1 span { color: #5eead4; }
+  .hero p {
+    font-size: clamp(0.95rem, 3vw, 1.08rem);
+    color: #f1f5f9;
+    max-width: 680px;
+    margin: 0 auto 16px;
+    line-height: 1.7;
+  }
+  .hero-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  /* ═══ TABS NAVIGATION ═══ */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: #ffffff;
+    border-bottom: 2px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    overflow-x: auto;
+  }
+  .tbtn {
+    background: transparent;
+    border: 1.5px solid transparent;
+    color: var(--muted);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .tbtn:hover {
+    color: var(--teal);
+    background: var(--teal-soft);
+  }
+  .tbtn.active {
+    background: var(--teal-soft);
+    color: var(--teal);
+    border-color: #5eead4;
+  }
+
+  /* ═══ WRAPPER & CARDS ═══ */
+  .container { max-width: 920px; margin: 24px auto; padding: 0 16px; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: clamp(18px, 4vw, 26px);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; width: 5px; height: 100%;
+    background: var(--teal);
+  }
+  .card.primary::after { background: var(--primary); }
+  .card.amber::after { background: var(--amber); }
+  .card.purple::after { background: var(--purple); }
+
+  .card h2 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+    margin: 18px 0 8px;
+    font-family: 'Cairo', sans-serif;
+  }
+  .card p {
+    color: #334155;
+    font-size: 1.02rem;
+    margin-bottom: 12px;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  .card ul li {
+    position: relative;
+    padding-right: 22px;
+    margin-bottom: 10px;
+    color: #1e293b;
+    font-size: 1rem;
+  }
+  .card ul li::before {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    color: var(--teal);
+    font-size: 0.85rem;
+  }
+
+  .concept-box {
+    background: var(--teal-soft);
+    border: 1px solid #99f6e4;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 14px 0;
+    font-size: 1.02rem;
+  }
+  .concept-box b { color: var(--teal); }
+
+  .life-box {
+    background: var(--amber-soft);
+    border-right: 5px solid var(--amber);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-size: 1.02rem;
+    color: #78350f;
+  }
+  .life-box b { color: #92400e; font-size: 1.1rem; }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .subcard {
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px;
+    background: #ffffff;
+  }
+  .subcard h4 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--navy);
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: 16px 0;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.96rem;
+    min-width: 520px;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: #ffffff;
+    padding: 12px 14px;
+    font-weight: 800;
+    text-align: center;
+  }
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--card-border);
+    text-align: center;
+    color: #1e293b;
+  }
+  .data-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* ═══ QUIZ SYSTEM ═══ */
+  .quiz-header {
+    background: linear-gradient(135deg, #f0fdf4, #ccfbf1);
+    border: 1px solid #99f6e4;
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .quiz-header h3 {
+    font-family: 'Cairo', sans-serif;
+    color: var(--navy);
+    font-size: 1.35rem;
+  }
+  .progress-wrap {
+    background: #e2e8f0;
+    height: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 14px 0 8px;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--teal), var(--primary));
+    transition: width 0.3s ease;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .q-card {
+    background: var(--surface);
+    border: 1.5px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .q-card.ok { border-color: var(--emerald); }
+  .q-card.bad { border-color: var(--rose); }
+
+  .q-head { display: flex; gap: 12px; margin-bottom: 14px; }
+  .q-badge {
+    background: var(--teal-soft);
+    color: var(--teal);
+    border: 1px solid #99f6e4;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .q-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.55;
+  }
+
+  .opts-stack { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.98rem;
+    text-align: right;
+    transition: all 0.15s ease;
+  }
+  .opt-btn:hover:not(:disabled) {
+    background: #f0fdfa;
+    border-color: var(--teal);
+  }
+  .opt-letter {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--muted);
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .opt-btn.correct {
+    background: var(--emerald-soft);
+    border-color: var(--emerald);
+    color: var(--emerald);
+    font-weight: 800;
+  }
+  .opt-btn.correct .opt-letter {
+    background: var(--emerald);
+    color: #ffffff;
+    border-color: var(--emerald);
+  }
+  .opt-btn.wrong {
+    background: var(--rose-soft);
+    border-color: var(--rose);
+    color: var(--rose);
+    font-weight: 800;
+  }
+  .opt-btn.wrong .opt-letter {
+    background: var(--rose);
+    color: #ffffff;
+    border-color: var(--rose);
+  }
+  .opt-btn:disabled { cursor: default; }
+
+  .q-explain {
+    display: none;
+    margin-top: 12px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: #334155;
+    border-right: 4px solid var(--teal);
+    line-height: 1.7;
+  }
+  .q-explain.show { display: block; }
+  .q-explain b { color: var(--teal); }
+
+  /* Floating Score Capsule */
+  .score-capsule {
+    position: fixed;
+    bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: #ffffff;
+    border: 1.5px solid var(--card-border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-radius: 50px;
+    padding: 8px 22px;
+    display: flex;
+    gap: 16px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    z-index: 1000;
+  }
+
+  /* Result Banner */
+  .result-banner {
+    display: none;
+    background: #ffffff;
+    border: 2px solid #99f6e4;
+    border-radius: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+  .result-banner.show { display: block; }
+  .res-score {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+  .res-btn {
+    background: var(--teal);
+    border: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 10px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: background 0.2s;
+  }
+  .res-btn:hover { background: #0f766e; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-badge">🔬 كيمياء 1 — الفصل 2: المادة - الخواص والتغيرات</div>
+  <h1>المخاليط <span>وطرائق فصلها</span></h1>
+  <p>ملخص شامل ومرتب لمفهوم المخاليط المتجانسة وغير المتجانسة، وأنواع المحاليل والسبائك، مع استعراض دقيق لطرائق الفصل الفيزيائية الخمس.</p>
+  <div class="hero-tags">
+    <div class="tag">🥤 الربط مع علبة المشروب الغازي</div>
+    <div class="tag">🥣 المتجانس وغير المتجانس</div>
+    <div class="tag">🔩 المحاليل والسبائك المعدنية</div>
+    <div class="tag">⚗️ طرائق الفصل الفيزيائية</div>
+    <div class="tag">✏️ 10 أسئلة تقييمية متوازنة</div>
+  </div>
+</header>
+
+<!-- ══ NAV TABS ══ -->
+<nav class="nav-tabs">
+  <button class="tbtn active" onclick="switchTab('t1', this)">🥣 مفهوم المخاليط وأنواعها</button>
+  <button class="tbtn" onclick="switchTab('t2', this)">🤿 المحاليل والسبائك (جدول 3-2)</button>
+  <button class="tbtn" onclick="switchTab('t3', this)">⚗️ طرائق فصل المخاليط</button>
+  <button class="tbtn" onclick="switchTab('t4', this)">✏️ اختبر فهمك (10 أسئلة)</button>
+</nav>
+
+<div class="container">
+
+  <!-- ════════ TAB 1: مفهوم المخاليط وأنواعها ════════ -->
+  <main id="t1" class="tab-pane active">
+    <div class="card">
+      <h2>1) ما هو المخلوط؟</h2>
+      <div class="concept-box">
+        <b>المخلوط (Mixture):</b> مزيج مكون من <b>مادتين نقيتين أو أكثر</b> مع احتفاظ كل مادة من هذه المواد <b>بخواصها الأصلية</b> دون حدوث تفاعل كيميائي بينها[cite: 56].
+      </div>
+
+      <div class="life-box">
+        <b>🥤 الربط مع الحياة (صوت علبة المشروب الغازي):</b><br>
+        الصوت الذي تسمعه عندما تفتح علبة مشروب غازي هو صوت تسرب غاز ثاني أكسيد الكربون من العلبة[cite: 56]. وعند ترك العلبة مفتوحة يتسرب معظم الغاز، إلا أن المشروب يبقى حلواً؛ لأن المواد امتزجت فيزيائياً دون أن تتفاعل كيميائياً، وظلت كل مادة محتفظة بطعمها وخواصها[cite: 56].
+      </div>
+
+      <h2>2) تصنيف المخاليط:</h2>
+      <div class="grid2">
+        <div class="subcard" style="border-right: 4px solid var(--rose);">
+          <h4 style="color: var(--rose);">أ) المخلوط غير المتجانس (Heterogeneous)</h4>
+          <p>مخلوط <b>لا تمتزج فيه المواد بانتظام</b>، وتبقى مواده متمايزة عن بعضها البعض، وتركيبه غير منتظم[cite: 57].</p>
+          <ul>
+            <li><b>سلطة الخضار:</b> يمكن تمييز وفصل كل مكوّن بسهولة[cite: 57].</li>
+            <li><b>عصير البرتقال الطبيعي باللب:</b> يطفو اللب على سطح العصير متمايزاً[cite: 57].</li>
+            <li><b>مُطيب السلطة (الزيت والتوابل والخل):</b> ينفصل الزيت ليكون طبقة مستقلة فوق الخل[cite: 56].</li>
+          </ul>
+        </div>
+
+        <div class="subcard" style="border-right: 4px solid var(--teal);">
+          <h4 style="color: var(--teal);">ب) المخلوط المتجانس (Homogeneous)</h4>
+          <p>مخلوط <b>له تركيب ثابت ومنتظم</b>، وتمتزج مكوناته تماماً بحيث لا يمكن التمييز بينها، ويُسمى أيضاً <b>«المحلول» (Solution)</b>[cite: 57].</p>
+          <ul>
+            <li><b>مملغم الفضة والزئبق:</b> حشوة الأسنان المعدنية متجانسة التركيب في كل أجزائها[cite: 56, 57].</li>
+            <li><b>مياه البحر المصفاة والشاي والعصائر الصافية</b>[cite: 57].</li>
+            <li><b>الهواء الجوي النقي</b>[cite: 57].</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ════════ TAB 2: المحاليل والسبائك ════════ -->
+  <section id="t2" class="tab-pane">
+    <div class="card teal">
+      <h2>3) أنواع المحاليل (Solutions)</h2>
+      <p>المحاليل هي مخاليط متجانسة، وقد تكون صلبة أو سائلة أو غازية كما يوضح الجدول 3-2 في واقع الغواص[cite: 57]:</p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>نوع المحلول</th>
+              <th>المثال المعتمد في الكتاب (جدول 3-2)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><b>غاز - غاز</b></td><td>الهواء في أسطوانة الغواص (مزيج من النيتروجين والأكسجين والأرجون)[cite: 57].</td></tr>
+            <tr><td><b>غاز - سائل</b></td><td>الأكسجين وثاني أكسيد الكربون الذائبان في ماء البحر[cite: 57].</td></tr>
+            <tr><td><b>سائل - غاز</b></td><td>الهواء الرطب الذي يتنفسه الغواص (يحوي قطرات ماء)[cite: 57].</td></tr>
+            <tr><td><b>سائل - سائل</b></td><td>امتزاج ماء المطر بماء البحر[cite: 57].</td></tr>
+            <tr><td><b>صلب - سائل</b></td><td>الأملاح الصلبة الذائبة في ماء البحر[cite: 57].</td></tr>
+            <tr><td><b>صلب - صلب</b></td><td>أسطوانة الغوص المصنوعة من مزيج المعادن (السبائك)[cite: 57].</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>4) السبائك (Alloys)</h2>
+      <div class="concept-box" style="background:var(--amber-soft); border-color:#fde68a;">
+        <b>السبيكة:</b> <b>مخلوط متجانس (محلول صلب)</b> من الفلزات، أو من فلز ولا فلز، يكون فيه الفلز هو المكون الأساسي[cite: 57].
+      </div>
+      <ul>
+        <li><b>الفولاذ (Steel):</b> مخلوط من فلز الحديد ولا فلز الكربون؛ ووجود ذرات الكربون يزيد من صلابة الفلز ومقاومته[cite: 57].</li>
+        <li><b>سبائك المجوهرات:</b> مثل البرونز، والذهب الأبيض[cite: 57].</li>
+        <li><b>سبائك الفضاء:</b> سبائك الألومنيوم والسليكون التي طورها علماء وكالة (ناسا) لصناعة محركات وآلات قوية وخفيفة الوزن[cite: 57].</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ════════ TAB 3: طرائق فصل المخاليط ════════ -->
+  <section id="t3" class="tab-pane">
+    <div class="card purple">
+      <h2>5) طرائق فصل المخاليط (العمليات الفيزيائية)</h2>
+      <p>بما أن مكونات المخلوط تمتزج فيزيائياً دون روابط كيميائية جديدة، فإن فصلها يتم باعتماد <b>الفروق في الخواص الفيزيائية للمواد</b>[cite: 58]:</p>
+
+      <div class="grid2">
+        <div class="subcard" style="border-right: 4px solid var(--primary);">
+          <h4 style="color: var(--primary);">1. المغناطيسية (Magnetism)</h4>
+          <p>تستغل الاختلاف في الاستجابة للمغناطيس، مثل فصل <b>برادة الحديد</b> عن الرمل[cite: 58].</p>
+        </div>
+
+        <div class="subcard" style="border-right: 4px solid var(--teal);">
+          <h4 style="color: var(--teal);">2. الترشيح (Filtration)</h4>
+          <p>استعمال <b>حاجز مسامي</b> (ورقة ترشيح) لفصل <b>المادة الصلبة غير الذائبة عن السائل</b> في المخاليط غير المتجانسة[cite: 58].</p>
+        </div>
+
+        <div class="subcard" style="border-right: 4px solid var(--amber);">
+          <h4 style="color: var(--amber);">3. التقطير (Distillation)</h4>
+          <p>فصل المخاليط المتجانسة بالاعتماد على <b>الاختلاف في درجات الغليان</b>؛ حيث تغلي المادة الأقل درجة غليان أولاً وتتكثف[cite: 58].</p>
+        </div>
+
+        <div class="subcard" style="border-right: 4px solid var(--emerald);">
+          <h4 style="color: var(--emerald);">4. التبلور (Crystallization)</h4>
+          <p>طريقة فصل تؤدي للحصول على <b>مادة نقية صلبة عالية النقاوة</b> من محلولها المشبع (مثل ترسيب بلورات السكر على الخيط)[cite: 58].</p>
+        </div>
+
+        <div class="subcard" style="border-right: 4px solid var(--purple);">
+          <h4 style="color: var(--purple);">5. التسامي (Sublimation)</h4>
+          <p>عملية تتبخر فيها المادة الصلبة مباشرة دون أن تنصهر، وتستعمل لفصل مادتين صلبتين إحداهما لها القدرة على التسامي[cite: 58].</p>
+        </div>
+
+        <div class="subcard" style="border-right: 4px solid var(--rose);">
+          <h4 style="color: var(--rose);">6. الكروماتوجرافيا (Chromatography)</h4>
+          <p>التحليل الاستشرابي لفصل مكونات المخلوط (الطور المتحرك) بالاعتماد على <b>قابلية انجذاب كل مكون لسطح مادة أخرى (الطور الثابت)</b>[cite: 58].</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TAB 4: الاختبار التفاعلي ════════ -->
+  <section id="t4" class="tab-pane">
+    <div class="quiz-header">
+      <h3>🎯 10 أسئلة تقييمية على المخاليط وطرائق فصلها</h3>
+      <p style="color: var(--muted); font-size: 0.95rem; margin-top: 4px;">إجابات موزعة بتوازن ودقة بين جميع الخيارات لاختبار الفهم العلمي</p>
+      
+      <div class="progress-wrap">
+        <div class="progress-bar" id="pBar"></div>
+      </div>
+      <div class="progress-labels">
+        <span id="pCount">التقدم: 0 / 10</span>
+        <span id="pScore">الدرجة: 0</span>
+      </div>
+    </div>
+
+    <div id="quizBox"></div>
+
+    <div class="result-banner" id="resBanner">
+      <div class="res-score" id="resVal">0 / 10</div>
+      <h3 id="resTitle" style="color: var(--navy); margin-bottom: 6px;"></h3>
+      <p id="resDesc" style="color: var(--muted); font-size: 0.98rem;"></p>
+      <button class="res-btn" onclick="restartQuiz()">🔄 إعادة المحاولة</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Floating Score Capsule -->
+<div class="score-capsule">
+  <span style="color: var(--emerald);">✔ صحيح: <b id="lblOk">0</b></span>
+  <span style="color: #cbd5e1;">|</span>
+  <span style="color: var(--rose);">✖ خطأ: <b id="lblBad">0</b></span>
+</div>
+
+<script>
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── 10 Balanced Questions (3 أ, 2 ب, 3 ج, 2 د) ── */
+const QUESTIONS = [
+  {
+    q: "يُعرّف المخلوط في الكيمياء بأنه مزيج مكون من مادتين نقيتين أو أكثر مع:",
+    opts: [
+      "احتفاظ كل مادة بخواصها الأصلية دون تفاعل كيميائي",
+      "تكون روابط كيميائية جديدة ونواتج مغايرة",
+      "فقدان المواد لخواصها وتغير نسبها الثابتة",
+      "انعدام الكتلة الكلية للمكونات"
+    ],
+    ans: 0, // أ
+    exp: "المخلوط خلط فيزيائي تحتفظ فيه كل مادة بخواصها الأصلية ويمكن فصله بالطرائق الفيزيائية[cite: 56]."
+  },
+  {
+    q: "أي الأمثلة الآتية يُصنف علمياً كـ «مخلوط غير متجانس» لعدم امتزاج مواده بانتظام وبقائها متمايزة؟",
+    opts: [
+      "مملغم الفضة والزئبق",
+      "الهواء الجوي النقي",
+      "عصير البرتقال الطبيعي الحاوي على اللب",
+      "ماء البحر المصفى"
+    ],
+    ans: 2, // ج
+    exp: "عصير البرتقال باللب وسلطة الخضار ومطيب الزيت والخل مخاليط غير متجانسة تتمايز مكوناتها بالعين[cite: 56, 57]."
+  },
+  {
+    q: "يُطلق اسم «المحاليل» (Solutions) في الكيمياء على:",
+    opts: [
+      "المخاليط غير المتجانسة المعلقة فقط",
+      "المخاليط المتجانسة ذات التركيب المنتظم الثابت",
+      "المركبات الكيميائية الصلبة النقية",
+      "العناصر التي تتسامى عند التسخين"
+    ],
+    ans: 1, // ب
+    exp: "المخاليط المتجانسة تمتزج بانتظام ويطلق عليها اسم المحاليل (سواء كانت سائلة أو صلبة أو غازية)[cite: 57]."
+  },
+  {
+    q: "سبيكة «الفولاذ» تعد محلولاً صلباً (صلب - صلب) متجانساً يتكون أساساً من خلط:",
+    opts: [
+      "فلز النحاس وفلز الخارصين",
+      "الذهب والفضة فقط",
+      "الزئبق السائل مع الفضة",
+      "فلز الحديد مع لا فلز الكربون لزيادة صلابته"
+    ],
+    ans: 3, // د
+    exp: "الفولاذ سبيكة صلبة متجانسة من فلز الحديد ولا فلز الكربون، وذرات الكربون تزيد من صلابة الفلز[cite: 57]."
+  },
+  {
+    q: "وفق تصنيف المحاليل، يُعد الهواء الموجود داخل أسطوانة الغواص مثالاً نموذجياً على محلول من نوع:",
+    opts: [
+      "غاز - غاز",
+      "سائل - غاز",
+      "صلب - سائل",
+      "غاز - سائل"
+    ],
+    ans: 0, // أ
+    exp: "هواء أسطوانة الغواص مزيج متجانس من غازات النيتروجين والأكسجين والأرجون، فهو محلول (غاز - غاز)[cite: 57]."
+  },
+  {
+    q: "طريقة الفصل الفيزيائية التي تعتمد على «استعمال حاجز مسامي لفصل مادة صلبة غير ذائبة عن السائل» هي:",
+    opts: [
+      "التقطير",
+      "التبلور",
+      "الترشيح",
+      "التسامي"
+    ],
+    ans: 2, // ج
+    exp: "الترشيح هو فصل فيزيائي يستعمل ورقة ترشيح مسامية لحجز المواد الصلبة وتمرير السوائل الراشحة[cite: 58]."
+  },
+  {
+    q: "تعتمد طريقة «التقطير» في فصل مكونات المخاليط المتجانسة كلياً على الاختلاف في:",
+    opts: [
+      "الشحنة الكهربائية للجسيمات",
+      "درجات غليان المواد المكونة للمخلوط",
+      "حجم ذرات العناصر في المحلول",
+      "الخاصية المغناطيسية"
+    ],
+    ans: 1, // ب
+    exp: "التقطير يقوم على تبخير المادة ذات درجة الغليان الأقل أولاً ثم تكثيف بخارها وجمعه سائلاً نقياً[cite: 58]."
+  },
+  {
+    q: "طريقة فيزيائية لفصل مادتين صلبتين إحداهما تتحول مباشرة إلى الحالة الغازية بالحرارة دون أن تنصهر تسمى:",
+    opts: [
+      "الترشيح المسامي",
+      "التبلور البطيء",
+      "الكروماتوجرافيا",
+      "التسامي"
+    ],
+    ans: 3, // د
+    exp: "التسامي هو تبخر المادة الصلبة مباشرة دون المرور بالحالة السائلة، ويستعمل لفصل صلبين أحدهما يتسامى[cite: 58]."
+  },
+  {
+    q: "تتميز طريقة «التبلور» (Crystallization) كطريقة لفصل المواد بأنها:",
+    opts: [
+      "تنتج مواد صلبة عالية النقاوة من محاليلها المشبعة كبلورات السكر",
+      "تعتمد على الطور المتحرك والطور الثابت",
+      "تستخدم فقط للمخاليط الغازية المضغوطة",
+      "تؤدي إلى تكسير الروابط الكيميائية بالحرارة"
+    ],
+    ans: 0, // أ
+    exp: "التبلور ينتج عنه مادة صلبة نقية جداً عند تبخر المذيب من المحلول المشبع وتكون بلورات على الأسطح[cite: 58]."
+  },
+  {
+    q: "في تقنية الكروماتوجرافيا (التحليل الاستشرابي) لفصل الأصباغ، تنفصل المكونات اعتماداً على:",
+    opts: [
+      "درجة انصهار الصبغة",
+      "حجم الوعاء الزجاجي المستخدم",
+      "قابلية انجذاب كل مكون من مكونات المخلوط لسطح مادة الطور الثابت",
+      "كثافة السائل عند الصفر المئوي"
+    ],
+    ans: 2, // ج
+    exp: "تنفصل الأصباغ على ورقة الكروماتوجرافيا بناءً على تفاوت قوى تماسكها وقابلية انجذابها للطور الثابت[cite: 58]."
+  }
+];
+
+let answersDone = 0;
+let correctCount = 0;
+let wrongCount = 0;
+const LETTERS = ['أ', 'ب', 'ج', 'د'];
+
+function renderQuiz() {
+  const container = document.getElementById('quizBox');
+  container.innerHTML = '';
+
+  QUESTIONS.forEach((qObj, qIdx) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = `qCard-${qIdx}`;
+
+    const optsHtml = qObj.opts.map((optText, optIdx) => `
+      <button class="opt-btn" onclick="submitAnswer(${qIdx}, ${optIdx})">
+        <span class="opt-letter">${LETTERS[optIdx]}</span>
+        <span>${optText}</span>
+      </button>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="q-head">
+        <div class="q-badge">${qIdx + 1}</div>
+        <div class="q-title">${qObj.q}</div>
+      </div>
+      <div class="opts-stack" id="optGroup-${qIdx}">${optsHtml}</div>
+      <div class="q-explain" id="exp-${qIdx}">
+        <b>💡 الشرح والتوضيح:</b> ${qObj.exp}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function submitAnswer(qIdx, selectedIdx) {
+  const card = document.getElementById(`qCard-${qIdx}`);
+  const group = document.getElementById(`optGroup-${qIdx}`);
+  const buttons = group.querySelectorAll('.opt-btn');
+
+  if (buttons[0].disabled) return;
+
+  const correctIndex = QUESTIONS[qIdx].ans;
+  const isCorrect = (selectedIdx === correctIndex);
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === correctIndex) btn.classList.add('correct');
+    else if (idx === selectedIdx) btn.classList.add('wrong');
+  });
+
+  if (isCorrect) {
+    correctCount++;
+    card.classList.add('ok');
+  } else {
+    wrongCount++;
+    card.classList.add('bad');
+  }
+
+  document.getElementById(`exp-${qIdx}`).classList.add('show');
+  answersDone++;
+  refreshStats();
+
+  if (answersDone === QUESTIONS.length) {
+    showResults();
+  }
+}
+
+function refreshStats() {
+  const pct = (answersDone / QUESTIONS.length) * 100;
+  document.getElementById('pBar').style.width = pct + '%';
+  document.getElementById('pCount').textContent = `التقدم: ${answersDone} / 10`;
+  document.getElementById('pScore').textContent = `الدرجة: ${correctCount}`;
+  document.getElementById('lblOk').textContent = correctCount;
+  document.getElementById('lblBad').textContent = wrongCount;
+}
+
+function showResults() {
+  const banner = document.getElementById('resBanner');
+  const scoreVal = document.getElementById('resVal');
+  const title = document.getElementById('resTitle');
+  const desc = document.getElementById('resDesc');
+
+  scoreVal.textContent = `${correctCount} / 10`;
+
+  if (correctCount >= 9) {
+    title.textContent = "🏆 إتقان تام ومبهر لأنواع المخاليط وطرائق فصلها!";
+    desc.textContent = "استيعاب كامل للمحاليل والسبائك وأسس الفصل بالترشيح والتقطير والكروماتوجرافيا.";
+  } else if (correctCount >= 7) {
+    title.textContent = "⭐ مستوى متميز ومبشر جداً!";
+    desc.textContent = "أداء رائع، راجع فقط النقاط البسيطة التي تعثرت فيها لتحقيق العلامة الكاملة.";
+  } else {
+    title.textContent = "📚 تحتاج لمراجعة سريعة لطرائق الفصل الفيزيائية.";
+    desc.textContent = "أعد قراءة الشرح بالبطاقات السابقة ثم أعد المحاولة لتطوير درجاتك.";
+  }
+
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function restartQuiz() {
+  answersDone = 0;
+  correctCount = 0;
+  wrongCount = 0;
+  refreshStats();
+  document.getElementById('resBanner').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
