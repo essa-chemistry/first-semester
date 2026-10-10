@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس 9: العناصر والمركبات — كيمياء 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --card-border: #e2e8f0;
+    --navy: #0f172a;
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --primary-soft: #e0f2fe;
+    --teal: #0d9488;
+    --teal-soft: #ccfbf1;
+    --amber: #d97706;
+    --amber-soft: #fef3c7;
+    --emerald: #059669;
+    --emerald-soft: #ecfdf5;
+    --purple: #7c3aed;
+    --purple-soft: #f3e8ff;
+    --rose: #e11d48;
+    --rose-soft: #ffe4e6;
+    --text: #1e293b;
+    --muted: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.85;
+    padding-bottom: 85px;
+    font-size: 1.05rem;
+  }
+
+  /* ═══ HERO HEADER ═══ */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #0369a1 60%, #0d9488 100%);
+    color: #ffffff;
+    padding: clamp(35px, 6vw, 55px) 20px 35px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.12);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #bae6fd;
+  }
+  .hero h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 900;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .hero h1 span { color: #5eead4; }
+  .hero p {
+    font-size: clamp(0.95rem, 3vw, 1.08rem);
+    color: #f1f5f9;
+    max-width: 680px;
+    margin: 0 auto 16px;
+    line-height: 1.7;
+  }
+  .hero-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  /* ═══ TABS NAVIGATION ═══ */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: #ffffff;
+    border-bottom: 2px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    overflow-x: auto;
+  }
+  .tbtn {
+    background: transparent;
+    border: 1.5px solid transparent;
+    color: var(--muted);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .tbtn:hover {
+    color: var(--primary);
+    background: var(--primary-soft);
+  }
+  .tbtn.active {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    border-color: #7dd3fc;
+  }
+
+  /* ═══ WRAPPER & CARDS ═══ */
+  .container { max-width: 920px; margin: 24px auto; padding: 0 16px; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: clamp(18px, 4vw, 26px);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; width: 5px; height: 100%;
+    background: var(--primary);
+  }
+  .card.teal::after { background: var(--teal); }
+  .card.amber::after { background: var(--amber); }
+  .card.purple::after { background: var(--purple); }
+
+  .card h2 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+    margin: 18px 0 8px;
+    font-family: 'Cairo', sans-serif;
+  }
+  .card p {
+    color: #334155;
+    font-size: 1.02rem;
+    margin-bottom: 12px;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  .card ul li {
+    position: relative;
+    padding-right: 22px;
+    margin-bottom: 10px;
+    color: #1e293b;
+    font-size: 1rem;
+  }
+  .card ul li::before {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    color: var(--primary);
+    font-size: 0.85rem;
+  }
+
+  .concept-box {
+    background: var(--primary-soft);
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 14px 0;
+    font-size: 1.02rem;
+  }
+  .concept-box b { color: var(--primary-dark); }
+
+  .life-box {
+    background: var(--amber-soft);
+    border-right: 5px solid var(--amber);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-size: 1.02rem;
+    color: #78350f;
+  }
+  .life-box b { color: #92400e; font-size: 1.1rem; }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .subcard {
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px;
+    background: #ffffff;
+  }
+  .subcard h4 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--navy);
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: 16px 0;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.96rem;
+    min-width: 520px;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: #ffffff;
+    padding: 12px 14px;
+    font-weight: 800;
+    text-align: center;
+  }
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--card-border);
+    text-align: center;
+    color: #1e293b;
+  }
+  .data-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* ═══ QUIZ SYSTEM ═══ */
+  .quiz-header {
+    background: linear-gradient(135deg, #f0f9ff, #ccfbf1);
+    border: 1px solid #bae6fd;
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .quiz-header h3 {
+    font-family: 'Cairo', sans-serif;
+    color: var(--navy);
+    font-size: 1.35rem;
+  }
+  .progress-wrap {
+    background: #e2e8f0;
+    height: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 14px 0 8px;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--teal));
+    transition: width 0.3s ease;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .q-card {
+    background: var(--surface);
+    border: 1.5px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .q-card.ok { border-color: var(--emerald); }
+  .q-card.bad { border-color: var(--rose); }
+
+  .q-head { display: flex; gap: 12px; margin-bottom: 14px; }
+  .q-badge {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    border: 1px solid #bae6fd;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .q-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.55;
+  }
+
+  .opts-stack { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.98rem;
+    text-align: right;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .opt-btn:hover:not(:disabled) {
+    background: #e0f2fe;
+    border-color: var(--primary);
+  }
+  .opt-letter {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--muted);
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .opt-btn.correct {
+    background: var(--emerald-soft);
+    border-color: var(--emerald);
+    color: var(--emerald);
+    font-weight: 800;
+  }
+  .opt-btn.correct .opt-letter {
+    background: var(--emerald);
+    color: #ffffff;
+    border-color: var(--emerald);
+  }
+  .opt-btn.wrong {
+    background: var(--rose-soft);
+    border-color: var(--rose);
+    color: var(--rose);
+    font-weight: 800;
+  }
+  .opt-btn.wrong .opt-letter {
+    background: var(--rose);
+    color: #ffffff;
+    border-color: var(--rose);
+  }
+  .opt-btn:disabled { cursor: default; }
+
+  .q-explain {
+    display: none;
+    margin-top: 12px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: #334155;
+    border-right: 4px solid var(--primary);
+    line-height: 1.7;
+  }
+  .q-explain.show { display: block; }
+  .q-explain b { color: var(--primary-dark); }
+
+  /* Floating Score Capsule */
+  .score-capsule {
+    position: fixed;
+    bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: #ffffff;
+    border: 1.5px solid var(--card-border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-radius: 50px;
+    padding: 8px 22px;
+    display: flex;
+    gap: 16px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    z-index: 1000;
+  }
+
+  /* Result Banner */
+  .result-banner {
+    display: none;
+    background: #ffffff;
+    border: 2px solid #bae6fd;
+    border-radius: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+  .result-banner.show { display: block; }
+  .res-score {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+  }
+  .res-btn {
+    background: var(--primary);
+    border: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 10px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: background 0.2s;
+  }
+  .res-btn:hover { background: var(--primary-dark); }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-badge">🔬 كيمياء 1 — الفصل 2: المادة - الخواص والتغيرات</div>
+  <h1>العناصر <span>والمركبات الكيميائية</span></h1>
+  <p>شرح مبسط ومفصل للوحدات البنائية للمادة: العناصر ووفرتها، والجدول الدوري لمندليف، والمركبات وتفكيكها بالتحليل الكهربائي للماء.</p>
+  <div class="hero-tags">
+    <div class="tag">🍓 سلطة الفواكه والمربى</div>
+    <div class="tag">⚛️ 92 عنصراً في الطبيعة</div>
+    <div class="tag">⚡ التحليل الكهربائي للماء</div>
+    <div class="tag">🧪 يوديد البوتاسيوم واختلاف الخواص</div>
+    <div class="tag">✏️ 10 أسئلة تقييمية متوازنة</div>
+  </div>
+</header>
+
+<!-- ══ NAV TABS ══ -->
+<nav class="nav-tabs">
+  <button class="tbtn active" onclick="switchTab('t1', this)">⚛️ العناصر ووفرتها وحالاتها</button>
+  <button class="tbtn" onclick="switchTab('t2', this)">🗺️ الجدول الدوري لمندليف</button>
+  <button class="tbtn" onclick="switchTab('t3', this)">🧪 المركبات والتحليل الكهربائي</button>
+  <button class="tbtn" onclick="switchTab('t4', this)">📊 مخطط تصنيف المادة</button>
+  <button class="tbtn" onclick="switchTab('t5', this)">✏️ اختبر فهمك (10 أسئلة)</button>
+</nav>
+
+<div class="container">
+
+  <!-- ════════ TAB 1: العناصر ووفرتها وحالاتها ════════ -->
+  <main id="t1" class="tab-pane active">
+    <div class="card">
+      <h2>1) ما هو العنصر؟</h2>
+      <div class="concept-box">
+        <b>العنصر (Element):</b> مادة كيميائية نقية لا يمكن تجزئتها إلى أجزاء أصغر منها بطرائق فيزيائية أو كيميائية.
+      </div>
+      <p>يوجد في الطبيعة <b>92 عنصراً طبيعياً</b> (مثل النحاس Cu، والأكسجين O، والذهب Au)، وهناك عناصر أخرى لا توجد طبيعياً وإنما يتم تحضيرها اصطناعياً في المختبرات.</p>
+
+      <div class="life-box">
+        <b>🍓 الربط مع الحياة (سلطة الفواكه مقابل المربى):</b><br>
+        عندما تأكل سلطة الفواكه يمكنك أكل وفصل قطع الفواكه منفردة (مثل المخاليط)، أما عندما تأكل مربى الفواكه فإنك لا تستطيع فصل كل قطعة وحدها؛ وكما أن المربى ناتجة عن امتزاج وثيق للفواكه، فإن المركب مكوّن من عناصر متحدة كيميائياً لا تراها منفردة.
+      </div>
+
+      <h3>رموز العناصر الكيميائية:</h3>
+      <ul>
+        <li>لكل عنصر اسم ورمز كيميائي خاص به معتمد وموحد دولياً لتسهيل التواصل بين العلماء.</li>
+        <li>يتكون الرمز من حرف كبير واحد (مثل <b>C</b> للكربون، و <b>O</b> للأكسجين)، أو حرفين (الأول كبير والثاني صغير مثل <b>Cu</b> للنحاس، و <b>Na</b> للصوديوم).</li>
+      </ul>
+
+      <h3>نسب وفرة العناصر في الكون والأرض والإنسان:</h3>
+      <div class="grid2">
+        <div class="subcard" style="border-right: 4px solid var(--primary);">
+          <h4 style="color:var(--primary);">في الكون والقشرة الأرضية:</h4>
+          <ul>
+            <li><b>الهيدروجين (H):</b> يشكل حوالي <b>75%</b> من كتلة الكون.</li>
+            <li><b>الأكسجين (O) والسليكون (Si):</b> يشكلان معاً <b>75%</b> من كتلة القشرة الأرضية.</li>
+            <li><b>الفرانسيوم (Fr):</b> أندر العناصر في الطبيعة (أقل من 20g موزعة في كامل قشرة الأرض).</li>
+          </ul>
+        </div>
+        <div class="subcard" style="border-right: 4px solid var(--teal);">
+          <h4 style="color:var(--teal);">في جسم الإنسان والحالات الفيزيائية:</h4>
+          <ul>
+            <li><b>الأكسجين والكربون والهيدروجين:</b> تشكل معاً أكثر من <b>90%</b> من كتلة جسم الإنسان.</li>
+            <li><b>حالات العناصر في الظروف العادية:</b>
+              <br>• غاز: الهيليوم في البالونات.
+              <br>• سائل: الزئبق في جهاز قياس ضغط الدم.
+              <br>• صلب: النحاس في الأواني والأسلاك.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ════════ TAB 2: الجدول الدوري لمندليف ════════ -->
+  <section id="t2" class="tab-pane">
+    <div class="card teal">
+      <h2>2) نظرة أولية على الجدول الدوري</h2>
+      <p>مع ازدياد اكتشاف العناصر، بدأ العلماء بدراسة أوجه التشابه بينها. ويعد العالم الروسي <b>ديمتري مندليف (1869م)</b> أول من صمم جدولاً رتب فيه العناصر المعروفة آنذاك اعتماداً على الكتل الذرية والتشابه في الخواص.</p>
+
+      <div class="concept-box" style="background:var(--teal-soft); border-color:#99f6e4;">
+        <b>بنية الجدول الدوري:</b> شبكة تنظم العناصر في صفوف وأعمدة:
+        <ul>
+          <li><b>الدورات (Periods):</b> الصفوف الأفقية في الجدول الدوري.</li>
+          <li><b>المجموعات أو العائلات (Groups / Families):</b> الأعمدة الرأسية في الجدول الدوري، وتتميز عناصر المجموعة الواحدة بامتلاكها <b>خواص فيزيائية وكيميائية متشابهة</b>.</li>
+          <li><b>سبب التسمية:</b> سُمي دورياً لأن نمط الخواص المتشابهة يتكرر بانتظام من دورة إلى أخرى.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TAB 3: المركبات والتحليل الكهربائي ════════ -->
+  <section id="t3" class="tab-pane">
+    <div class="card purple">
+      <h2>3) ما هو المركب؟</h2>
+      <div class="concept-box" style="background:var(--purple-soft); border-color:#ddd6fe;">
+        <b>المركب (Compound):</b> مادة نقية تتكون من <b>عنصرين مختلفين أو أكثر</b> متحدين معاً كيميائياً بنسب ثابتة.
+      </div>
+      <p>يوجد حالياً أكثر من <b>10 ملايين مركب معروف</b>، ويُكتشف أو يُحضر سنوياً قرابة 100,000 مركب جديد. وتدل الصيغة الكيميائية على نوع وعدد الذرات المكونة له؛ فصيغة ملح الطعام هي <b>NaCl</b>، وصيغة الماء هي <b>H₂O</b> حيث يشير الرقم السفلي (2) إلى ذرتي هيدروجين متحدتين مع ذرة أكسجين واحدة.</p>
+
+      <h2>4) فصل المركبات: تجربة التحليل الكهربائي للماء</h2>
+      <p>المركبات أكثر استقراراً من عناصرها الحرة في الطبيعة، وتفكيكها يتطلب طاقة كيميائية (حرارة أو كهرباء):</p>
+      <ul>
+        <li><b>جهاز التحليل الكهربائي للماء:</b> يمرر تياراً كهربائياً في الماء فيحلله إلى غازي الهيدروجين والأكسجين.</li>
+        <li><b>النسبة الحجمية للغازات:</b> يتجمع غاز الهيدروجين عند المهبط (الكاثود)، وغاز الأكسجين عند المصعد (الأنود). ويكون <b>حجم غاز الهيدروجين المنطلق ضعف حجم غاز الأكسجين</b> لأن صيغة الماء H₂O.</li>
+      </ul>
+
+      <h2>5) اختلاف خواص المركب عن عناصره</h2>
+      <div class="grid2">
+        <div class="subcard" style="border-right: 4px solid var(--primary);">
+          <h4 style="color:var(--primary);">مثال الماء (H₂O):</h4>
+          <p>الماء سائل مستقر يطفئ النار، بينما ناتجا تحليله هما: غاز الهيدروجين (شديد الاشتعال بفرقعة)، وغاز الأكسجين (يساعد على الاشتعال بقوة).</p>
+        </div>
+        <div class="subcard" style="border-right: 4px solid var(--amber);">
+          <h4 style="color:var(--amber);">مثال يوديد البوتاسيوم (KI):</h4>
+          <p>يوديد البوتاسيوم ملح أبيض صالح للاستخدام، بينما عناصره: فلز البوتاسيوم (K) فضي لين شديد التفاعل مع الماء، واليود (I₂) صلب داكن ينتج بخاراً بنفسجياً ساماً.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TAB 4: مخطط تصنيف المادة ════════ -->
+  <section id="t4" class="tab-pane">
+    <div class="card emerald">
+      <h2>6) خريطة تصنيف المادة (شكل 20-2)</h2>
+      <p>تُصنف المادة في الكون إلى قسمين رئيسيين يرتبطان بتحولات محددة:</p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>المجال</th>
+              <th>النوع</th>
+              <th>التعريف والتفكيك</th>
+              <th>أمثلة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="2"><b>المواد الكيميائية النقية</b></td>
+              <td><b>العناصر</b></td>
+              <td>لا تتجزأ بطرائق كيميائية أو فيزيائية</td>
+              <td>الأكسجين، الذهب، الحديد، النحاس</td>
+            </tr>
+            <tr>
+              <td><b>المركبات</b></td>
+              <td>تتفكك إلى عناصرها <b>بالطرائق الكيميائية فقط</b></td>
+              <td>الماء (H₂O)، الملح (NaCl)، السكر</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><b>المخاليط</b></td>
+              <td><b>متجانسة</b></td>
+              <td>تمتزج بانتظام، وتفصل <b>بالطرائق الفيزيائية</b></td>
+              <td>الشاي، الفولاذ، الجازولين، ماء البحر</td>
+            </tr>
+            <tr>
+              <td><b>غير متجانسة</b></td>
+              <td>لا تمتزج بانتظام ومتمايزة المكونات</td>
+              <td>الحليب، الدم، سلطة الخضار، عصير البرتقال</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TAB 5: الاختبار التفاعلي ════════ -->
+  <section id="t5" class="tab-pane">
+    <div class="quiz-header">
+      <h3>🎯 10 أسئلة تقييمية على العناصر والمركبات</h3>
+      <p style="color: var(--muted); font-size: 0.95rem; margin-top: 4px;">إجابات موزعة بدقة وتوازن بين جميع الخيارات لاختبار الفهم العلمي</p>
+      
+      <div class="progress-wrap">
+        <div class="progress-bar" id="pBar"></div>
+      </div>
+      <div class="progress-labels">
+        <span id="pCount">التقدم: 0 / 10</span>
+        <span id="pScore">الدرجة: 0</span>
+      </div>
+    </div>
+
+    <div id="quizBox"></div>
+
+    <div class="result-banner" id="resBanner">
+      <div class="res-score" id="resVal">0 / 10</div>
+      <h3 id="resTitle" style="color: var(--navy); margin-bottom: 6px;"></h3>
+      <p id="resDesc" style="color: var(--muted); font-size: 0.98rem;"></p>
+      <button class="res-btn" onclick="restartQuiz()">🔄 إعادة المحاولة</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Floating Score Capsule -->
+<div class="score-capsule">
+  <span style="color: var(--emerald);">✔ صحيح: <b id="lblOk">0</b></span>
+  <span style="color: #cbd5e1;">|</span>
+  <span style="color: var(--rose);">✖ خطأ: <b id="lblBad">0</b></span>
+</div>
+
+<script>
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── 10 Balanced Questions (3 أ, 2 ب, 3 ج, 2 د) ── */
+const QUESTIONS = [
+  {
+    q: "تُعرّف المادة الكيميائية النقية التي لا يمكن تجزئتها إلى مواد أبسط منها بطرائق فيزيائية أو كيميائية باسم:",
+    opts: [
+      "العنصر",
+      "المركب",
+      "المحلول",
+      "المخلوط المتجانس"
+    ],
+    ans: 0, // أ
+    exp: "العنصر هو مادة كيميائية نقية تعد وحدة بنائية أساسية لا يمكن تجزئتها بأي طريقة فيزيائية أو كيميائية."
+  },
+  {
+    q: "كم يبلغ عدد العناصر الكيميائية الموجودة في الطبيعة؟",
+    opts: [
+      "33 عنصراً",
+      "118 عنصراً",
+      "92 عنصراً طبيعياً",
+      "10 ملايين عنصر"
+    ],
+    ans: 2, // ج
+    exp: "تضم الطبيعة 92 عنصراً طبيعياً كالنحاس والذهب، وما تبقى من عناصر تم تحضيرها اصطناعياً في المختبرات."
+  },
+  {
+    q: "أي العناصر الآتية يشكل النسبة الأكبر حيث يمثل نحو 75% من الكتلة الكلية للكون؟",
+    opts: [
+      "الأكسجين",
+      "الهيدروجين",
+      "السليكون",
+      "النيتروجين"
+    ],
+    ans: 1, // ب
+    exp: "عنصر الهيدروجين H هو أكثر العناصر وفرة في الكون ويشكل قرابة 75% من كتلته."
+  },
+  {
+    q: "في عملية التحليل الكهربائي للماء، لماذا يكون حجم غاز الهيدروجين المنطلق ضعف حجم غاز الأكسجين؟",
+    opts: [
+      "لأن غاز الهيدروجين يزن ضعف وزن غاز الأكسجين",
+      "لأن الأكسجين يتجمع عند الكاثود والهيدروجين عند الأنود",
+      "لأن كثافة الأكسجين منعدمة في الماء",
+      "لأن جزيء الماء H₂O يتكون من ذرتي هيدروجين مقابل ذرة أكسجين واحدة"
+    ],
+    ans: 3, // د
+    exp: "الصيغة الكيميائية للماء H₂O توضح أن نسبة الهيدروجين للأكسجين هي 2:1، لذلك ينتج ضعف الحجم من غاز الهيدروجين."
+  },
+  {
+    q: "يُعرّف «المركب الكيميائي» بأنه مادة نقية تتكون من:",
+    opts: [
+      "عنصرين مختلفين أو أكثر متحدين كيميائياً بنسب محددة",
+      "خلط فيزيائي لمادتين دون أي اتحاد كيميائي",
+      "عنصر واحد فقط في الحالة الصلبة",
+      "مواد متمايزة يسهل فصلها بالترشيح"
+    ],
+    ans: 0, // أ
+    exp: "المركب يتكون من عنصرين مختلفين أو أكثر متحدين كيميائياً وتختلف خواصه تماماً عن عناصره المكونة له."
+  },
+  {
+    q: "أي العبارات الآتية تصف خواص مركب «يوديد البوتاسيوم KI» مقارنة بالعناصر الداخلة في تركيبه؟",
+    opts: [
+      "هو فلز فضي شديد التفاعل كالماء",
+      "هو غاز بنفسجي سام يشتعل بفرقعة",
+      "هو ملح أبيض يختلف تماماً عن البوتاسيوم الفضي وبخار اليود البنفسجي",
+      "خواصه مطابقة تماماً لمجموع خواص البوتاسيوم واليود"
+    ],
+    ans: 2, // ج
+    exp: "تختلف خواص المركب كلياً عن مكوناته؛ فمركب KI ملح أبيض ناتج عن اتحاد فلز البوتاسيوم الفضي وغاز اليود البنفسجي."
+  },
+  {
+    q: "العالم الروسي الذي صمم النسخة الأولى من الجدول الدوري بترتيب العناصر وفق كتلها وتشابه خواصها هو:",
+    opts: [
+      "أنطوان لافوازييه",
+      "ديمتري مندليف",
+      "جون نيولاندز",
+      "هنري موزلي"
+    ],
+    ans: 1, // ب
+    exp: "صمم ديمتري مندليف أول جدول دوري عام 1869م لتنظيم العناصر في دورات ومجموعات حسب تشابه خواصها وكتلها."
+  },
+  {
+    q: "ما الطريقة التي يمكن من خلالها تفكيك المركبات الكيميائية إلى العناصر المكونة لها؟",
+    opts: [
+      "الترشيح المسامي",
+      "التقطير البسيط والتسامي",
+      "الطفو والفرز باليد",
+      "الطرائق الكيميائية فقط (كالطاقة الحرارية والتحليل الكهربائي)"
+    ],
+    ans: 3, // د
+    exp: "لا يمكن تجزئة المركبات بطرائق فيزيائية، بل تتطلب طرائق كيميائية تعتمد على الطاقة كالتحليل الكهربائي والحراري."
+  },
+  {
+    q: "يعد عنصر الفرانسيوم (Fr) من أندر العناصر وجوداً في الطبيعة؛ حيث يقدر وجوده في القشرة الأرضية بأقل من:",
+    opts: [
+      "20 جراماً",
+      "75 كيلوجراماً",
+      "100 جرام",
+      "مليون طن"
+    ],
+    ans: 0, // أ
+    exp: "يقدر إجمالي وجود الفرانسيوم النادر والمشع في قشرة الأرض بأقل من 20g فقط."
+  },
+  {
+    q: "عنصران يشكلان مجتمعين نحو 75% من الكتلة الإجمالية للقشرة الأرضية هما:",
+    opts: [
+      "الكربون والهيدروجين",
+      "الذهب والفضة",
+      "الأكسجين والسليكون",
+      "الحديد والنحاس"
+    ],
+    ans: 2, // ج
+    exp: "يشكل الأكسجين والسليكون Si مجتمعين قرابة 75% من كتلة صخور ومعادن القشرة الأرضية."
+  }
+];
+
+let answersDone = 0;
+let correctCount = 0;
+let wrongCount = 0;
+const LETTERS = ['أ', 'ب', 'ج', 'د'];
+
+function renderQuiz() {
+  const container = document.getElementById('quizBox');
+  container.innerHTML = '';
+
+  QUESTIONS.forEach((qObj, qIdx) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = `qCard-${qIdx}`;
+
+    const optsHtml = qObj.opts.map((optText, optIdx) => `
+      <button class="opt-btn" onclick="submitAnswer(${qIdx}, ${optIdx})">
+        <span class="opt-letter">${LETTERS[optIdx]}</span>
+        <span>${optText}</span>
+      </button>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="q-head">
+        <div class="q-badge">${qIdx + 1}</div>
+        <div class="q-title">${qObj.q}</div>
+      </div>
+      <div class="opts-stack" id="optGroup-${qIdx}">${optsHtml}</div>
+      <div class="q-explain" id="exp-${qIdx}">
+        <b>💡 الشرح والتوضيح:</b> ${qObj.exp}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function submitAnswer(qIdx, selectedIdx) {
+  const card = document.getElementById(`qCard-${qIdx}`);
+  const group = document.getElementById(`optGroup-${qIdx}`);
+  const buttons = group.querySelectorAll('.opt-btn');
+
+  if (buttons[0].disabled) return;
+
+  const correctIndex = QUESTIONS[qIdx].ans;
+  const isCorrect = (selectedIdx === correctIndex);
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === correctIndex) btn.classList.add('correct');
+    else if (idx === selectedIdx) btn.classList.add('wrong');
+  });
+
+  if (isCorrect) {
+    correctCount++;
+    card.classList.add('ok');
+  } else {
+    wrongCount++;
+    card.classList.add('bad');
+  }
+
+  document.getElementById(`exp-${qIdx}`).classList.add('show');
+  answersDone++;
+  refreshStats();
+
+  if (answersDone === QUESTIONS.length) {
+    showResults();
+  }
+}
+
+function refreshStats() {
+  const pct = (answersDone / QUESTIONS.length) * 100;
+  document.getElementById('pBar').style.width = pct + '%';
+  document.getElementById('pCount').textContent = `التقدم: ${answersDone} / 10`;
+  document.getElementById('pScore').textContent = `الدرجة: ${correctCount}`;
+  document.getElementById('lblOk').textContent = correctCount;
+  document.getElementById('lblBad').textContent = wrongCount;
+}
+
+function showResults() {
+  const banner = document.getElementById('resBanner');
+  const scoreVal = document.getElementById('resVal');
+  const title = document.getElementById('resTitle');
+  const desc = document.getElementById('resDesc');
+
+  scoreVal.textContent = `${correctCount} / 10`;
+
+  if (correctCount >= 9) {
+    title.textContent = "🏆 إتقان تام ومبهر لمفاهيم العناصر والمركبات!";
+    desc.textContent = "استيعاب كامل لخصائص العناصر ووفرتها والتحليل الكهربائي وتصنيف المادة.";
+  } else if (correctCount >= 7) {
+    title.textContent = "⭐ مستوى متميز ومبشر جداً!";
+    desc.textContent = "أداء رائع، راجع فقط النقاط البسيطة التي تعثرت فيها لتحقيق العلامة الكاملة.";
+  } else {
+    title.textContent = "📚 تحتاج لمراجعة سريعة للفروق بين العناصر والمركبات.";
+    desc.textContent = "أعد قراءة الشرح بالبطاقات السابقة ثم أعد المحاولة لتطوير درجاتك.";
+  }
+
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function restartQuiz() {
+  answersDone = 0;
+  correctCount = 0;
+  wrongCount = 0;
+  refreshStats();
+  document.getElementById('resBanner').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderQuiz();
+</script>
+</body>
+</html>

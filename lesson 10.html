@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدرس 10: قانون النسب الثابتة والنسب المتضاعفة — كيمياء 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --card-border: #e2e8f0;
+    --navy: #0f172a;
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --primary-soft: #e0f2fe;
+    --teal: #0d9488;
+    --teal-soft: #ccfbf1;
+    --amber: #d97706;
+    --amber-soft: #fef3c7;
+    --emerald: #059669;
+    --emerald-soft: #ecfdf5;
+    --purple: #7c3aed;
+    --purple-soft: #f3e8ff;
+    --rose: #e11d48;
+    --rose-soft: #ffe4e6;
+    --text: #1e293b;
+    --muted: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.85;
+    padding-bottom: 85px;
+    font-size: 1.05rem;
+  }
+
+  /* ═══ HERO HEADER ═══ */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #0369a1 60%, #0d9488 100%);
+    color: #ffffff;
+    padding: clamp(35px, 6vw, 55px) 20px 35px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.12);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #bae6fd;
+  }
+  .hero h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 900;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .hero h1 span { color: #5eead4; }
+  .hero p {
+    font-size: clamp(0.95rem, 3vw, 1.08rem);
+    color: #f1f5f9;
+    max-width: 680px;
+    margin: 0 auto 16px;
+    line-height: 1.7;
+  }
+  .hero-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  /* ═══ TABS NAVIGATION ═══ */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: #ffffff;
+    border-bottom: 2px solid var(--card-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    overflow-x: auto;
+  }
+  .tbtn {
+    background: transparent;
+    border: 1.5px solid transparent;
+    color: var(--muted);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .tbtn:hover {
+    color: var(--primary);
+    background: var(--primary-soft);
+  }
+  .tbtn.active {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    border-color: #7dd3fc;
+  }
+
+  /* ═══ WRAPPER & CARDS ═══ */
+  .container { max-width: 920px; margin: 24px auto; padding: 0 16px; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: clamp(18px, 4vw, 26px);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; width: 5px; height: 100%;
+    background: var(--primary);
+  }
+  .card.teal::after { background: var(--teal); }
+  .card.amber::after { background: var(--amber); }
+  .card.purple::after { background: var(--purple); }
+
+  .card h2 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+    margin: 18px 0 8px;
+    font-family: 'Cairo', sans-serif;
+  }
+  .card p {
+    color: #334155;
+    font-size: 1.02rem;
+    margin-bottom: 12px;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  .card ul li {
+    position: relative;
+    padding-right: 22px;
+    margin-bottom: 10px;
+    color: #1e293b;
+    font-size: 1rem;
+  }
+  .card ul li::before {
+    content: '◆';
+    position: absolute;
+    right: 0;
+    color: var(--primary);
+    font-size: 0.85rem;
+  }
+
+  .concept-box {
+    background: var(--primary-soft);
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 14px 0;
+    font-size: 1.02rem;
+  }
+  .concept-box b { color: var(--primary-dark); }
+
+  .quran-box {
+    background: #f0fdf4;
+    border-right: 5px solid var(--emerald);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-size: 1.05rem;
+    color: #065f46;
+  }
+  .quran-box b { color: #047857; }
+
+  .formula-box {
+    background: #eff6ff;
+    border: 1.5px dashed var(--primary);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    margin: 16px 0;
+  }
+  .formula-eq {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .subcard {
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 16px;
+    background: #ffffff;
+  }
+  .subcard h4 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--navy);
+  }
+
+  .ex-card {
+    background: #fdfcfe;
+    border: 1px solid #ede9fe;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 14px 0;
+  }
+  .ex-tag {
+    display: inline-block;
+    background: var(--purple-soft);
+    color: var(--purple);
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 2px 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: 16px 0;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.96rem;
+    min-width: 520px;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: #ffffff;
+    padding: 12px 14px;
+    font-weight: 800;
+    text-align: center;
+  }
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--card-border);
+    text-align: center;
+    color: #1e293b;
+  }
+  .data-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* ═══ QUIZ SYSTEM ═══ */
+  .quiz-header {
+    background: linear-gradient(135deg, #f0f9ff, #ccfbf1);
+    border: 1px solid #bae6fd;
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .quiz-header h3 {
+    font-family: 'Cairo', sans-serif;
+    color: var(--navy);
+    font-size: 1.35rem;
+  }
+  .progress-wrap {
+    background: #e2e8f0;
+    height: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 14px 0 8px;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--teal));
+    transition: width 0.3s ease;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .q-card {
+    background: var(--surface);
+    border: 1.5px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .q-card.ok { border-color: var(--emerald); }
+  .q-card.bad { border-color: var(--rose); }
+
+  .q-head { display: flex; gap: 12px; margin-bottom: 14px; }
+  .q-badge {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    border: 1px solid #bae6fd;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .q-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.55;
+  }
+
+  .opts-stack { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.98rem;
+    text-align: right;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .opt-btn:hover:not(:disabled) {
+    background: #e0f2fe;
+    border-color: var(--primary);
+  }
+  .opt-letter {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--muted);
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .opt-btn.correct {
+    background: var(--emerald-soft);
+    border-color: var(--emerald);
+    color: var(--emerald);
+    font-weight: 800;
+  }
+  .opt-btn.correct .opt-letter {
+    background: var(--emerald);
+    color: #ffffff;
+    border-color: var(--emerald);
+  }
+  .opt-btn.wrong {
+    background: var(--rose-soft);
+    border-color: var(--rose);
+    color: var(--rose);
+    font-weight: 800;
+  }
+  .opt-btn.wrong .opt-letter {
+    background: var(--rose);
+    color: #ffffff;
+    border-color: var(--rose);
+  }
+  .opt-btn:disabled { cursor: default; }
+
+  .q-explain {
+    display: none;
+    margin-top: 12px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: #334155;
+    border-right: 4px solid var(--primary);
+    line-height: 1.7;
+  }
+  .q-explain.show { display: block; }
+  .q-explain b { color: var(--primary-dark); }
+
+  /* Floating Score Capsule */
+  .score-capsule {
+    position: fixed;
+    bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: #ffffff;
+    border: 1.5px solid var(--card-border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-radius: 50px;
+    padding: 8px 22px;
+    display: flex;
+    gap: 16px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    z-index: 1000;
+  }
+
+  /* Result Banner */
+  .result-banner {
+    display: none;
+    background: #ffffff;
+    border: 2px solid #bae6fd;
+    border-radius: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+  .result-banner.show { display: block; }
+  .res-score {
+    font-family: 'Cairo', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+  }
+  .res-btn {
+    background: var(--primary);
+    border: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 10px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: background 0.2s;
+  }
+  .res-btn:hover { background: var(--primary-dark); }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-badge">🔬 كيمياء 1 — الفصل 2: المادة - الخواص والتغيرات</div>
+  <h1>قانون النسب الثابتة <span>والنسب المتضاعفة</span></h1>
+  <p>شرح مبسط لقوانين تركيب المركبات الكيميائية: النسب الكتلية الثابتة، والنسبة المئوية بالكتلة وتحليل السكروز، وقانون النسب المتضاعفة لمركبات الماء والنحاس.</p>
+  <div class="hero-tags">
+    <div class="tag">⚖️ قانون النسب الثابتة</div>
+    <div class="tag">🍬 تحليل سكر المائدة والسكروز</div>
+    <div class="tag">🔢 قانون النسب المتضاعفة</div>
+    <div class="tag">🧪 مركبات النحاس والكلور (I و II)</div>
+    <div class="tag">✏️ 10 أسئلة تقييمية متوازنة</div>
+  </div>
+</header>
+
+<!-- ══ NAV TABS ══ -->
+<nav class="nav-tabs">
+  <button class="tbtn active" onclick="switchTab('t1', this)">⚖️ قانون النسب الثابتة</button>
+  <button class="tbtn" onclick="switchTab('t2', this)">🍬 تحليل السكروز وتطبيقات حسابية</button>
+  <button class="tbtn" onclick="switchTab('t3', this)">🔢 قانون النسب المتضاعفة</button>
+  <button class="tbtn" onclick="switchTab('t4', this)">📊 مقارنة شاملة بين القانونين</button>
+  <button class="tbtn" onclick="switchTab('t5', this)">✏️ اختبر فهمك (10 أسئلة)</button>
+</nav>
+
+<div class="container">
+
+  <!-- ════════ TAB 1: قانون النسب الثابتة ════════ -->
+  <main id="t1" class="tab-pane active">
+    <div class="card">
+      <div class="quran-box">
+        قال تعالى: ﴿وَكُلُّ شَيْءٍ عِندَهُ بِمِقْدَارٍ﴾ [الرعد: 8]. من الحقائق البديعة في الكون أن المركبات تتكون دائماً من العناصر نفسها بنسب كتلية ثابتة ومقدّرة بقدر منه سبحانه وتعالى.
+      </div>
+
+      <h2>1) ما هو قانون النسب الثابتة (Law of Definite Proportions)؟</h2>
+      <div class="concept-box">
+        <b>نص قانون النسب الثابتة:</b> "المركب يتكون دائماً من العناصر نفسها بنسب كتلية ثابتة، مهما اختلفت كمياته".
+      </div>
+      <p>كما ينص القانون على مبدأ أساسي: <b>كتلة المركب تساوي مجموع كتل العناصر المكونة له</b>.</p>
+
+      <h2>2) النسبة المئوية بالكتلة (%)</h2>
+      <p>يُعبر الكيميائيون عن الكميات النسبية للعناصر في المركب بالنسبة المئوية بالكتلة، وهي نسبة كتلة كل عنصر إلى كتلة المركب الكلية معبراً عنها بنسبة مئوية:</p>
+
+      <div class="formula-box">
+        <div class="formula-eq">النسبة المئوية بالكتلة للعنصر (%) = (كتلة العنصر ÷ كتلة المركب الكلية) × 100</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ════════ TAB 2: تحليل السكروز وتطبيقات حسابية ════════ -->
+  <section id="t2" class="tab-pane">
+    <div class="card teal">
+      <h2>3) دراسة حالة: تحليل السكروز (سكر المائدة وسكر القصب)</h2>
+      <p>يتكون السكروز من ثلاثة عناصر: الكربون والهيدروجين والأكسجين. يوضح الجدول 4-2 نتائج تحليل عينتين مختلفتين في الكتلة والمصدر:</p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>العنصر</th>
+              <th>كتلة العنصر في 20.0g (سكر المائدة)</th>
+              <th>النسبة المئوية بالكتلة (%)</th>
+              <th>كتلة العنصر في 500.0g (سكر القصب)</th>
+              <th>النسبة المئوية بالكتلة (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>الكربون (C)</b></td>
+              <td>8.44 g</td>
+              <td><b>42.20%</b></td>
+              <td>211.0 g</td>
+              <td><b>42.20%</b></td>
+            </tr>
+            <tr>
+              <td><b>الهيدروجين (H)</b></td>
+              <td>1.30 g</td>
+              <td><b>6.50%</b></td>
+              <td>32.5 g</td>
+              <td><b>6.50%</b></td>
+            </tr>
+            <tr>
+              <td><b>الأكسجين (O)</b></td>
+              <td>10.26 g</td>
+              <td><b>51.30%</b></td>
+              <td>256.5 g</td>
+              <td><b>51.30%</b></td>
+            </tr>
+            <tr>
+              <td><b>المجموع</b></td>
+              <td><b>20.00 g</b></td>
+              <td><b>100%</b></td>
+              <td><b>500.0 g</b></td>
+              <td><b>100%</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="concept-box" style="background:var(--teal-soft); border-color:#99f6e4;">
+        <b>💡 الاستنتاج العلمي:</b> عينات أي مركب نقي، مهما كان مصدرها أو كميتها، تتكون دائماً من النسب الكتلية نفسها. وإذا كانت لمركبين نسب كتلية مختلفة، فهما حتماً مركبان مختلفان.
+      </div>
+
+      <h3>مسائل تدريبية محلولة:</h3>
+      <div class="grid2">
+        <div class="ex-card">
+          <span class="ex-tag">مسألة 19</span>
+          <h4>عينة مركب كتلتها 78.0g تحتوي على 12.4g هيدروجين. ما النسبة المئوية بالكتلة للهيدروجين؟</h4>
+          <p><b>الحل:</b> النسبة المئوية = (12.4g ÷ 78.0g) × 100 = <b>15.90%</b></p>
+        </div>
+        <div class="ex-card">
+          <span class="ex-tag">مسألة 20</span>
+          <h4>يتفاعل 1.0g هيدروجين كلياً مع 19.0g فلور. ما النسبة المئوية للهيدروجين في الناتج؟</h4>
+          <p><b>الحل:</b> كتلة المركب = 1.0 + 19.0 = 20.0g<br>
+          النسبة المئوية = (1.0g ÷ 20.0g) × 100 = <b>5.0%</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TAB 3: قانون النسب المتضاعفة ════════ -->
+  <section id="t3" class="tab-pane">
+    <div class="card purple">
+      <h2>4) ما هو قانون النسب المتضاعفة (Law of Multiple Proportions)؟</h2>
+      <p>قد تتحد العناصر نفسها لتكوين مركبات مختلفة؛ وذلك عندما تختلف النسب الكتلية بينها.</p>
+
+      <div class="concept-box" style="background:var(--purple-soft); border-color:#ddd6fe;">
+        <b>نص قانون النسب المتضاعفة:</b> "عند تكوين مركبات مختلفة من اتحاد العناصر نفسها، فإن النسبة بين كتل أحد العناصر التي تتحد مع كتلة ثابتة من عنصر آخر في هذه المركبات هي <b>نسبة عددية بسيطة وصحيحة</b>".
+      </div>
+
+      <div class="grid2">
+        <div class="subcard" style="border-right: 4px solid var(--primary);">
+          <h4 style="color:var(--primary);">أ) الماء وفوق أكسيد الهيدروجين:</h4>
+          <ul>
+            <li><b>الماء (H₂O):</b> يتكون من ذرتي هيدروجين وذرة أكسجين واحدة.</li>
+            <li><b>فوق أكسيد الهيدروجين (H₂O₂):</b> يتكون من ذرتي هيدروجين وذرتي أكسجين.</li>
+            <li>نسبة الأكسجين في فوق أكسيد الهيدروجين إلى الأكسجين في الماء تتحد مع نفس كتلة الهيدروجين بنسبة بسيطة وصحيحة هي <b>2 : 1</b>.</li>
+          </ul>
+        </div>
+
+        <div class="subcard" style="border-right: 4px solid var(--amber);">
+          <h4 style="color:var(--amber);">ب) مركبات النحاس والكلور (شكل 22-2):</h4>
+          <ul>
+            <li><b>كلوريد النحاس I (أخضر):</b> نسبة Cu/Cl = 1.793 g Cu لكل 1g Cl.</li>
+            <li><b>كلوريد النحاس II (أزرق):</b> نسبة Cu/Cl = 0.8964 g Cu لكل 1g Cl.</li>
+            <li>النسبة بين كتلتي النحاس = 1.793 ÷ 0.8964 = <b>2 : 1</b> (نسبة عددية صحيحة بسيطة).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TAB 4: مقارنة شاملة بين القانونين ════════ -->
+  <section id="t4" class="tab-pane">
+    <div class="card emerald">
+      <h2>5) مقارنة فاصلة بين قانون النسب الثابتة وقانون النسب المتضاعفة</h2>
+      <p>يوضح الجدول الآتي الفروق الجوهرية لمساعدة الطلاب على التمييز السريع بين القانونين:</p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>وجه المقارنة</th>
+              <th>قانون النسب الثابتة (Definite Proportions)</th>
+              <th>قانون النسب المتضاعفة (Multiple Proportions)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>نطاق التطبيق</b></td>
+              <td>يطبق على <b>مركب واحد فقط</b> مهما تعددت عيناته واختلفت كمياته.</td>
+              <td>يطبق عند المقارنة بين <b>مركبين مختلفين أو أكثر</b> يتكونان من نفس العناصر.</td>
+            </tr>
+            <tr>
+              <td><b>الفكرة الأساسية</b></td>
+              <td>النسبة المئوية بالكتلة لعناصر المركب الواحد ثابتة دائماً.</td>
+              <td>النسبة بين كتل عنصر يتحد مع كتلة ثابتة من عنصر آخر هي نسبة عددية بسيطة (مثل 2:1).</td>
+            </tr>
+            <tr>
+              <td><b>مثال نموذجي</b></td>
+              <td>السكروز (سكر المائدة وسكر القصب يحتويان دائماً على 42.2% كربون).</td>
+              <td>الماء (H₂O) وفوق أكسيد الهيدروجين (H₂O₂) / كلوريد النحاس I وكلوريد النحاس II.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TAB 5: الاختبار التفاعلي ════════ -->
+  <section id="t5" class="tab-pane">
+    <div class="quiz-header">
+      <h3>🎯 10 أسئلة تقييمية على قانوني النسب الثابتة والمتضاعفة</h3>
+      <p style="color: var(--muted); font-size: 0.95rem; margin-top: 4px;">إجابات موزعة بدقة وتوازن بين جميع الخيارات لاختبار الفهم العلمي</p>
+      
+      <div class="progress-wrap">
+        <div class="progress-bar" id="pBar"></div>
+      </div>
+      <div class="progress-labels">
+        <span id="pCount">التقدم: 0 / 10</span>
+        <span id="pScore">الدرجة: 0</span>
+      </div>
+    </div>
+
+    <div id="quizBox"></div>
+
+    <div class="result-banner" id="resBanner">
+      <div class="res-score" id="resVal">0 / 10</div>
+      <h3 id="resTitle" style="color: var(--navy); margin-bottom: 6px;"></h3>
+      <p id="resDesc" style="color: var(--muted); font-size: 0.98rem;"></p>
+      <button class="res-btn" onclick="restartQuiz()">🔄 إعادة المحاولة</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- Floating Score Capsule -->
+<div class="score-capsule">
+  <span style="color: var(--emerald);">✔ صحيح: <b id="lblOk">0</b></span>
+  <span style="color: #cbd5e1;">|</span>
+  <span style="color: var(--rose);">✖ خطأ: <b id="lblBad">0</b></span>
+</div>
+
+<script>
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── 10 Balanced Questions (3 أ, 2 ب, 2 ج, 3 د) ── */
+const QUESTIONS = [
+  {
+    q: "ينص «قانون النسب الثابتة» في الكيمياء على أن:",
+    opts: [
+      "المركب يتكون دائماً من العناصر نفسها بنسب كتلية ثابتة مهما اختلفت كمياته",
+      "النسبة بين كتل العناصر في المركبات نسبة متضاعفة دائماً",
+      "كتل النواتج أكبر دائماً من كتل المتفاعلات",
+      "العناصر تفقد كتلتها تماماً عند تكوين المركبات"
+    ],
+    ans: 0, // أ
+    exp: "قانون النسب الثابتة ينص على أن المركب يتكون دائماً من العناصر نفسها بنسب كتلية محددة وثابتة مهما اختلفت كمية العينة ومصدرها."
+  },
+  {
+    q: "تُحسب «النسبة المئوية بالكتلة» لعنصر ما في مركب كيميائي باستخدام العلاقة الرياضية:",
+    opts: [
+      "(كتلة المركب الكلية ÷ كتلة العنصر) × 100",
+      "(كتلة العنصر ÷ الحجم الكلي للمحلول) × 100",
+      "(كتلة العنصر ÷ كتلة المركب الكلية) × 100",
+      "كتلة العنصر × كتلة المركب الكلية"
+    ],
+    ans: 2, // ج
+    exp: "النسبة المئوية بالكتلة = (كتلة العنصر ÷ كتلة المركب) × 100، وتساوي نسبة الجزء إلى الكل مئوياً."
+  },
+  {
+    q: "عند تحليل عينة 20.0g من سكر المائدة وعينة 500.0g من سكر القصب، وُجد أن نسبة الكربون في كلتيهما 42.20%، وهذا يمثل تطبيقاً مباشراً لـ:",
+    opts: [
+      "قانون حفظ الطاقة",
+      "قانون النسب الثابتة",
+      "قانون النسب المتضاعفة",
+      "قانون دالتون للضغوط الجزيئية"
+    ],
+    ans: 1, // ب
+    exp: "تطابق النسب المئوية الكتلية للسكروز في العينتين رغم اختلاف كتلتهما ومصدرهما يثبت صحة قانون النسب الثابتة."
+  },
+  {
+    q: "عينة من مركب مجهول كتلتها 78.0g تحتوي على 12.4g من الهيدروجين، فإن النسبة المئوية بالكتلة للهيدروجين في المركب تساوي:",
+    opts: [
+      "6.29%",
+      "42.20%",
+      "78.00%",
+      "15.90%"
+    ],
+    ans: 3, // د
+    exp: "النسبة المئوية بالكتلة للهيدروجين = (12.4 ÷ 78.0) × 100 = 15.897% وتساوي بالتقريب 15.90%."
+  },
+  {
+    q: "يتفاعل 1.0g هيدروجين كلياً مع 19.0g فلور لتكوين مركب فلوريد الهيدروجين، ما النسبة المئوية بالكتلة للهيدروجين في الناتج؟",
+    opts: [
+      "5.0%",
+      "19.0%",
+      "95.0%",
+      "1.0%"
+    ],
+    ans: 0, // أ
+    exp: "كتلة المركب = 1.0 + 19.0 = 20.0g. النسبة المئوية للهيدروجين = (1.0 ÷ 20.0) × 100 = 5.0%."
+  },
+  {
+    q: "ينص «قانون النسب المتضاعفة» على أنه عند تكوين مركبات مختلفة من اتحاد العناصر نفسها فإن النسبة بين كتل أحد العناصر التي تتحد مع كتلة ثابتة من عنصر آخر هي:",
+    opts: [
+      "نسبة عشوائية تتغير بتغير درجة الحرارة",
+      "نسبة كسرية معقدة وغير منتظمة",
+      "نسبة عددية بسيطة وصحيحة",
+      "متطابقة تماماً ولا يمكن تمييزها"
+    ],
+    ans: 2, // ج
+    exp: "ينص قانون النسب المتضاعفة على أن النسبة بين الكتل هي نسبة عددية بسيطة وصحيحة يعبر عنها بأعداد مثل (2:1)."
+  },
+  {
+    q: "أي زوج من أزواج المركبات التالية يمثل نموذجاً تطبيقياً صريحاً لـ «قانون النسب المتضاعفة»؟",
+    opts: [
+      "كلوريد الصوديوم (NaCl) وكلوريد البوتاسيوم (KCl)",
+      "الماء (H₂O) وفوق أكسيد الهيدروجين (H₂O₂)",
+      "كربونات الكالسيوم (CaCO₃) والماء (H₂O)",
+      "السكروز (سكر القصب) وسكر المائدة"
+    ],
+    ans: 1, // ب
+    exp: "الماء وفوق أكسيد الهيدروجين يتكونان من نفس العناصر (H و O) بنسب كتلية مختلفة تخضع لقانون النسب المتضاعفة."
+  },
+  {
+    q: "عند مقارنة كتلة الأكسجين التي تتحد مع كتلة ثابتة من الهيدروجين في مركب فوق أكسيد الهيدروجين (H₂O₂) بكتلته في الماء (H₂O)، نجد أن النسبة العددية هي:",
+    opts: [
+      "1 : 1",
+      "3 : 1",
+      "4 : 1",
+      "2 : 1"
+    ],
+    ans: 3, // د
+    exp: "يحتوي فوق أكسيد الهيدروجين على ضعف كمية الأكسجين الموجودة في الماء لنفس كمية الهيدروجين، فالنسبة هي 2:1."
+  },
+  {
+    q: "يتحد النحاس والكلور لتكوين مركبين؛ نسبة النحاس للكلور في المركب I هي 1.793g Cu/g Cl وفي المركب II هي 0.8964g Cu/g Cl، نسبة النحاس بينهما هي:",
+    opts: [
+      "2 : 1",
+      "1 : 3",
+      "4 : 1",
+      "1 : 1"
+    ],
+    ans: 0, // أ
+    exp: "بقسمة النسبة الكتلية للمركب الأول على الثاني: 1.793 ÷ 0.8964 = 2.00 أي نسبة 2:1 وهي نسبة عددية بسيطة وصحيحة."
+  },
+  {
+    q: "إذا حللنا مركبين ووجدنا أن لهما نسباً مئوية كتلية مختلفة للعناصر المكونة لهما، فإن ذلك يثبت أنهما:",
+    opts: [
+      "مركب واحد تعرض للتسخين الشديد",
+      "عينتان لمركب واحد غير نقي",
+      "محاليل غير متجانسة معلقة",
+      "مركبان مختلفان تماماً حتى وإن تكونا من نفس العناصر"
+    ],
+    ans: 3, // د
+    exp: "بحسب قانون النسب الثابتة، المركبات التي لها نسب كتلية مختلفة يجب أن تكون مركبات مختلفة تماماً."
+  }
+];
+
+let answersDone = 0;
+let correctCount = 0;
+let wrongCount = 0;
+const LETTERS = ['أ', 'ب', 'ج', 'د'];
+
+function renderQuiz() {
+  const container = document.getElementById('quizBox');
+  container.innerHTML = '';
+
+  QUESTIONS.forEach((qObj, qIdx) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = `qCard-${qIdx}`;
+
+    const optsHtml = qObj.opts.map((optText, optIdx) => `
+      <button class="opt-btn" onclick="submitAnswer(${qIdx}, ${optIdx})">
+        <span class="opt-letter">${LETTERS[optIdx]}</span>
+        <span>${optText}</span>
+      </button>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="q-head">
+        <div class="q-badge">${qIdx + 1}</div>
+        <div class="q-title">${qObj.q}</div>
+      </div>
+      <div class="opts-stack" id="optGroup-${qIdx}">${optsHtml}</div>
+      <div class="q-explain" id="exp-${qIdx}">
+        <b>💡 الشرح والتوضيح:</b> ${qObj.exp}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function submitAnswer(qIdx, selectedIdx) {
+  const card = document.getElementById(`qCard-${qIdx}`);
+  const group = document.getElementById(`optGroup-${qIdx}`);
+  const buttons = group.querySelectorAll('.opt-btn');
+
+  if (buttons[0].disabled) return;
+
+  const correctIndex = QUESTIONS[qIdx].ans;
+  const isCorrect = (selectedIdx === correctIndex);
+
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === correctIndex) btn.classList.add('correct');
+    else if (idx === selectedIdx) btn.classList.add('wrong');
+  });
+
+  if (isCorrect) {
+    correctCount++;
+    card.classList.add('ok');
+  } else {
+    wrongCount++;
+    card.classList.add('bad');
+  }
+
+  document.getElementById(`exp-${qIdx}`).classList.add('show');
+  answersDone++;
+  refreshStats();
+
+  if (answersDone === QUESTIONS.length) {
+    showResults();
+  }
+}
+
+function refreshStats() {
+  const pct = (answersDone / QUESTIONS.length) * 100;
+  document.getElementById('pBar').style.width = pct + '%';
+  document.getElementById('pCount').textContent = `التقدم: ${answersDone} / 10`;
+  document.getElementById('pScore').textContent = `الدرجة: ${correctCount}`;
+  document.getElementById('lblOk').textContent = correctCount;
+  document.getElementById('lblBad').textContent = wrongCount;
+}
+
+function showResults() {
+  const banner = document.getElementById('resBanner');
+  const scoreVal = document.getElementById('resVal');
+  const title = document.getElementById('resTitle');
+  const desc = document.getElementById('resDesc');
+
+  scoreVal.textContent = `${correctCount} / 10`;
+
+  if (correctCount >= 9) {
+    title.textContent = "🏆 إتقان تام ومبهر لقانوني النسب الثابتة والمتضاعفة!";
+    desc.textContent = "استيعاب كامل لمفهوم النسبة المئوية بالكتلة وحل المسائل الحسابية بدقة.";
+  } else if (correctCount >= 7) {
+    title.textContent = "⭐ مستوى متميز ومبشر جداً!";
+    desc.textContent = "أداء رائع، راجع فقط المسائل أو النقاط البسيطة التي تعثرت فيها للوصول للدرجة الكاملة.";
+  } else {
+    title.textContent = "📚 تحتاج لمراجعة سريعة للفرق بين النسب الثابتة والنسب المتضاعفة.";
+    desc.textContent = "أعد قراءة الشرح بالبطاقات السابقة ثم أعد المحاولة لتطوير درجاتك.";
+  }
+
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function restartQuiz() {
+  answersDone = 0;
+  correctCount = 0;
+  wrongCount = 0;
+  refreshStats();
+  document.getElementById('resBanner').classList.remove('show');
+  renderQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
